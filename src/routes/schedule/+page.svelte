@@ -6,6 +6,7 @@
   import { page } from '$app/stores';
   import { browser } from '$app/environment';
   import { trackEvent } from '$lib/utils/analytics';
+  import { updateLeadStatus } from '$lib/supabase';
 
   const params = $derived(browser ? new URLSearchParams($page.url.search) : new URLSearchParams());
   const schoolName = $derived(params.get('school') ?? '');
@@ -14,15 +15,85 @@
   const commune = $derived(params.get('commune') ?? '');
   const region = $derived(params.get('region') ?? '');
 
+  let calContainer = $state<HTMLDivElement | null>(null);
   let calLoaded = $state(false);
 
-  // Cal.com embed URL
-  const calUrl = $derived.by(() => {
-    const base = 'https://cal.com/ethoz/demo';
-    const url = new URL(base);
-    if (contactName) url.searchParams.set('name', contactName);
-    if (contactEmail) url.searchParams.set('email', contactEmail);
-    return url.toString();
+  // Load Cal.com embed script and render inline
+  $effect(() => {
+    if (!browser || !calContainer) return;
+
+    // Cal.com embed loader (official snippet)
+    const win = window as any;
+    (function (C: any, A: string, L: string) {
+      const p = function (a: any, ar: any) { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function () {
+        const cal = C.Cal;
+        const ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement('script')).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === 'string') {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ['initNamespace', namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(win, 'https://app.cal.com/embed/embed.js', 'init');
+
+    const Cal = win.Cal;
+    Cal('init', { origin: 'https://cal.com' });
+
+    // Build config with pre-filled data
+    const config: Record<string, string> = {
+      theme: 'light',
+      timeFormat: '24',   // Force 24h format (Chile standard)
+    };
+    if (contactName) config.name = contactName;
+    if (contactEmail) config.email = contactEmail;
+
+    Cal('inline', {
+      elementOrSelector: calContainer,
+      calLink: 'ethoz/demo',
+      config
+    });
+
+    Cal('ui', {
+      theme: 'light',
+      styles: { branding: { brandColor: '#2563EB' } },
+      hideEventTypeDetails: false,
+      hideBranding: true,
+      layout: 'month_view'
+    });
+
+    // Listen for Cal.com events — client-side lead update (immediate)
+    Cal('on', {
+      action: 'bookingSuccessful',
+      callback: () => {
+        trackEvent('demo_booked', { school: schoolName });
+
+        // Update lead status in Supabase (fire-and-forget, resilient)
+        if (contactEmail) {
+          updateLeadStatus(
+            contactEmail,
+            'demo_scheduled',
+            `Booked via Cal.com | School: ${schoolName}`
+          ).catch(() => {}); // Silent — webhook is the backup
+        }
+      }
+    });
+
+    calLoaded = true;
   });
 
   $effect(() => {
@@ -47,6 +118,23 @@
   <NavBar />
 
   <div class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 pt-24 sm:py-16 sm:pt-28">
+    <!-- Step indicator -->
+    <div class="mb-8">
+      <div class="mx-auto flex max-w-lg items-center justify-center gap-3">
+        {#each [{ label: 'Busca tu colegio', n: 1 }, { label: 'Completa tus datos', n: 2 }, { label: 'Agenda tu demo', n: 3 }] as s}
+          <div class="flex items-center gap-2">
+            <div class="flex size-7 items-center justify-center rounded-full text-xs font-bold {3 >= s.n ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}">
+              {s.n}
+            </div>
+            <span class="hidden text-xs font-medium sm:block {3 >= s.n ? 'text-foreground' : 'text-muted-foreground'}">{s.label}</span>
+          </div>
+          {#if s.n < 3}
+            <div class="h-px w-8 {3 > s.n ? 'bg-primary' : 'bg-border'}"></div>
+          {/if}
+        {/each}
+      </div>
+    </div>
+
     <!-- Success banner -->
     {#if schoolName || contactName || contactEmail}
       <div class="mb-8 flex items-start gap-4 rounded-xl border border-success/20 bg-success/5 p-5">
@@ -87,23 +175,17 @@
       </p>
     </div>
 
-    <!-- Cal.com embed -->
-    <div class="relative overflow-hidden rounded-xl border border-border bg-background shadow-sm">
+    <!-- Cal.com inline embed — auto-resizes, no double scroll -->
+    <div class="overflow-hidden rounded-xl border border-border bg-background shadow-sm">
       {#if !calLoaded}
-        <div class="absolute inset-0 flex items-center justify-center bg-background">
+        <div class="flex items-center justify-center py-20">
           <div class="flex flex-col items-center gap-3">
             <Loader2 class="size-8 animate-spin text-primary" />
             <p class="text-sm text-muted-foreground">Cargando calendario...</p>
           </div>
         </div>
       {/if}
-      <iframe
-        src={calUrl}
-        class="h-[650px] w-full border-0"
-        title="Agendar demo de Ethoz"
-        loading="lazy"
-        onload={() => { calLoaded = true; }}
-      ></iframe>
+      <div bind:this={calContainer} class="w-full"></div>
     </div>
   </div>
 
