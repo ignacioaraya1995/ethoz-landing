@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 64" role="img" aria-label="Ethoz">
+  <path d="M32 4 C46 4 56 11 56 19 V35 C56 49 45 59 32 60 C19 59 8 49 8 35 V19 C8 11 18 4 32 4 Z" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M23 20 V44 M23 20 H41 M23 32 H37 M23 44 H41" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="78" y="42" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" font-weight="500" fill="#0f172a" letter-spacing="1.5">Ethoz</text>
+</svg>

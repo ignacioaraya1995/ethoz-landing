@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img" aria-labelledby="ethoz-kc-title ethoz-kc-desc">
+  <title id="ethoz-kc-title">Ethoz Logo</title>
+  <desc id="ethoz-kc-desc">A bold letter E in a dark rounded square next to the word Ethoz</desc>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#0f172a"/>
+  <path d="M17 16 H47 V22 H25 V29 H41 V35 H25 V42 H47 V48 H17 Z" fill="#fff"/>
+  <text x="74" y="42" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+</svg>

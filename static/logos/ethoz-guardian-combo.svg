@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img" aria-labelledby="ethoz-gc-title ethoz-gc-desc">
+  <title id="ethoz-gc-title">Ethoz Logo</title>
+  <desc id="ethoz-gc-desc">A blue shield with a white checkmark next to the word Ethoz</desc>
+  <defs>
+    <linearGradient id="gc-grad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="url(#gc-grad)"/>
+  <path d="M22 33 L28 40 L42 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="74" y="42" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+</svg>

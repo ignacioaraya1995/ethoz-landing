@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="ethoz-ki-title">
+  <title id="ethoz-ki-title">Ethoz</title>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#0f172a"/>
+  <path d="M17 16 H47 V22 H25 V29 H41 V35 H25 V42 H47 V48 H17 Z" fill="#fff"/>
+</svg>

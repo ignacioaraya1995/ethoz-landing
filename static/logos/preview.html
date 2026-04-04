@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethoz Logo Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 48px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 48px;
+    }
+    .palette {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+    }
+    .swatch-color {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .swatch-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .swatch-hex {
+      font-size: 12px;
+      color: #94a3b8;
+      font-family: monospace;
+    }
+    .concept {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    .concept-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .concept h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .concept-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .concept p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+    .logo-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+    .logo-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .logo-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      padding: 10px 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .logo-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      min-height: 140px;
+    }
+    .logo-display.dark {
+      background: #0f172a;
+    }
+    .logo-display.dark svg text {
+      fill: #fff;
+    }
+    .logo-display svg {
+      max-width: 100%;
+      height: auto;
+    }
+    .icon-display svg {
+      width: 64px;
+      height: 64px;
+    }
+    .combo-display svg {
+      width: 200px;
+    }
+    .best-for {
+      font-size: 12px;
+      color: #64748b;
+      padding: 8px 16px 10px;
+      border-top: 1px solid #e2e8f0;
+      background: #fafbfc;
+    }
+    @media (max-width: 768px) {
+      .logo-row { grid-template-columns: 1fr; }
+      body { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ethoz Logo Concepts</h1>
+  <p class="subtitle">4 logo directions aligned with the Ethoz brand identity. Each uses the project's color system and Inter typeface.</p>
+
+  <div class="palette">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1e3a8a"></div>
+      <div><div class="swatch-label">Primary Blue</div><div class="swatch-hex">#1e3a8a</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1e40af"></div>
+      <div><div class="swatch-label">Blue Light</div><div class="swatch-hex">#1e40af</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #10b981"></div>
+      <div><div class="swatch-label">Accent Emerald</div><div class="swatch-hex">#10b981</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #0f172a"></div>
+      <div><div class="swatch-label">Navy Dark</div><div class="swatch-hex">#0f172a</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #fff; border: 1px solid #e2e8f0"></div>
+      <div><div class="swatch-label">White</div><div class="swatch-hex">#ffffff</div></div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 1: THE GUARDIAN -->
+  <div class="concept">
+    <div class="concept-header">
+      <h2>Concept 1: The Guardian</h2>
+      <span class="concept-tag">Enterprise / Trust</span>
+    </div>
+    <p>A solid shield with a compliance checkmark. Directly communicates Ethoz's core promise: <em>"El escudo digital de tu comunidad escolar."</em> The blue gradient conveys authority and trust. Best for an audience of school administrators and decision-makers.</p>
+    <div class="logo-row">
+      <div class="logo-card">
+        <div class="logo-card-label">Combination Mark</div>
+        <div class="logo-display combo-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img">
+            <defs><linearGradient id="p-gc" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#1e40af"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient></defs>
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="url(#p-gc)"/>
+            <path d="M22 33 L28 40 L42 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="74" y="42" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+          </svg>
+        </div>
+        <div class="best-for">Headers, navigation, business cards</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon Only</div>
+        <div class="logo-display icon-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <defs><linearGradient id="p-gi" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#1e40af"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient></defs>
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="url(#p-gi)"/>
+            <path d="M22 33 L28 40 L42 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="best-for">Favicon, app icon, social profiles</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon on Dark</div>
+        <div class="logo-display icon-display dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <defs><linearGradient id="p-gid" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="url(#p-gid)"/>
+            <path d="M22 33 L28 40 L42 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="best-for">Dark backgrounds, dark mode UI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 2: THE NETWORK -->
+  <div class="concept">
+    <div class="concept-header">
+      <h2>Concept 2: The Network</h2>
+      <span class="concept-tag">Tech / Community</span>
+    </div>
+    <p>A hexagonal shape (stability, structure) with three connected nodes representing the school community: students, staff, and parents. The blue-to-emerald gradient transitions from trust to growth. Feels like a modern SaaS product.</p>
+    <div class="logo-row">
+      <div class="logo-card">
+        <div class="logo-card-label">Combination Mark</div>
+        <div class="logo-display combo-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img">
+            <defs><linearGradient id="p-nc" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+            <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" fill="url(#p-nc)"/>
+            <line x1="32" y1="22" x2="20" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="22" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="44" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="32" cy="22" r="4" fill="#fff"/>
+            <circle cx="20" cy="44" r="4" fill="#fff"/>
+            <circle cx="44" cy="44" r="4" fill="#fff"/>
+            <text x="74" y="42" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+          </svg>
+        </div>
+        <div class="best-for">Website header, presentations, pitch decks</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon Only</div>
+        <div class="logo-display icon-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <defs><linearGradient id="p-ni" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+            <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" fill="url(#p-ni)"/>
+            <line x1="32" y1="22" x2="20" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="22" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="44" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="32" cy="22" r="4" fill="#fff"/>
+            <circle cx="20" cy="44" r="4" fill="#fff"/>
+            <circle cx="44" cy="44" r="4" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="best-for">Favicon, app icon, social profiles</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon on Dark</div>
+        <div class="logo-display icon-display dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <defs><linearGradient id="p-nid" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#34d399"/></linearGradient></defs>
+            <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" fill="url(#p-nid)"/>
+            <line x1="32" y1="22" x2="20" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="22" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="44" x2="44" y2="44" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="32" cy="22" r="4" fill="#fff"/>
+            <circle cx="20" cy="44" r="4" fill="#fff"/>
+            <circle cx="44" cy="44" r="4" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="best-for">Dark backgrounds, dark mode UI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 3: THE KEYSTONE -->
+  <div class="concept">
+    <div class="concept-header">
+      <h2>Concept 3: The Keystone</h2>
+      <span class="concept-tag">Minimal / Modern</span>
+    </div>
+    <p>A bold geometric E in a rounded square. Instantly app-icon ready. Matches your current favicon approach but elevated with precise geometric proportions. Think Notion, Linear, or Vercel. The most versatile option across all sizes and contexts.</p>
+    <div class="logo-row">
+      <div class="logo-card">
+        <div class="logo-card-label">Combination Mark</div>
+        <div class="logo-display combo-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img">
+            <rect x="2" y="2" width="60" height="60" rx="16" fill="#0f172a"/>
+            <path d="M17 16 H47 V22 H25 V29 H41 V35 H25 V42 H47 V48 H17 Z" fill="#fff"/>
+            <text x="74" y="42" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+          </svg>
+        </div>
+        <div class="best-for">Navigation, documents, email signatures</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon Only</div>
+        <div class="logo-display icon-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <rect x="2" y="2" width="60" height="60" rx="16" fill="#0f172a"/>
+            <path d="M17 16 H47 V22 H25 V29 H41 V35 H25 V42 H47 V48 H17 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="best-for">Favicon, app store icon, watermarks</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon on Dark</div>
+        <div class="logo-display icon-display dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <rect x="2" y="2" width="60" height="60" rx="16" fill="#1e293b"/>
+            <path d="M17 16 H47 V22 H25 V29 H41 V35 H25 V42 H47 V48 H17 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="best-for">Dark mode, dark backgrounds</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 4: THE FUSION -->
+  <div class="concept">
+    <div class="concept-header">
+      <h2>Concept 4: The Fusion</h2>
+      <span class="concept-tag">Creative / Distinctive</span>
+    </div>
+    <p>A shield outline (blue = trust) houses a solid E letterform (emerald = growth). The two-tone approach tells the brand story: Ethoz is the protective structure that lets schools thrive. The most unique and recognizable option of the four.</p>
+    <div class="logo-row">
+      <div class="logo-card">
+        <div class="logo-card-label">Combination Mark</div>
+        <div class="logo-display combo-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" role="img">
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="none" stroke="#1e3a8a" stroke-width="3.5"/>
+            <path d="M22 18 H42 V23 H28 V29 H38 V34 H28 V40 H42 V45 H22 Z" fill="#10b981"/>
+            <text x="74" y="42" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#0f172a" letter-spacing="-0.5">Ethoz</text>
+          </svg>
+        </div>
+        <div class="best-for">Marketing, landing page, brand identity</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon Only</div>
+        <div class="logo-display icon-display">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="none" stroke="#1e3a8a" stroke-width="3.5"/>
+            <path d="M22 18 H42 V23 H28 V29 H38 V34 H28 V40 H42 V45 H22 Z" fill="#10b981"/>
+          </svg>
+        </div>
+        <div class="best-for">Medium+ sizes, stickers, merchandise</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-label">Icon on Dark</div>
+        <div class="logo-display icon-display dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+            <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+            <path d="M22 18 H42 V23 H28 V29 H38 V34 H28 V40 H42 V45 H22 Z" fill="#34d399"/>
+          </svg>
+        </div>
+        <div class="best-for">Dark backgrounds, dark mode UI</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:32px 0; color:#94a3b8; font-size:13px;">
+    All logos use brand colors from Ethoz's design system. Wordmarks require Inter font (loaded in the project).
+    <br>For production use, convert text to outlines using Inkscape or Figma.
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="ethoz-gi-title">
+  <title id="ethoz-gi-title">Ethoz</title>
+  <defs>
+    <linearGradient id="gi-grad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 5 L54 14 V36 Q54 54 32 60 Q10 54 10 36 V14 Z" fill="url(#gi-grad)"/>
+  <path d="M22 33 L28 40 L42 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,418 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775285497699,
+  "projectRoot": "/Volumes/External Drive/Projects/Personal/startUpColegio-landing",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@sveltejs/kit",
+        "version": "2.50.2",
+        "category": "fullstack"
+      },
+      {
+        "name": "svelte",
+        "version": "5.54.0",
+        "category": "frontend"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.1",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "vite dev",
+      "build": "vite build",
+      "preview": "vite preview",
+      "prepare": "svelte-kit sync || echo ''",
+      "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "src",
+      "static"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 3,
+      "lastAccessed": 1775285497643,
+      "keyFiles": [
+        "app.css",
+        "app.d.ts",
+        "app.html"
+      ]
+    },
+    "static": {
+      "path": "static",
+      "purpose": "Static files",
+      "fileCount": 1,
+      "lastAccessed": 1775285497645,
+      "keyFiles": [
+        "favicon.svg"
+      ]
+    },
+    "src/lib": {
+      "path": "src/lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1775285497652,
+      "keyFiles": [
+        "utils.ts"
+      ]
+    },
+    "src/routes": {
+      "path": "src/routes",
+      "purpose": "Route handlers",
+      "fileCount": 3,
+      "lastAccessed": 1775285497654,
+      "keyFiles": [
+        "+layout.svelte",
+        "+layout.ts",
+        "+page.svelte"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/routes/+page.svelte",
+      "accessCount": 261,
+      "lastAccessed": 1775314983914,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/demo/+page.svelte",
+      "accessCount": 77,
+      "lastAccessed": 1775314673226,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/i18n/translations/es.ts",
+      "accessCount": 62,
+      "lastAccessed": 1775314774575,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/i18n/translations/en.ts",
+      "accessCount": 52,
+      "lastAccessed": 1775313723736,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 51,
+      "lastAccessed": 1775314285682,
+      "type": "directory"
+    },
+    {
+      "path": "",
+      "accessCount": 44,
+      "lastAccessed": 1775315805001,
+      "type": "directory"
+    },
+    {
+      "path": "src/lib/stores/schools.svelte.ts",
+      "accessCount": 31,
+      "lastAccessed": 1775314570185,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/blog/[slug]/+page.svelte",
+      "accessCount": 23,
+      "lastAccessed": 1775315072688,
+      "type": "file"
+    },
+    {
+      "path": "src/app.css",
+      "accessCount": 19,
+      "lastAccessed": 1775311826675,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/blog/+page.svelte",
+      "accessCount": 17,
+      "lastAccessed": 1775315051613,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/privacy/+page.svelte",
+      "accessCount": 14,
+      "lastAccessed": 1775314230623,
+      "type": "file"
+    },
+    {
+      "path": "svelte.config.js",
+      "accessCount": 12,
+      "lastAccessed": 1775312585719,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/+layout.svelte",
+      "accessCount": 12,
+      "lastAccessed": 1775314240426,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/terms/+page.svelte",
+      "accessCount": 10,
+      "lastAccessed": 1775314231069,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/components/ui/button/button.svelte",
+      "accessCount": 7,
+      "lastAccessed": 1775290614894,
+      "type": "file"
+    },
+    {
+      "path": "src/routes",
+      "accessCount": 7,
+      "lastAccessed": 1775314259556,
+      "type": "directory"
+    },
+    {
+      "path": "src/lib/data/posts/index.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775314761170,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/data/posts/types.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775315030231,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/i18n/index.svelte.ts",
+      "accessCount": 6,
+      "lastAccessed": 1775291076240,
+      "type": "file"
+    },
+    {
+      "path": "src/routes/blog/[slug]/+page.ts",
+      "accessCount": 6,
+      "lastAccessed": 1775314764041,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/components/DemoModal.svelte",
+      "accessCount": 5,
+      "lastAccessed": 1775287203909,
+      "type": "file"
+    },
+    {
+      "path": "scripts/process-schools.mjs",
+      "accessCount": 5,
+      "lastAccessed": 1775289866297,
+      "type": "file"
+    },
+    {
+      "path": "vite.config.ts",
+      "accessCount": 5,
+      "lastAccessed": 1775309729689,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 5,
+      "lastAccessed": 1775311827222,
+      "type": "file"
+    },
+    {
+      "path": ".impeccable.md",
+      "accessCount": 5,
+      "lastAccessed": 1775314843694,
+      "type": "file"
+    },
+    {
+      "path": "src/app.html",
+      "accessCount": 4,
+      "lastAccessed": 1775290970325,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/components/ui/badge/badge.svelte",
+      "accessCount": 4,
+      "lastAccessed": 1775314782150,
+      "type": "file"
+    },
+    {
+      "path": "static/favicon.svg",
+      "accessCount": 2,
+      "lastAccessed": 1775285619949,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/i18n/translations",
+      "accessCount": 2,
+      "lastAccessed": 1775286291878,
+      "type": "directory"
+    },
+    {
+      "path": "src/lib",
+      "accessCount": 2,
+      "lastAccessed": 1775291059212,
+      "type": "directory"
+    },
+    {
+      "path": "src/routes/+layout.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775291153183,
+      "type": "file"
+    },
+    {
+      "path": "src/app.d.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775309734606,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775285588727,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-guardian-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286242698,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-guardian-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286246299,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-network-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286249361,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-network-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286253469,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-keystone-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286255150,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-keystone-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286257773,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-fusion-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286259667,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-fusion-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286261882,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/preview.html",
+      "accessCount": 1,
+      "lastAccessed": 1775286331089,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-shield-e-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286959662,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-shield-e-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286961591,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-geometric-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286962919,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-geometric-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286964720,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-contour-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286967281,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-contour-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286969596,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-pill-icon.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286971851,
+      "type": "file"
+    },
+    {
+      "path": "static/logos/ethoz-pill-combo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1775286974374,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
