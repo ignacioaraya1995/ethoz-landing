@@ -344,6 +344,8 @@ export const en = {
   'contact.form.message.placeholder': 'How can we help you?',
   'contact.form.submit': 'Send message',
   'contact.form.submitting': 'Sending...',
+  'contact.form.success.title': 'Message sent',
+  'contact.form.success.message': 'We\'ll get back to you shortly. Check your inbox.',
   'contact.cta.label': 'Or book a demo directly',
   'contact.cta.link': 'Go to demo →',
   'contact.recaptcha': 'Protected by Google reCAPTCHA.',

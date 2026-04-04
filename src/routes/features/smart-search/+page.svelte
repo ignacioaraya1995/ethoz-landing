@@ -4,6 +4,9 @@
   import { t } from '$lib/i18n/index.svelte';
   import { Button } from '$lib/components/ui/button';
   import { Search, ArrowRight, ArrowLeft, Zap, LayoutDashboard, Filter } from '@lucide/svelte';
+  import { trackEvent } from '$lib/utils/analytics';
+
+  $effect(() => { trackEvent('feature_page_viewed', { feature: 'smart-search' }); });
 </script>
 
 <svelte:head>

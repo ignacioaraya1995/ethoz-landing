@@ -10,6 +10,17 @@
   let productsOpen = $state(false);
   let productsTimeout: ReturnType<typeof setTimeout>;
 
+  $effect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('overflow-hidden', mobileOpen);
+    }
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+  });
+
   const products = [
     { icon: Users, name: 'Perfil Integral del Alumno', href: '/features/student-profile', desc: 'Ficha 360° que persiste entre años' },
     { icon: MapPin, name: 'Retiros Escolares Seguros', href: '/features/safe-pickups', desc: 'Verificación digital en portería' },

@@ -4,6 +4,9 @@
   import { t } from '$lib/i18n/index.svelte';
   import { Button } from '$lib/components/ui/button';
   import { Bell, ArrowRight, ArrowLeft, ShieldCheck, Ban, BellRing } from '@lucide/svelte';
+  import { trackEvent } from '$lib/utils/analytics';
+
+  $effect(() => { trackEvent('feature_page_viewed', { feature: 'safe-pickups' }); });
 </script>
 
 <svelte:head>

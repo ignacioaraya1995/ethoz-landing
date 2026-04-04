@@ -2,7 +2,6 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import Footer from '$lib/components/Footer.svelte';
   import NavBar from '$lib/components/NavBar.svelte';
   import { Button } from '$lib/components/ui/button';
   import { Badge } from '$lib/components/ui/badge';
@@ -409,5 +408,7 @@
     {/if}
   </div>
 
-  <Footer />
+  <footer class="border-t border-border bg-background py-4 text-center text-[11px] text-muted-foreground">
+    &copy; {new Date().getFullYear()} Ethoz
+  </footer>
 </main>

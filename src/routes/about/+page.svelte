@@ -4,6 +4,7 @@
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
   import { Shield, Users, Clock, ArrowRight, ChevronDown } from '@lucide/svelte';
+  import { trackEvent } from '$lib/utils/analytics';
 
   const faqs = [
     { q: 'about.faq.q1' as const, a: 'about.faq.a1' as const },
@@ -17,6 +18,8 @@
   function toggleFaq(i: number) {
     openFaq = openFaq === i ? null : i;
   }
+
+  $effect(() => { trackEvent('about_page_viewed'); });
 </script>
 
 <svelte:head>

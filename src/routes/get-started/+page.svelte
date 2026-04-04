@@ -5,6 +5,7 @@
   import { t } from '$lib/i18n/index.svelte';
   import { slide } from 'svelte/transition';
   import { CONTACT } from '$lib/config';
+  import { trackEvent } from '$lib/utils/analytics';
   import {
     Check, Plus, Minus, ArrowRight,
     Users, Shield, Eye, Search, ClipboardList, BarChart3,
@@ -13,6 +14,8 @@
 
   let openFaq = $state<number | null>(null);
   function toggleFaq(i: number) { openFaq = openFaq === i ? null : i; }
+
+  $effect(() => { trackEvent('pricing_page_viewed'); });
 
   const modules = [
     { icon: Users, name: 'Perfil integral del alumno' },

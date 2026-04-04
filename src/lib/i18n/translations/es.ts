@@ -365,6 +365,8 @@ export const es = {
   'contact.form.message.placeholder': '¿En qué podemos ayudarte?',
   'contact.form.submit': 'Enviar mensaje',
   'contact.form.submitting': 'Enviando...',
+  'contact.form.success.title': 'Mensaje enviado',
+  'contact.form.success.message': 'Te responderemos a la brevedad. Revisa tu correo.',
   'contact.cta.label': 'O agenda una demo directamente',
   'contact.cta.link': 'Ir a la demo →',
   'contact.recaptcha': 'Protegido por reCAPTCHA de Google.',

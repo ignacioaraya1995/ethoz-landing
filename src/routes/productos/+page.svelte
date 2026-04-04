@@ -4,6 +4,9 @@
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
   import { Users, Shield, MapPin, Search, ClipboardList, Eye, ArrowRight } from '@lucide/svelte';
+  import { trackEvent } from '$lib/utils/analytics';
+
+  $effect(() => { trackEvent('products_page_viewed'); });
 
   const products = [
     {

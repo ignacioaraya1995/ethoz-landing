@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import Footer from '$lib/components/Footer.svelte';
   import NavBar from '$lib/components/NavBar.svelte';
   import { t } from '$lib/i18n/index.svelte';
   import { schoolStore, type School } from '$lib/stores/schools.svelte';
@@ -150,7 +149,7 @@
         </div>
       {:else}
         <!-- Search input -->
-        <div class="sticky top-20 z-10 -mx-1 bg-secondary px-1 pb-3 pt-1">
+        <div class="sticky top-16 z-10 bg-secondary pb-3 pt-3">
           <div class="relative">
             <Search class="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input
@@ -221,7 +220,9 @@
     </div>
   </div>
 
-  <Footer />
+  <footer class="border-t border-border bg-background py-4 text-center text-[11px] text-muted-foreground">
+    &copy; {new Date().getFullYear()} Ethoz
+  </footer>
 </main>
 
 <style>

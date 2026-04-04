@@ -16,6 +16,9 @@
     ExternalLink,
     Scale,
   } from '@lucide/svelte';
+  import { trackEvent } from '$lib/utils/analytics';
+
+  $effect(() => { trackEvent('compliance_page_viewed'); });
 
   // ── Compliance pillars ──
   const pillars = [

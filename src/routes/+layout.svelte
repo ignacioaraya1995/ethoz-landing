@@ -3,6 +3,7 @@
   import { env } from '$env/dynamic/public';
   import { slide } from 'svelte/transition';
   import { checkInternalFlag, isInternal } from '$lib/utils/internal';
+  import { identifyVisitor } from '$lib/utils/visitor';
   let { children } = $props();
   const feedbackEnabled = env.PUBLIC_FEEDBACK_MODE === 'true';
   const clarityId = env.PUBLIC_CLARITY_PROJECT_ID ?? '';
@@ -26,6 +27,10 @@
       const stored = localStorage.getItem('cookie-consent');
       cookieConsent = stored === null ? false : true;
       if (stored === 'accepted' && !isInternal()) loadClarity();
+      // Identify visitor across GA4 + Clarity (after consent + Clarity load)
+      if (stored === 'accepted' && !isInternal()) {
+        setTimeout(() => identifyVisitor(), 1000);
+      }
     }
   });
 

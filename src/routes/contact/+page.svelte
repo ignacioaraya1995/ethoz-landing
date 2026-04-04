@@ -3,26 +3,41 @@
   import NavBar from '$lib/components/NavBar.svelte';
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
-  import { Mail, CalendarDays, Loader2 } from '@lucide/svelte';
+  import { Mail, CalendarDays, Loader2, Check } from '@lucide/svelte';
   import { CONTACT } from '$lib/config';
+  import { saveLead } from '$lib/supabase';
+  import { trackEvent } from '$lib/utils/analytics';
 
   // ── State ──
   let name = $state('');
   let email = $state('');
   let message = $state('');
   let submitting = $state(false);
+  let submitted = $state(false);
 
   // ── Handlers ──
   async function handleSubmit(e: Event) {
     e.preventDefault();
     submitting = true;
 
-    setTimeout(() => {
-      submitting = false;
-      name = '';
-      email = '';
-      message = '';
-    }, 600);
+    // Save to Supabase as a lead
+    saveLead({
+      school_name: '',
+      contact_name: name,
+      contact_role: 'contact_form',
+      contact_email: email,
+      contact_source: 'contact_page',
+      notes: message,
+      status: 'new',
+    });
+
+    trackEvent('contact_form_submitted', { email });
+
+    submitting = false;
+    submitted = true;
+    name = '';
+    email = '';
+    message = '';
   }
 </script>
 
@@ -100,6 +115,15 @@
 
     <!-- Contact form -->
     <div class="rounded-xl border border-border bg-background p-6 shadow-sm">
+      {#if submitted}
+        <div class="flex flex-col items-center gap-3 py-8 text-center">
+          <div class="flex size-12 items-center justify-center rounded-full bg-success/10">
+            <Check class="size-6 text-success" />
+          </div>
+          <h2 class="text-lg font-semibold text-foreground">{t('contact.form.success.title')}</h2>
+          <p class="text-sm text-muted-foreground">{t('contact.form.success.message')}</p>
+        </div>
+      {:else}
       <h2 class="mb-6 text-lg font-semibold text-foreground">
         {t('contact.form.title')}
       </h2>
@@ -167,6 +191,7 @@
         </Button>
 
       </form>
+      {/if}
     </div>
 
     <!-- CTA -->

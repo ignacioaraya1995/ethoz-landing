@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { env } from '$env/dynamic/public';
 import { isInternal, isTestEmail } from '$lib/utils/internal';
+import { getVisitorId } from '$lib/utils/visitor';
 
 const supabaseUrl = env.PUBLIC_SUPABASE_URL ?? '';
 const supabaseKey = env.PUBLIC_SUPABASE_ANON_KEY ?? '';
@@ -78,10 +79,13 @@ export async function saveLead(lead: Lead): Promise<{ ok: boolean; error?: strin
   const test = isInternal() || isTestEmail(lead.contact_email);
   const notes = test ? '[TEST] Internal team' : lead.notes;
 
+  const visitor_id = getVisitorId() || undefined;
+
   const { error } = await supabase.from('leads').insert([{
     ...lead,
     status: lead.status ?? 'new',
     notes,
+    visitor_id,
     created_at: new Date().toISOString(),
   }]);
 
