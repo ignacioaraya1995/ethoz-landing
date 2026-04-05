@@ -66,7 +66,7 @@
   <link rel="canonical" href="https://ethoz.cl/productos" />
 </svelte:head>
 
-<main class="min-h-dvh bg-background">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->

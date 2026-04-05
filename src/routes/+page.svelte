@@ -195,7 +195,7 @@
   </script>
 </svelte:head>
 
-<main>
+<main class="flex min-h-dvh flex-col">
   <NavBar />
 
   <!-- ═══════════════════════════════════════════

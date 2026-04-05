@@ -27,7 +27,7 @@
     { icon: Shield, name: 'Permisos por Cargo', href: '/features/access-control', desc: 'Cada cargo ve solo lo que necesita' },
     { icon: Search, name: 'Búsqueda Inteligente', href: '/features/smart-search', desc: 'Cualquier alumno en segundos' },
     { icon: ClipboardList, name: 'Registro de Convivencia', href: '/features/privacy-compliance', desc: 'Seguimiento sin reinicio de marzo' },
-    { icon: Eye, name: 'Libro de Clases Digital', href: '/compliance', desc: 'Conforme a Circular N°30' },
+    { icon: Eye, name: 'Integración Libro Digital', href: '/compliance', desc: 'Conecta con tu proveedor actual' },
   ];
 
   const navLinksBefore = [

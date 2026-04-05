@@ -16,9 +16,9 @@
   <link rel="canonical" href="https://ethoz.cl/privacy" />
 </svelte:head>
 
-<main class="min-h-dvh bg-background">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
-  <div class="mx-auto max-w-3xl px-4 pt-28 pb-16 sm:pt-32 sm:pb-20 sm:px-6 lg:px-8">
+  <div class="mx-auto flex-1 max-w-3xl px-4 pt-28 pb-16 sm:pt-32 sm:pb-20 sm:px-6 lg:px-8">
 
     <h1 class="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Política de Privacidad</h1>
     <p class="mt-2 text-sm text-muted-foreground">Última actualización: abril 2026</p>

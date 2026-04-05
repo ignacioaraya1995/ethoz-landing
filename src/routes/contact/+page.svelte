@@ -57,7 +57,7 @@
   <NavBar />
 
   <!-- Content -->
-  <div class="mx-auto w-full max-w-2xl px-4 pt-28 pb-16 sm:pt-32 sm:pb-20">
+  <div class="mx-auto flex-1 w-full max-w-2xl px-4 pt-28 pb-16 sm:pt-32 sm:pb-20">
 
     <!-- Heading -->
     <div class="mb-10 text-center">

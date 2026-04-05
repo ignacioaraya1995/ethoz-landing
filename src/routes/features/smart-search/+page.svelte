@@ -19,7 +19,7 @@
   <link rel="canonical" href="https://ethoz.cl/features/smart-search" />
 </svelte:head>
 
-<main class="min-h-dvh pt-16">
+<main class="flex min-h-dvh flex-col pt-16">
   <NavBar />
 
   <!-- Hero -->

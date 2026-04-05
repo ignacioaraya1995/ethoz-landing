@@ -199,7 +199,7 @@
   </div>
 
   <!-- Content -->
-  <div class="mx-auto max-w-5xl px-4 py-12 sm:py-16">
+  <div class="mx-auto flex-1 max-w-5xl px-4 py-12 sm:py-16">
     {#if schoolStore.loading || !schoolStore.selectedSchool}
       <div class="flex flex-col items-center gap-3 py-16">
         <Loader2 class="size-8 animate-spin text-primary" />
@@ -212,6 +212,10 @@
           <h1 class="text-2xl font-bold tracking-tight text-foreground">
             {t('demo.step2.title')}
           </h1>
+          <a href="/demo" class="mt-2 inline-flex items-center gap-1 text-sm text-primary transition-colors hover:text-primary/70">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            {t('demo.step2.change')}
+          </a>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-2">

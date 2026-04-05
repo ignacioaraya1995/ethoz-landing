@@ -30,7 +30,7 @@
   <link rel="canonical" href="https://ethoz.cl/about" />
 </svelte:head>
 
-<main class="min-h-dvh bg-background">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero — split layout (Contrast Effect: problem vs. solution) -->

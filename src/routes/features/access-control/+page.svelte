@@ -19,7 +19,7 @@
   <link rel="canonical" href="https://ethoz.cl/features/access-control" />
 </svelte:head>
 
-<main class="min-h-dvh pt-16">
+<main class="flex min-h-dvh flex-col pt-16">
   <NavBar />
 
   <!-- Hero -->

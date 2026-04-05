@@ -128,7 +128,7 @@
   </div>
 
   <!-- Content -->
-  <div class="mx-auto max-w-lg px-4 py-12 sm:py-16">
+  <div class="mx-auto flex-1 max-w-lg px-4 py-12 sm:py-16">
     <div class="space-y-6">
       <div class="text-center">
         <div class="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-primary/10">
