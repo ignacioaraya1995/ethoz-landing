@@ -10,6 +10,7 @@
   import { trackEvent } from '$lib/utils/analytics';
   import { saveLead } from '$lib/supabase';
   import { executeRecaptcha, getRecaptchaScriptUrl } from '$lib/utils/recaptcha';
+  import { untrack } from 'svelte';
   import {
     Building,
     MapPin,
@@ -38,15 +39,17 @@
 
   // ── Load school by RBD ──
   $effect(() => {
-    schoolStore.load();
+    untrack(() => schoolStore.load());
   });
 
   $effect(() => {
     if (schoolStore.loaded && rbd) {
-      schoolStore.selectSchool(rbd);
-      if (!schoolStore.selectedSchool) {
-        goto('/demo', { replaceState: true });
-      }
+      untrack(() => {
+        schoolStore.selectSchool(rbd);
+        if (!schoolStore.selectedSchool) {
+          goto('/demo', { replaceState: true });
+        }
+      });
     }
   });
 
@@ -94,24 +97,26 @@
   // ── Map ──
   $effect(() => {
     const school = schoolStore.selectedSchool;
-    if (school && mapContainer && !mapInstance) {
-      if (school.lat === 0 && school.lng === 0) return;
-      import('leaflet').then((L) => {
-        mapInstance = L.map(mapContainer!, {
-          attributionControl: false,
-          zoomControl: false,
-          dragging: false,
-          touchZoom: false,
-          scrollWheelZoom: false,
-          doubleClickZoom: false,
-          boxZoom: false,
-          keyboard: false,
-        }).setView([school.lat, school.lng], 15);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapInstance);
-        L.marker([school.lat, school.lng]).addTo(mapInstance);
-        setTimeout(() => mapInstance?.invalidateSize(), 100);
-      });
-    }
+    const container = mapContainer;
+    if (!school || !container || school.lat === 0 && school.lng === 0) return;
+    if (mapInstance || (container as any)._leaflet_id) return;
+
+    import('leaflet').then((L) => {
+      if (mapInstance || (container as any)._leaflet_id) return;
+      mapInstance = L.map(container, {
+        attributionControl: false,
+        zoomControl: false,
+        dragging: false,
+        touchZoom: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+      }).setView([school.lat, school.lng], 15);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapInstance);
+      L.marker([school.lat, school.lng]).addTo(mapInstance);
+      setTimeout(() => mapInstance?.invalidateSize(), 100);
+    });
 
     return () => {
       if (mapInstance) {
