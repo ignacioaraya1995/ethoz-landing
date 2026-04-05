@@ -234,6 +234,52 @@ test.describe('Navigation — CTA buttons', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// 2b. Zero uncaught errors on critical pages
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Runtime errors — no uncaught exceptions', () => {
+	test('demo school page (/demo/[rbd]) has no JS errors', async ({ page }) => {
+		const errors: string[] = [];
+		page.on('pageerror', (err) => errors.push(err.message));
+
+		// Navigate to demo search, select a school
+		await page.goto('/demo');
+		const input = page.locator('input[type="text"], input[placeholder]').first();
+		await expect(input).toBeVisible({ timeout: 10000 });
+		await input.fill('Santiago');
+		await page.waitForTimeout(500);
+		const firstResult = page.locator('[role="listbox"] button').first();
+		await expect(firstResult).toBeVisible({ timeout: 5000 });
+		await firstResult.click();
+		await page.waitForURL(/\/demo\/\d+/, { timeout: 5000 });
+
+		// Wait for school card to fully render
+		await expect(page.locator('h2').first()).toBeVisible({ timeout: 5000 });
+		await page.waitForTimeout(1000);
+
+		expect(errors).toEqual([]);
+	});
+
+	test('homepage has no JS errors', async ({ page }) => {
+		const errors: string[] = [];
+		page.on('pageerror', (err) => errors.push(err.message));
+		await page.goto('/');
+		await expect(page.locator('h1')).toBeVisible();
+		await page.waitForTimeout(1000);
+		expect(errors).toEqual([]);
+	});
+
+	test('contact page has no JS errors', async ({ page }) => {
+		const errors: string[] = [];
+		page.on('pageerror', (err) => errors.push(err.message));
+		await page.goto('/contact');
+		await expect(page.locator('h1, h2').first()).toBeVisible();
+		await page.waitForTimeout(1000);
+		expect(errors).toEqual([]);
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 3. Demo funnel (full flow)
 // ─────────────────────────────────────────────────────────────────────────────
 
