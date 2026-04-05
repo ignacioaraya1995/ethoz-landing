@@ -97,7 +97,16 @@
     if (school && mapContainer && !mapInstance) {
       if (school.lat === 0 && school.lng === 0) return;
       import('leaflet').then((L) => {
-        mapInstance = L.map(mapContainer!, { attributionControl: false }).setView([school.lat, school.lng], 15);
+        mapInstance = L.map(mapContainer!, {
+          attributionControl: false,
+          zoomControl: false,
+          dragging: false,
+          touchZoom: false,
+          scrollWheelZoom: false,
+          doubleClickZoom: false,
+          boxZoom: false,
+          keyboard: false,
+        }).setView([school.lat, school.lng], 15);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapInstance);
         L.marker([school.lat, school.lng]).addTo(mapInstance);
         setTimeout(() => mapInstance?.invalidateSize(), 100);
@@ -277,15 +286,6 @@
                 </div>
               </div>
 
-              <!-- Card footer -->
-              <div class="px-5 py-3">
-                <a
-                  href="/demo"
-                  class="text-sm font-medium text-primary transition-colors hover:text-primary/70"
-                >
-                  &larr; {t('demo.step2.change')}
-                </a>
-              </div>
             </div>
 
             <!-- Map — desktop only -->

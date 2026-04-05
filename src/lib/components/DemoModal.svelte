@@ -596,7 +596,7 @@
 									<Loader2 class="h-4 w-4 animate-spin" />
 									Enviando... <!-- TODO: i18n -->
 								{:else}
-									Confirmar Demo <!-- TODO: i18n -->
+									Confirmar información <!-- TODO: i18n -->
 									<ChevronRight class="h-4 w-4" />
 								{/if}
 							</Button>

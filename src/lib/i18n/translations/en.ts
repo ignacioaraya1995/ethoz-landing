@@ -234,7 +234,7 @@ export const en = {
   'demo.form.source.event': 'Event or conference',
   'demo.form.source.mineduc': 'MINEDUC or Superintendence',
   'demo.form.source.other': 'Other',
-  'demo.form.submit': 'Confirm Demo',
+  'demo.form.submit': 'Confirm information',
   'demo.step3.title': 'All set!',
   'demo.step3.subtitle': 'We\'ll be in touch with you soon.',
   'demo.step3.email': 'We\'ll send an email to',

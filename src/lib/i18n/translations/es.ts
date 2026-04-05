@@ -255,7 +255,7 @@ export const es = {
   'demo.form.source.event': 'Evento o conferencia',
   'demo.form.source.mineduc': 'MINEDUC o Superintendencia',
   'demo.form.source.other': 'Otro',
-  'demo.form.submit': 'Confirmar Demo',
+  'demo.form.submit': 'Confirmar información',
   'demo.step3.title': '¡Listo!',
   'demo.step3.subtitle': 'Nos pondremos en contacto contigo pronto.',
   'demo.step3.email': 'Te enviaremos un email a',
