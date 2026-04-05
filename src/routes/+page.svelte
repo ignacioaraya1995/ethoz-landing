@@ -750,7 +750,7 @@
 
   <!-- Mobile sticky CTA -->
   {#if showStickyCta}
-    <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background px-4 pb-[env(safe-area-inset-bottom,0.75rem)] pt-3 md:hidden">
+    <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background px-4 pb-[max(env(safe-area-inset-bottom,0px),1rem)] pt-3 md:hidden">
       <Button size="lg" href="/demo" class="w-full">
         {t('hero.cta.primary')}
         <ArrowRight class="size-4" />

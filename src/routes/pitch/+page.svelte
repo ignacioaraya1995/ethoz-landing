@@ -42,6 +42,7 @@
   let loaded = $state(false);
   let isFullscreen = $state(false);
   let showControls = $state(true);
+  let showSubtitles = $state(typeof window !== 'undefined' ? window.innerWidth > 640 : true);
   let controlsTimeout: ReturnType<typeof setTimeout>;
   let containerEl = $state<HTMLDivElement | null>(null);
 
@@ -434,14 +435,16 @@
     {/key}
   </div>
 
-  <!-- Subtitles — always visible -->
-  <div class="subtitle-bar">
-    {#key currentSlide.id}
-      <p class="subtitle-text" in:fade={{ duration: 400, delay: 200 }}>
-        {currentSlide.subtitle}
-      </p>
-    {/key}
-  </div>
+  <!-- Subtitles — toggleable on mobile -->
+  {#if showSubtitles}
+    <div class="subtitle-bar">
+      {#key currentSlide.id}
+        <p class="subtitle-text" in:fade={{ duration: 400, delay: 200 }}>
+          {currentSlide.subtitle}
+        </p>
+      {/key}
+    </div>
+  {/if}
 
   <!-- Controls -->
   <div class="controls-bar" class:visible={showControls || !playing}>
@@ -495,6 +498,9 @@
       </div>
 
       <div class="controls-right">
+        <button class="ctrl-btn" class:ctrl-active={showSubtitles} onclick={() => showSubtitles = !showSubtitles} aria-label={showSubtitles ? 'Ocultar subtítulos' : 'Mostrar subtítulos'}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M7 15h4m-4-3h2m4 0h4m-2 3h2"/></svg>
+        </button>
         <button class="ctrl-btn" onclick={toggleMute} aria-label={muted ? 'Activar sonido' : 'Silenciar'}>
           {#if muted}
             <VolumeX size={18} />
@@ -502,10 +508,10 @@
             <Volume2 size={18} />
           {/if}
         </button>
-        <a href="/audio/pitch.m4a" download="Ethoz-Pitch.m4a" class="ctrl-btn" aria-label="Descargar audio">
+        <a href="/audio/pitch.m4a" download="Ethoz-Pitch.m4a" class="ctrl-btn hidden-mobile" aria-label="Descargar audio">
           <Download size={18} />
         </a>
-        <button class="ctrl-btn" onclick={toggleFullscreen} aria-label={isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}>
+        <button class="ctrl-btn hidden-mobile" onclick={toggleFullscreen} aria-label={isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}>
           {#if isFullscreen}
             <Minimize size={18} />
           {:else}
@@ -1392,16 +1398,27 @@
     50% { opacity: 0.7; }
   }
 
+  /* ── Subtitle toggle active state ── */
+  .ctrl-active {
+    color: var(--primary) !important;
+    background: oklch(0.546 0.213 264 / 0.1);
+  }
+
+  .hidden-mobile { display: inline-flex; }
+
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 640px) {
-    .slide-content { padding: 1.25rem; gap: 1rem; }
-    .subtitle-bar { bottom: 8.5rem; width: calc(100% - 2rem); }
-    .controls-bar { padding: 0.5rem 1rem 0.75rem; }
+    .slide-area { padding-bottom: 6rem; }
+    .slide-content { padding: 1rem 1.25rem; gap: 0.75rem; }
+    .subtitle-bar { bottom: 7rem; width: calc(100% - 1.5rem); }
+    .subtitle-text { font-size: 0.8rem; padding: 0.5rem 1rem; }
+    .controls-bar { padding: 0.5rem 0.75rem 0.75rem; }
     .scattered-grid { gap: 1.25rem; }
     .scatter-icon { width: 3.5rem; height: 3.5rem; }
     .risk-callout { font-size: 0.8rem; flex-wrap: wrap; justify-content: center; text-align: center; }
     .controls-left, .controls-right { min-width: auto; }
     .time-display { font-size: 0.7rem; }
+    .hidden-mobile { display: none; }
   }
 
   /* ═══ REDUCED MOTION ═══ */
