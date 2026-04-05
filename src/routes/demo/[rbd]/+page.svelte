@@ -97,7 +97,16 @@
     if (school && mapContainer && !mapInstance) {
       if (school.lat === 0 && school.lng === 0) return;
       import('leaflet').then((L) => {
-        mapInstance = L.map(mapContainer!, { attributionControl: false }).setView([school.lat, school.lng], 15);
+        mapInstance = L.map(mapContainer!, {
+          attributionControl: false,
+          zoomControl: false,
+          dragging: false,
+          touchZoom: false,
+          scrollWheelZoom: false,
+          doubleClickZoom: false,
+          boxZoom: false,
+          keyboard: false,
+        }).setView([school.lat, school.lng], 15);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapInstance);
         L.marker([school.lat, school.lng]).addTo(mapInstance);
         setTimeout(() => mapInstance?.invalidateSize(), 100);
@@ -132,39 +141,42 @@
     e.preventDefault();
     submitting = true;
 
-    await executeRecaptcha('submit_demo');
-    const school = schoolStore.selectedSchool;
+    try {
+      await executeRecaptcha('submit_demo');
+      const school = schoolStore.selectedSchool;
 
-    saveLead({
-      school_name: school?.name ?? '',
-      school_rbd: school?.rbd,
-      school_commune: school?.commune ?? '',
-      contact_name: contactName,
-      contact_role: contactRole,
-      contact_email: contactEmail,
-      contact_phone: contactPhone || undefined,
-      contact_source: contactSource || undefined,
-      status: 'new',
-    });
+      saveLead({
+        school_name: school?.name ?? '',
+        school_rbd: school?.rbd,
+        school_commune: school?.commune ?? '',
+        contact_name: contactName,
+        contact_role: contactRole,
+        contact_email: contactEmail,
+        contact_phone: contactPhone || undefined,
+        contact_source: contactSource || undefined,
+        status: 'new',
+      });
 
-    trackEvent('demo_form_submitted', { school: school?.name ?? '', email: contactEmail });
+      trackEvent('demo_form_submitted', { school: school?.name ?? '', email: contactEmail });
 
-    // Clear saved form
-    if (browser) sessionStorage.removeItem(STORAGE_KEY);
+      // Clear saved form
+      if (browser) sessionStorage.removeItem(STORAGE_KEY);
 
-    // Redirect to scheduling page
-    const params = new URLSearchParams();
-    if (school) {
-      params.set('school', school.name);
-      params.set('commune', school.commune);
-      const region = schoolStore.regions.find(r => r.code === school.regionCode);
-      if (region) params.set('region', region.name);
+      // Redirect to scheduling page
+      const params = new URLSearchParams();
+      if (school) {
+        params.set('school', school.name);
+        params.set('commune', school.commune);
+        const region = schoolStore.regions.find(r => r.code === school.regionCode);
+        if (region) params.set('region', region.name);
+      }
+      params.set('name', contactName);
+      params.set('email', contactEmail);
+
+      goto(`/schedule?${params.toString()}`);
+    } finally {
+      submitting = false;
     }
-    params.set('name', contactName);
-    params.set('email', contactEmail);
-
-    submitting = false;
-    goto(`/schedule?${params.toString()}`);
   }
 </script>
 
@@ -277,15 +289,6 @@
                 </div>
               </div>
 
-              <!-- Card footer -->
-              <div class="px-5 py-3">
-                <a
-                  href="/demo"
-                  class="text-sm font-medium text-primary transition-colors hover:text-primary/70"
-                >
-                  &larr; {t('demo.step2.change')}
-                </a>
-              </div>
             </div>
 
             <!-- Map — desktop only -->

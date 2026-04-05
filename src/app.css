@@ -195,7 +195,7 @@ button, a, [role="button"] {
 }
 
 /* ── Hide reCAPTCHA badge (attribution in footer instead) ── */
-.grecaptcha-badge { visibility: hidden !important; }
+.grecaptcha-badge { visibility: hidden !important; pointer-events: none !important; }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
