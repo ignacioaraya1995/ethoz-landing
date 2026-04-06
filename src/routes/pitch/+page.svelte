@@ -30,7 +30,9 @@
     ClipboardList,
     Server,
     Gavel,
-    Download
+    Download,
+    ChevronLeft,
+    Captions
   } from '@lucide/svelte';
 
   import { pitchSlides as slides, getDaysUntilEnforcement } from '$lib/data/pitch-slides';
@@ -163,7 +165,7 @@
     class="absolute left-4 top-4 z-30 flex size-10 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-sm transition-colors hover:bg-secondary hover:text-foreground"
     aria-label="Volver al inicio"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <ChevronLeft class="size-5" />
   </a>
 
   <!-- Slide Area -->
@@ -483,7 +485,7 @@
 
       <div class="controls-right">
         <button class="ctrl-btn" class:ctrl-active={showSubtitles} onclick={() => showSubtitles = !showSubtitles} aria-label={showSubtitles ? 'Ocultar subtítulos' : 'Mostrar subtítulos'}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M7 15h4m-4-3h2m4 0h4m-2 3h2"/></svg>
+          <Captions class="size-[18px]" />
         </button>
         <button class="ctrl-btn" onclick={toggleMute} aria-label={muted ? 'Activar sonido' : 'Silenciar'}>
           {#if muted}

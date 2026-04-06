@@ -15,6 +15,7 @@
     Building,
     MapPin,
     ChevronRight,
+    ChevronLeft,
     Loader2,
     GraduationCap,
     ChevronDown,
@@ -239,7 +240,7 @@
             {t('demo.step2.title')}
           </h1>
           <a href="/demo" class="mt-2 inline-flex items-center gap-1 text-sm text-primary transition-colors hover:text-primary/70">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <ChevronLeft class="size-4" />
             {t('demo.step2.change')}
           </a>
         </div>

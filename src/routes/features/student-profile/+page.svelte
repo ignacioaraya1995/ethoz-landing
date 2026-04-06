@@ -3,7 +3,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import { t } from '$lib/i18n/index.svelte';
   import { Button } from '$lib/components/ui/button';
-  import { ClipboardList, ArrowRight, ArrowLeft, History, Lock, BadgeCheck } from '@lucide/svelte';
+  import { ClipboardList, ArrowRight, ArrowLeft, History, Lock, BadgeCheck, Eye, UserCheck, AlertTriangle } from '@lucide/svelte';
   import { trackEvent } from '$lib/utils/analytics';
 
   $effect(() => { trackEvent('feature_page_viewed', { feature: 'student-profile' }); });
@@ -81,7 +81,7 @@
             <div class="mt-2.5 space-y-2">
               <div class="flex items-start gap-2">
                 <div class="mt-0.5 size-4 shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                  <Eye class="size-2 text-primary" />
                 </div>
                 <div>
                   <p class="text-[10px] font-medium text-foreground">Observación académica positiva</p>
@@ -90,7 +90,7 @@
               </div>
               <div class="flex items-start gap-2">
                 <div class="mt-0.5 size-4 shrink-0 rounded-full bg-success/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-success"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+                  <UserCheck class="size-2 text-success" />
                 </div>
                 <div>
                   <p class="text-[10px] font-medium text-foreground">Retiro autorizado — María Sepúlveda (madre)</p>
@@ -99,7 +99,7 @@
               </div>
               <div class="flex items-start gap-2">
                 <div class="mt-0.5 size-4 shrink-0 rounded-full bg-warning/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-warning-foreground"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  <AlertTriangle class="size-2 text-warning-foreground" />
                 </div>
                 <div>
                   <p class="text-[10px] font-medium text-foreground">Atraso registrado (08:15)</p>
