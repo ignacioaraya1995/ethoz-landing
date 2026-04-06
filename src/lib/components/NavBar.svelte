@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
-  import { Menu, X, ChevronDown, Shield, Search, ClipboardList, Eye, Bell, Fingerprint } from '@lucide/svelte';
+  import { Menu, X, ChevronDown, Shield, Search, ClipboardList, Plug, Bell, Fingerprint } from '@lucide/svelte';
   import { env } from '$env/dynamic/public';
   import { slide } from 'svelte/transition';
   import { page } from '$app/state';
@@ -27,7 +27,7 @@
     { icon: Fingerprint, name: 'Permisos por Cargo', href: '/features/access-control', desc: 'Cada cargo ve solo lo que necesita' },
     { icon: Search, name: 'Búsqueda Inteligente', href: '/features/smart-search', desc: 'Cualquier alumno en segundos' },
     { icon: Shield, name: 'Registro de Convivencia', href: '/features/privacy-compliance', desc: 'Seguimiento sin reinicio de marzo' },
-    { icon: Eye, name: 'Integración Libro Digital', href: '/compliance', desc: 'Conecta con tu proveedor actual' },
+    { icon: Plug, name: 'Integraciones', href: '/integrations', desc: 'Conecta con tu sistema o usa el nuestro' },
   ];
 
   const navLinksBefore = [
@@ -46,7 +46,7 @@
   }
 
   function isProductActive(): boolean {
-    return page.url.pathname.startsWith('/features') || page.url.pathname === '/compliance' || page.url.pathname === '/productos';
+    return page.url.pathname.startsWith('/features') || page.url.pathname === '/compliance' || page.url.pathname === '/productos' || page.url.pathname === '/integrations';
   }
 
   function openProducts() {
