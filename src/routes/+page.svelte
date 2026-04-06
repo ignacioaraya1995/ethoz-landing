@@ -378,7 +378,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 4: PROBLEM
        ═══════════════════════════════════════════ -->
-  <section class="bg-secondary py-16 sm:py-20" id="problem">
+  <section class="py-16 sm:py-20" id="problem">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="mx-auto max-w-2xl text-center">
@@ -431,7 +431,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 5: SOLUTION / FEATURES
        ═══════════════════════════════════════════ -->
-  <section class="py-16 sm:py-20" id="features">
+  <section class="bg-secondary py-16 sm:py-20" id="features">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="mx-auto max-w-2xl text-center">
@@ -524,7 +524,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 6: COMPLIANCE + COUNTDOWN
        ═══════════════════════════════════════════ -->
-  <section class="bg-secondary py-16 sm:py-20" id="compliance">
+  <section class="py-16 sm:py-20" id="compliance">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="mx-auto max-w-2xl text-center">
@@ -733,7 +733,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 10: FINAL CTA
        ═══════════════════════════════════════════ -->
-  <section class="border-t border-border bg-secondary py-16 sm:py-20" id="cta">
+  <section class="py-16 sm:py-20" id="cta">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
         {t('cta.title')}
