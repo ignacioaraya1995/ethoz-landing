@@ -217,7 +217,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 2: HERO — split layout
        ═══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden pt-28 sm:pt-32">
+  <section class="relative overflow-hidden pt-20 sm:pt-24">
     <!-- Background gradient -->
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent"></div>
 
@@ -393,36 +393,24 @@
         </p>
       </div>
 
-      <!-- Problem items — 3 columns -->
+      <!-- Problem items — 3 columns, clean typography -->
       <div class="mx-auto mt-10 grid gap-6 sm:grid-cols-3">
-        <div class="rounded-xl border border-border border-l-4 border-l-warning bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-warning/15">
-              <AlertTriangle class="size-5 text-warning-foreground" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('problem.card1.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('problem.card1.desc')}</p>
+        <div class="rounded-xl border border-border bg-card p-6">
+          <AlertTriangle class="size-5 text-warning-foreground" />
+          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card1.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card1.desc')}</p>
         </div>
 
-        <div class="rounded-xl border border-border border-l-4 border-l-destructive bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-destructive/10">
-              <Shield class="size-5 text-destructive" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('problem.card2.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('problem.card2.desc')}</p>
+        <div class="rounded-xl border border-border bg-card p-6">
+          <Shield class="size-5 text-destructive" />
+          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card2.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card2.desc')}</p>
         </div>
 
-        <div class="rounded-xl border border-border border-l-4 border-l-primary bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-              <FileCheck class="size-5 text-primary" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('problem.card3.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('problem.card3.desc')}</p>
+        <div class="rounded-xl border border-border bg-card p-6">
+          <FileCheck class="size-5 text-primary" />
+          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card3.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card3.desc')}</p>
         </div>
       </div>
     </div>
@@ -446,60 +434,44 @@
         </p>
       </div>
 
-      <!-- Feature cards — 2×2 grid (products only, compliance is separate) -->
+      <!-- Feature cards — 2×2 grid, numbered headings (no icon boxes) -->
       <div class="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
         <!-- Feature 1: Ficha 360° -->
-        <a href="/features/student-profile" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-l-2 hover:border-l-primary hover:shadow-md hover:-translate-y-0.5">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <ClipboardList class="size-5 text-primary" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('features.record.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('features.record.desc')}</p>
-          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        <a href="/features/student-profile" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+          <span class="text-xs font-bold tabular-nums tracking-wider text-primary/40">01</span>
+          <h3 class="mt-1.5 text-base font-semibold text-foreground">{t('features.record.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('features.record.desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
             {t('features.learn_more')} <ChevronRight class="size-3.5" />
           </span>
         </a>
 
         <!-- Feature 2: Retiros Seguros -->
-        <a href="/features/safe-pickups" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-l-2 hover:border-l-primary hover:shadow-md hover:-translate-y-0.5">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10">
-              <Bell class="size-5 text-destructive" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('features.pickup.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('features.pickup.desc')}</p>
-          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        <a href="/features/safe-pickups" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+          <span class="text-xs font-bold tabular-nums tracking-wider text-primary/40">02</span>
+          <h3 class="mt-1.5 text-base font-semibold text-foreground">{t('features.pickup.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('features.pickup.desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
             {t('features.learn_more')} <ChevronRight class="size-3.5" />
           </span>
         </a>
 
         <!-- Feature 3: Permisos por Cargo -->
-        <a href="/features/access-control" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-l-2 hover:border-l-primary hover:shadow-md hover:-translate-y-0.5">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-warning/15">
-              <Fingerprint class="size-5 text-warning-foreground" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('features.rbac.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('features.rbac.desc')}</p>
-          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        <a href="/features/access-control" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+          <span class="text-xs font-bold tabular-nums tracking-wider text-primary/40">03</span>
+          <h3 class="mt-1.5 text-base font-semibold text-foreground">{t('features.rbac.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('features.rbac.desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
             {t('features.learn_more')} <ChevronRight class="size-3.5" />
           </span>
         </a>
 
         <!-- Feature 4: Búsqueda Instantánea -->
-        <a href="/features/smart-search" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-l-2 hover:border-l-primary hover:shadow-md hover:-translate-y-0.5">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Search class="size-5 text-primary" />
-            </div>
-            <h3 class="text-base font-semibold text-foreground">{t('features.search.title')}</h3>
-          </div>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{t('features.search.desc')}</p>
-          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        <a href="/features/smart-search" class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+          <span class="text-xs font-bold tabular-nums tracking-wider text-primary/40">04</span>
+          <h3 class="mt-1.5 text-base font-semibold text-foreground">{t('features.search.title')}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('features.search.desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
             {t('features.learn_more')} <ChevronRight class="size-3.5" />
           </span>
         </a>
@@ -507,13 +479,11 @@
 
       <!-- Cross-cutting: privacy is not a product, it's how everything works -->
       <div class="mx-auto mt-8 max-w-4xl">
-        <a href="/compliance" class="group flex items-center gap-4 rounded-xl border border-border bg-secondary/50 px-6 py-4 transition-all hover:border-primary/20 hover:shadow-sm">
-          <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/10">
-            <Shield class="size-5 text-success" />
-          </div>
+        <a href="/compliance" class="group flex items-center gap-4 rounded-xl border border-border px-6 py-4 transition-all hover:border-primary/20 hover:shadow-sm">
+          <Shield class="size-5 shrink-0 text-primary" />
           <div class="flex-1">
             <p class="text-sm font-semibold text-foreground">Todo Ethoz cumple la Ley 21.719 por diseño</p>
-            <p class="mt-0.5 text-xs text-muted-foreground">Cifrado, auditoría, consentimiento parental y aislamiento de datos no son un módulo aparte — están integrados en cada función.</p>
+            <p class="mt-0.5 text-xs text-muted-foreground">Cifrado, auditoría, consentimiento parental y aislamiento de datos — integrados en cada función.</p>
           </div>
           <ChevronRight class="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
         </a>
