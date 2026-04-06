@@ -24,6 +24,8 @@
 
   // ── Route param ──
   const rbd = $derived(Number(page.params.rbd));
+  const isManual = $derived(page.url.searchParams.get('manual') === '1');
+  let manualSchoolName = $state(page.url.searchParams.get('school') ?? '');
 
   // ── Form state ──
   const STORAGE_KEY = 'ethoz-demo-form';
@@ -39,13 +41,13 @@
   let mapContainer = $state<HTMLDivElement | null>(null);
   let mapInstance: any = null;
 
-  // ── Load school by RBD ──
+  // ── Load school by RBD (skip if manual) ──
   $effect(() => {
-    untrack(() => schoolStore.load());
+    if (!isManual) untrack(() => schoolStore.load());
   });
 
   $effect(() => {
-    if (schoolStore.loaded && rbd) {
+    if (!isManual && schoolStore.loaded && rbd) {
       untrack(() => {
         schoolStore.selectSchool(rbd);
         if (!schoolStore.selectedSchool) {
@@ -152,10 +154,11 @@
 
     try {
       await executeRecaptcha('submit_demo');
-      const school = schoolStore.selectedSchool;
+      const school = isManual ? null : schoolStore.selectedSchool;
+      const schoolName = isManual ? manualSchoolName.trim() : (school?.name ?? '');
 
       const result = await saveLead({
-        school_name: school?.name ?? '',
+        school_name: schoolName,
         school_rbd: school?.rbd,
         school_commune: school?.commune ?? '',
         contact_name: contactName,
@@ -163,6 +166,7 @@
         contact_email: contactEmail,
         contact_phone: contactPhone || undefined,
         contact_source: contactSource || undefined,
+        notes: isManual ? 'Entrada manual — colegio no encontrado en directorio' : undefined,
         status: 'new',
       });
 
@@ -173,15 +177,15 @@
         return;
       }
 
-      trackEvent('demo_form_submitted', { school: school?.name ?? '', email: contactEmail });
+      trackEvent('demo_form_submitted', { school: schoolName, email: contactEmail, manual: isManual });
 
       // Clear saved form
       if (browser) sessionStorage.removeItem(STORAGE_KEY);
 
       // Redirect to scheduling page
       const params = new URLSearchParams();
+      params.set('school', schoolName);
       if (school) {
-        params.set('school', school.name);
         params.set('commune', school.commune);
         const region = schoolStore.regions.find(r => r.code === school.regionCode);
         if (region) params.set('region', region.name);
@@ -227,13 +231,13 @@
 
   <!-- Content -->
   <div class="mx-auto flex-1 max-w-5xl px-4 py-12 sm:py-16">
-    {#if schoolStore.loading || !schoolStore.selectedSchool}
+    {#if !isManual && (schoolStore.loading || !schoolStore.selectedSchool)}
       <div class="flex flex-col items-center gap-3 py-16">
         <Loader2 class="size-8 animate-spin text-primary" />
         <p class="text-sm text-muted-foreground">{t('demo.search.loading')}</p>
       </div>
     {:else}
-      {@const school = schoolStore.selectedSchool}
+      {@const school = isManual ? null : schoolStore.selectedSchool}
       <div class="space-y-8">
         <div class="text-center">
           <h1 class="text-2xl font-bold tracking-tight text-foreground">
@@ -248,6 +252,34 @@
         <div class="grid gap-8 lg:grid-cols-2">
           <!-- Left: school info + map -->
           <div class="space-y-6">
+            {#if isManual}
+              <!-- Manual entry card -->
+              <div class="rounded-xl border border-border bg-background p-5 shadow-sm">
+                <div class="flex items-center gap-2.5 mb-4">
+                  <GraduationCap class="size-5 shrink-0 text-primary" />
+                  <h2 class="text-base font-semibold text-foreground">Datos del colegio</h2>
+                </div>
+                <div class="space-y-3">
+                  <div class="space-y-1.5">
+                    <label for="manual-school" class="block text-sm font-medium text-foreground">
+                      Nombre del colegio <span class="text-destructive">*</span>
+                    </label>
+                    <input
+                      id="manual-school"
+                      type="text"
+                      required
+                      bind:value={manualSchoolName}
+                      placeholder="Ej: Colegio San Patricio"
+                      autocapitalize="words"
+                      class="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+                </div>
+                <p class="mt-3 text-xs text-muted-foreground">
+                  No te preocupes si no encontraste tu colegio en el buscador. Completa los datos y nos pondremos en contacto contigo.
+                </p>
+              </div>
+            {:else}
             <!-- Selected school card -->
             <div class="rounded-xl border border-primary/20 bg-background shadow-sm">
               <!-- Card header -->
@@ -257,9 +289,9 @@
                     <GraduationCap class="size-5 text-primary" />
                   </div>
                   <div class="min-w-0 flex-1">
-                    <h2 class="text-base font-semibold leading-snug text-foreground">{school.name}</h2>
+                    <h2 class="text-base font-semibold leading-snug text-foreground">{school?.name}</h2>
                     <Badge variant="outline" class="mt-1 font-mono text-xs">
-                      {t('demo.rbd')} {school.rbd}
+                      {t('demo.rbd')} {school?.rbd}
                     </Badge>
                   </div>
                 </div>
@@ -271,35 +303,35 @@
                   <MapPin class="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                   <div class="min-w-0">
                     <p class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{t('demo.commune')}</p>
-                    <p class="truncate text-sm text-foreground">{school.commune}</p>
+                    <p class="truncate text-sm text-foreground">{school?.commune}</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5 bg-background px-4 py-3">
                   <MapPin class="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                   <div class="min-w-0">
                     <p class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{t('demo.region')}</p>
-                    <p class="truncate text-sm text-foreground">{regionName(school.regionCode)}</p>
+                    <p class="truncate text-sm text-foreground">{regionName(school?.regionCode ?? 0)}</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5 bg-background px-4 py-3">
                   <Users class="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                   <div class="min-w-0">
                     <p class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{t('demo.enrollment.label')}</p>
-                    <p class="text-sm text-foreground">{school.enrollment.toLocaleString('es-CL')} {t('demo.enrollment')}</p>
+                    <p class="text-sm text-foreground">{school?.enrollment.toLocaleString('es-CL')} {t('demo.enrollment')}</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5 bg-background px-4 py-3">
                   <Building class="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                   <div class="min-w-0">
                     <p class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Dependencia</p>
-                    <p class="text-sm text-foreground">{depTypeLabel(school.depType)}</p>
+                    <p class="text-sm text-foreground">{depTypeLabel(school?.depType ?? 0)}</p>
                   </div>
                 </div>
                 <div class="col-span-2 flex items-start gap-2.5 bg-background px-4 py-3">
                   <Building class="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                   <div class="min-w-0">
                     <p class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{t('demo.sostenedor')}</p>
-                    <p class="truncate text-sm text-foreground">{school.sostenedor}</p>
+                    <p class="truncate text-sm text-foreground">{school?.sostenedor}</p>
                   </div>
                 </div>
               </div>
@@ -307,11 +339,12 @@
             </div>
 
             <!-- Map — desktop only -->
-            {#if school.lat !== 0}
+            {#if school?.lat !== 0}
               <div
                 bind:this={mapContainer}
                 class="hidden h-64 w-full overflow-hidden rounded-xl border border-border lg:block"
               ></div>
+            {/if}
             {/if}
           </div>
 
@@ -415,7 +448,7 @@
                 type="submit"
                 size="xl"
                 class="w-full"
-                disabled={submitting || !contactName.trim() || !contactRole || !contactEmail.trim()}
+                disabled={submitting || !contactName.trim() || !contactRole || !contactEmail.trim() || (isManual && !manualSchoolName.trim())}
               >
                 {#if submitting}
                   <Loader2 class="size-4 animate-spin" />

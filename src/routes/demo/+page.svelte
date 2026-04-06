@@ -211,9 +211,30 @@
 
         <!-- No results -->
         {#if showNoResults}
-          <div class="rounded-xl border border-dashed border-border bg-background px-4 py-10 text-center">
+          <div class="rounded-xl border border-dashed border-border bg-background px-4 py-8 text-center">
             <Search class="mx-auto mb-2 size-8 text-muted-foreground/50" />
             <p class="text-sm font-medium text-foreground">{t('demo.search.noresults')}</p>
+            <button
+              type="button"
+              onclick={() => goto(`/demo/0?manual=1&school=${encodeURIComponent(searchInput.trim())}`)}
+              class="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              {t('demo.manual')}
+              <ChevronRight class="size-3.5" />
+            </button>
+          </div>
+        {/if}
+
+        <!-- Always show manual option -->
+        {#if searchInput.trim().length >= 2}
+          <div class="text-center">
+            <button
+              type="button"
+              onclick={() => goto(`/demo/0?manual=1&school=${encodeURIComponent(searchInput.trim())}`)}
+              class="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+            >
+              ¿No encuentras tu colegio? Continúa con el nombre a mano
+            </button>
           </div>
         {/if}
       {/if}
