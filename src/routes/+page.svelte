@@ -232,7 +232,7 @@
         </Badge>
 
         <!-- Headline -->
-        <h1 class="animate-fade-in-up animate-delay-100 text-balance text-5xl font-extrabold tracking-tighter text-foreground sm:text-6xl lg:text-7xl">
+        <h1 class="animate-fade-in-up animate-delay-100 text-balance text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           {t('hero.title')}
         </h1>
 
@@ -378,7 +378,7 @@
   <!-- ═══════════════════════════════════════════
        SECTION 4: PROBLEM
        ═══════════════════════════════════════════ -->
-  <section class="bg-muted py-16 sm:py-20" id="problem">
+  <section class="bg-secondary py-16 sm:py-20" id="problem">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="mx-auto max-w-2xl text-center">
@@ -733,22 +733,19 @@
   <!-- ═══════════════════════════════════════════
        SECTION 10: FINAL CTA
        ═══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-primary py-16 sm:py-20" id="cta">
-    <!-- Decorative gradient overlay -->
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80"></div>
-
-    <div class="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
+  <section class="border-t border-border bg-secondary py-16 sm:py-20" id="cta">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
         {t('cta.title')}
       </h2>
-      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-primary-foreground/80">
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
         {t('cta.subtitle')}
       </p>
       <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <Button
           size="xl"
           href="/demo"
-          class="bg-background text-foreground shadow-lg hover:bg-background/90"
+          class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
         >
           {t('cta.primary')}
           <ArrowRight class="size-4" />
@@ -757,7 +754,6 @@
           variant="outline"
           size="xl"
           onclick={() => showPitch = true}
-          class="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground"
         >
           <Play class="size-4" />
           Ver presentación

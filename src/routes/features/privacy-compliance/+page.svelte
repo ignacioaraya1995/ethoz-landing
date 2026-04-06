@@ -95,7 +95,7 @@
     <div class="mx-auto max-w-4xl px-4 sm:px-6">
       <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
 
-        <div class="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/10">
               <Building2 class="size-5 text-success" />
@@ -107,7 +107,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/10">
               <KeyRound class="size-5 text-success" />
@@ -119,7 +119,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/10">
               <Users class="size-5 text-success" />

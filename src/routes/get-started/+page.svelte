@@ -66,9 +66,9 @@
   <NavBar />
 
   <!-- ═══ HERO: Hook ═══ -->
-  <section class="pt-28 pb-16 sm:pt-36 sm:pb-20 bg-secondary">
+  <section class="pt-28 pb-16 sm:pt-32 sm:pb-20 bg-secondary">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
-      <h1 class="text-balance text-4xl font-extrabold tracking-tighter text-foreground sm:text-5xl">
+      <h1 class="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
         Fácil de contratar, fácil de implementar
       </h1>
       <p class="mt-5 text-lg leading-relaxed text-muted-foreground">

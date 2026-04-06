@@ -79,7 +79,7 @@
   <!-- Hero -->
   <section class="pt-28 pb-12 sm:pt-32 sm:pb-16 bg-secondary">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
-      <h1 class="text-balance text-4xl font-extrabold tracking-tighter text-foreground sm:text-5xl">
+      <h1 class="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
         Seis módulos, un solo objetivo
       </h1>
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">

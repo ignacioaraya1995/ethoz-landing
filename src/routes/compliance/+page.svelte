@@ -279,7 +279,7 @@
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {#each pillars as pillar}
           {@const Icon = pillar.icon}
-          <div class="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div class="flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm">
             <div class="mb-3 flex items-center gap-3">
               <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                 <Icon class="size-5 text-primary" />
