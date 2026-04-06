@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
-  import { Menu, X, ChevronDown, Users, Shield, MapPin, Search, ClipboardList, Eye } from '@lucide/svelte';
+  import { Menu, X, ChevronDown, Shield, Search, ClipboardList, Eye, Bell, Fingerprint } from '@lucide/svelte';
   import { env } from '$env/dynamic/public';
   import { slide } from 'svelte/transition';
   import { page } from '$app/state';
@@ -22,19 +22,19 @@
   });
 
   const products = [
-    { icon: Users, name: 'Perfil Integral del Alumno', href: '/features/student-profile', desc: 'Ficha 360° que persiste entre años' },
-    { icon: MapPin, name: 'Retiros Escolares Seguros', href: '/features/safe-pickups', desc: 'Verificación digital en portería' },
-    { icon: Shield, name: 'Permisos por Cargo', href: '/features/access-control', desc: 'Cada cargo ve solo lo que necesita' },
+    { icon: ClipboardList, name: 'Perfil Integral del Alumno', href: '/features/student-profile', desc: 'Ficha 360° que persiste entre años' },
+    { icon: Bell, name: 'Retiros Escolares Seguros', href: '/features/safe-pickups', desc: 'Verificación digital en portería' },
+    { icon: Fingerprint, name: 'Permisos por Cargo', href: '/features/access-control', desc: 'Cada cargo ve solo lo que necesita' },
     { icon: Search, name: 'Búsqueda Inteligente', href: '/features/smart-search', desc: 'Cualquier alumno en segundos' },
-    { icon: ClipboardList, name: 'Registro de Convivencia', href: '/features/privacy-compliance', desc: 'Seguimiento sin reinicio de marzo' },
+    { icon: Shield, name: 'Registro de Convivencia', href: '/features/privacy-compliance', desc: 'Seguimiento sin reinicio de marzo' },
     { icon: Eye, name: 'Integración Libro Digital', href: '/compliance', desc: 'Conecta con tu proveedor actual' },
   ];
 
   const navLinksBefore = [
     { key: 'nav.about' as const, href: '/about' },
+    { key: 'nav.pricing' as const, href: '/get-started' },
   ];
   const navLinksAfter = [
-    { key: 'nav.pricing' as const, href: '/get-started' },
     { key: 'nav.blog' as const, href: '/blog' },
     { key: 'nav.contact' as const, href: '/contact' },
   ];

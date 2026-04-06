@@ -34,12 +34,12 @@
       </a>
       <div class="mt-6 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <div class="mb-5 flex size-14 items-center justify-center rounded-2xl bg-destructive/10">
-            <Bell class="size-7 text-destructive" />
+          <div class="flex items-center gap-3">
+            <Bell class="size-6 shrink-0 text-primary" />
+            <h1 class="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {t('features.pickup.title')}
+            </h1>
           </div>
-          <h1 class="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {t('features.pickup.title')}
-          </h1>
           <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
             {t('features.pickup.desc')}
           </p>
