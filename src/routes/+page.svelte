@@ -393,23 +393,29 @@
         </p>
       </div>
 
-      <!-- Problem items — 3 columns, clean typography -->
+      <!-- Problem items — 3 columns, icon + title always inline -->
       <div class="mx-auto mt-10 grid gap-6 sm:grid-cols-3">
         <div class="rounded-xl border border-border bg-card p-6">
-          <AlertTriangle class="size-5 text-warning-foreground" />
-          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card1.title')}</h3>
+          <div class="flex items-center gap-2.5">
+            <AlertTriangle class="size-4.5 shrink-0 text-warning-foreground" />
+            <h3 class="text-base font-semibold text-foreground">{t('problem.card1.title')}</h3>
+          </div>
           <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card1.desc')}</p>
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6">
-          <Shield class="size-5 text-destructive" />
-          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card2.title')}</h3>
+          <div class="flex items-center gap-2.5">
+            <Shield class="size-4.5 shrink-0 text-destructive" />
+            <h3 class="text-base font-semibold text-foreground">{t('problem.card2.title')}</h3>
+          </div>
           <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card2.desc')}</p>
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6">
-          <FileCheck class="size-5 text-primary" />
-          <h3 class="mt-3 text-base font-semibold text-foreground">{t('problem.card3.title')}</h3>
+          <div class="flex items-center gap-2.5">
+            <FileCheck class="size-4.5 shrink-0 text-primary" />
+            <h3 class="text-base font-semibold text-foreground">{t('problem.card3.title')}</h3>
+          </div>
           <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{t('problem.card3.desc')}</p>
         </div>
       </div>
