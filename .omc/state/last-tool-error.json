@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"gcloud config set account ignacioaraya1995@gmail.com 2>&1 && gcloud recaptcha keys create --display-name=\\\"Ethoz Landing\\\" --web --domains=ethoz.cl,ethoz.web.app,gestion-estudiantil-dev.we...",
-  "error": "Exit code 1\nUpdated property [core/account].\nAPI [recaptchaenterprise.googleapis.com] not enabled on project \n[gestion-estudiantil-dev]. Would you like to enable and retry (this will take a \nfew minutes)? (y/N)?  \nERROR: (gcloud.recaptcha.keys.create) [ignacioaraya1995@gmail.com] does not have permission to access projects instance [gestion-estudiantil-dev] (or it may not exist): reCAPTCHA Enterprise API has not been used in project gestion-estudiantil-dev before or it is disabled. Enable it by ...",
-  "timestamp": "2026-04-04T22:41:02.976Z",
-  "retry_count": 1
-}
