@@ -16,17 +16,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ethoz — Retiros Seguros y Alertas Críticas" />
   <meta property="og:description" content="El portero sabe en segundos si puede entregar al alumno — sin llamadas, sin papel, sin margen de error." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ethoz — Retiros Seguros y Alertas Críticas" />
   <meta name="twitter:description" content="El portero sabe en segundos si puede entregar al alumno — sin llamadas, sin papel, sin margen de error." />
   <link rel="canonical" href="https://ethoz.cl/features/safe-pickups" />
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Productos","item":"https://ethoz.cl/productos"},{"@type":"ListItem","position":3,"name":"Retiros Escolares Seguros"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col pt-16">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->
-  <section class="bg-secondary py-16 sm:py-20">
+  <section class="bg-secondary pt-28 pb-16 sm:pt-32 sm:pb-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <a href="/#features" class="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
         <ArrowLeft class="size-3.5" />
@@ -93,13 +94,11 @@
   <!-- Detail cards -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6">
-      <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10">
-              <ShieldCheck class="size-5 text-destructive" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <ShieldCheck class="size-5 shrink-0 text-destructive" />
             <h2 class="text-base font-semibold text-foreground">Validación en tiempo real</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -108,10 +107,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10">
-              <Ban class="size-5 text-destructive" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Ban class="size-5 shrink-0 text-destructive" />
             <h2 class="text-base font-semibold text-foreground">Bloqueo automático ante restricciones</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -120,10 +117,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10">
-              <BellRing class="size-5 text-destructive" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <BellRing class="size-5 shrink-0 text-destructive" />
             <h2 class="text-base font-semibold text-foreground">Notificaciones seguras por rol</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">

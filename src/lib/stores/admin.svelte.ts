@@ -3,20 +3,24 @@ import type { User } from '@supabase/supabase-js';
 
 class AdminStore {
   user = $state<User | null>(null);
+  private _subscription: { unsubscribe: () => void } | null = null;
+  private _initialized = false;
 
   get authenticated(): boolean {
     return this.user !== null;
   }
 
   async init(): Promise<void> {
-    if (!supabase) return;
+    if (!supabase || this._initialized) return;
+    this._initialized = true;
 
     const { data } = await supabase.auth.getSession();
     this.user = data.session?.user ?? null;
 
-    supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       this.user = session?.user ?? null;
     });
+    this._subscription = subscription;
   }
 
   async login(email: string, password: string): Promise<{ ok: boolean; error?: string }> {

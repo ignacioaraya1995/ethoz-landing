@@ -1,3 +1,9 @@
+<svelte:head>
+  <meta property="og:site_name" content="Ethoz" />
+  <meta property="og:locale" content="es_CL" />
+  <meta name="application-name" content="Ethoz" />
+</svelte:head>
+
 <script lang="ts">
   import '../app.css';
   import { env } from '$env/dynamic/public';

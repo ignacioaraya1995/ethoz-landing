@@ -4,7 +4,7 @@
   import { Lock, Mail } from '@lucide/svelte';
   import { onMount } from 'svelte';
 
-  let email = $state('idaraya@uc.cl');
+  let email = $state('');
   let password = $state('');
   let errorMsg = $state('');
   let loading = $state(false);

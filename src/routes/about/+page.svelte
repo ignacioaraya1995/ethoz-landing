@@ -29,6 +29,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ethoz — Construido en Chile, para colegios chilenos" />
   <meta property="og:description" content="Conoce Ethoz, la plataforma de gestión y protección de datos escolares para Chile." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ethoz — Construido en Chile, para colegios chilenos" />
   <meta name="twitter:description" content="Conoce Ethoz, la plataforma de gestión y protección de datos escolares para Chile." />
   <link rel="canonical" href="https://ethoz.cl/about" />
@@ -137,32 +138,26 @@
 
   <!-- Values -->
   <section class="bg-secondary py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-center text-2xl font-bold tracking-tight text-foreground">{t('about.values_title')}</h2>
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
         <div class="rounded-xl border border-border bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Shield class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Shield class="size-5 shrink-0 text-primary" />
             <h3 class="text-base font-semibold text-foreground">{t('about.value1_title')}</h3>
           </div>
           <p class="mt-3 text-sm text-muted-foreground">{t('about.value1_desc')}</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Users class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Users class="size-5 shrink-0 text-primary" />
             <h3 class="text-base font-semibold text-foreground">{t('about.value2_title')}</h3>
           </div>
           <p class="mt-3 text-sm text-muted-foreground">{t('about.value2_desc')}</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-6">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Clock class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Clock class="size-5 shrink-0 text-primary" />
             <h3 class="text-base font-semibold text-foreground">{t('about.value3_title')}</h3>
           </div>
           <p class="mt-3 text-sm text-muted-foreground">{t('about.value3_desc')}</p>
@@ -172,7 +167,7 @@
   </section>
 
   <!-- FAQ — subtle, not prominent -->
-  <section class="py-16 sm:py-20">
+  <section class="bg-secondary py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-4 sm:px-6">
       <h2 class="text-center text-xl font-bold tracking-tight text-foreground sm:text-2xl">
         {t('about.faq.title')}

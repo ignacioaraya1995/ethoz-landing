@@ -15,17 +15,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Integraciones — Ethoz" />
   <meta property="og:description" content="Conecta Ethoz con Napsis, Syscol, SIGE o cualquier sistema. Si no tienes uno, tenemos un módulo básico incluido." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Integraciones — Ethoz" />
   <meta name="twitter:description" content="Conecta Ethoz con tu sistema actual o usa nuestro módulo básico de gestión escolar." />
   <link rel="canonical" href="https://ethoz.cl/integrations" />
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Integraciones"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col pt-16">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->
-  <section class="bg-secondary py-16 sm:py-20">
+  <section class="bg-secondary pt-28 pb-16 sm:pt-32 sm:pb-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <a href="/productos" class="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
         <ArrowLeft class="size-3.5" />
@@ -182,19 +183,25 @@
       </p>
       <div class="mt-8 grid gap-4 sm:grid-cols-3">
         <div class="rounded-xl border border-border bg-card p-5">
-          <Database class="size-5 text-primary" />
-          <p class="mt-2 text-sm font-semibold text-foreground">Datos históricos</p>
-          <p class="mt-1 text-xs text-muted-foreground">Fichas de alumnos, observaciones, retiros — nada se pierde.</p>
+          <div class="flex items-center gap-2.5">
+            <Database class="size-5 shrink-0 text-primary" />
+            <p class="text-sm font-semibold text-foreground">Datos históricos</p>
+          </div>
+          <p class="mt-2 text-xs text-muted-foreground">Fichas de alumnos, observaciones, retiros — nada se pierde.</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-5">
-          <Zap class="size-5 text-primary" />
-          <p class="mt-2 text-sm font-semibold text-foreground">2 semanas</p>
-          <p class="mt-1 text-xs text-muted-foreground">Tiempo promedio de migración completa con datos verificados.</p>
+          <div class="flex items-center gap-2.5">
+            <Zap class="size-5 shrink-0 text-primary" />
+            <p class="text-sm font-semibold text-foreground">2 semanas</p>
+          </div>
+          <p class="mt-2 text-xs text-muted-foreground">Tiempo promedio de migración completa con datos verificados.</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-5">
-          <Building class="size-5 text-primary" />
-          <p class="mt-2 text-sm font-semibold text-foreground">Sin interrupciones</p>
-          <p class="mt-1 text-xs text-muted-foreground">El colegio sigue operando normal mientras migramos en paralelo.</p>
+          <div class="flex items-center gap-2.5">
+            <Building class="size-5 shrink-0 text-primary" />
+            <p class="text-sm font-semibold text-foreground">Sin interrupciones</p>
+          </div>
+          <p class="mt-2 text-xs text-muted-foreground">El colegio sigue operando normal mientras migramos en paralelo.</p>
         </div>
       </div>
     </div>

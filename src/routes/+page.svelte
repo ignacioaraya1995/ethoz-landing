@@ -211,13 +211,13 @@
   </script>
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- ═══════════════════════════════════════════
        SECTION 2: HERO — split layout
        ═══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden pt-20 sm:pt-24">
+  <section class="relative overflow-hidden pt-28 sm:pt-32">
     <!-- Background gradient -->
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent"></div>
 
@@ -243,11 +243,11 @@
 
         <!-- CTAs -->
         <div class="animate-fade-in-up animate-delay-300 mt-8 flex items-center justify-center gap-3 sm:justify-start sm:gap-4">
-          <Button size="lg" href="/demo" class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 sm:size-xl">
+          <Button size="lg" href="/demo" class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 sm:h-12 sm:px-8 sm:text-base">
             {t('hero.cta.primary')}
             <ArrowRight class="size-4" />
           </Button>
-          <Button variant="outline" size="lg" onclick={() => showPitch = true} class="border-foreground/20 hover:border-foreground/40 hover:bg-muted sm:size-xl">
+          <Button variant="outline" size="lg" onclick={() => showPitch = true} class="border-foreground/20 hover:border-foreground/40 hover:bg-muted sm:h-12 sm:px-8 sm:text-base">
             <Play class="size-4" />
             <span class="hidden sm:inline">Conoce Ethoz en 2 min</span>
             <span class="sm:hidden">Ver presentación</span>
@@ -738,7 +738,7 @@
     </div>
   </section>
 
-  <Footer mode="landing" />
+  <Footer />
 
   <!-- Mobile sticky CTA -->
   {#if showStickyCta}

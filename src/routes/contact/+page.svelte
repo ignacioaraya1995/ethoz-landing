@@ -64,7 +64,7 @@
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Contacto"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col bg-secondary">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Content -->

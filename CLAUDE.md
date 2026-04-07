@@ -1,3 +1,72 @@
+# Ethoz — Project Context
+
+## What is this
+Ethoz (ethoz.cl) is a school protection platform for Chilean K-12 schools. SvelteKit 2 + Svelte 5 (runes), Tailwind CSS v4, Supabase (Auth + DB + Edge Functions), Firebase Hosting + Cloudflare DNS.
+
+**Not a school management system** — complements existing ERPs (Napsis, Syscol, Lirmi) by adding security, compliance, and student data protection.
+
+## Architecture
+
+```
+src/routes/           — SvelteKit pages (landing + admin)
+src/routes/admin/     — Admin panel (auth-gated): leads CRM, prospecting, content manager
+src/lib/components/   — Shared UI (NavBar, Footer, shadcn-svelte)
+src/lib/data/posts/   — Blog posts as TypeScript modules (auto-discovered via glob)
+src/lib/content/      — Content strategy + pitch slides
+src/lib/i18n/         — i18n (es/en) via t() function
+scripts/              — Content pipeline (generate, publish, images, video)
+supabase/functions/   — Edge Functions (social-publish, new-lead-notify, etc.)
+static/data/          — schools.json (processed from Mineduc CSVs)
+docs/                 — Documentation index (5 sections + knowledge base + content bank)
+```
+
+## Critical Rules
+
+### Code
+- Dev server: `npm run dev -- --port 5177` (ALWAYS port 5177)
+- Build: `npm run build` | Deploy: `npm run build && firebase deploy`
+- All text via `t()` i18n function — NEVER hardcode strings in templates
+- URLs in English (`/features/safe-pickups`), content in ES/EN
+- Svelte 5 runes API (`$state`, `$derived`, `$effect`) — no legacy reactive syntax
+- Blog posts: export `BlogPost` from `src/lib/data/posts/*.ts` — auto-discovered, no manual registration
+
+### Design (see .impeccable.md for full spec)
+- Light mode only. Brand: Navy #0F172A + Blue #2563EB + White #FFFFFF
+- NEVER hardcode colors — use design tokens (bg-primary, text-muted-foreground, etc.)
+- Icons + titles ALWAYS inline (same row), never stacked. No icon-in-colored-box wrappers.
+- Card pattern: `rounded-xl border border-border bg-card`
+- McKinsey + Apple tone: precise, authoritative, no buzzwords
+
+### Content
+- Spanish chileno profesional (no slang, no extreme modismos)
+- No markdown in social posts (no **, *, #, backticks)
+- Max 2-3 emojis per post, ZERO on LinkedIn
+- Ethoz COMPLEMENTS existing systems — never say "replaces"
+- Knowledge base: `docs/5-knowledge-base/` (stats, competitors, laws, trends, messaging)
+- Content bank: `docs/content-bank/` (posts, scripts, calendar)
+
+### Brand context
+- Company: ETHOZ SpA | RUT: 78.394.522-3 | Founded: 2026
+- Tagline: "Proteccion escolar inteligente"
+- Key urgency: Ley 21.719 (data protection) enters full enforcement December 2026
+- Fines: up to 20,000 UTM (~$1,300M CLP) or 4% annual revenue
+- TAM: 12,038 schools, 5,777 sostenedores. Tier 1: 402 multi-school operators
+
+### APIs and Keys
+All in `.env.local` (never commit): Supabase (anon + service_role), Kimi, Gemini, reCAPTCHA, Cal.com, Sentry, Cloudflare, Clarity.
+Content pipeline: Kimi CLI (text) → Gemini (images) → Supabase Edge Functions (publish)
+
+## Documentation Map
+- `docs/1-landing/` — All public pages documented
+- `docs/2-admin/` — Admin panel, auth, CRM, Edge Functions
+- `docs/3-prospecting/` — Mineduc CSVs, scoring, outbound pipeline
+- `docs/4-content-generation/` — 12 scripts, strategy.ts, publish flow
+- `docs/5-knowledge-base/` — 10 files: stats, competitors, laws, trends, positioning, audiences, stories, quotes
+- `docs/content-bank/` — 70+ social posts, 5 YT scripts, 30-day calendar
+- `.impeccable.md` — Full design system spec (colors, typography, spacing, components, accessibility)
+
+---
+
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands
 

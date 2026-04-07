@@ -7,11 +7,12 @@
   import { trackEvent } from '$lib/utils/analytics';
   import { Clock, Calendar, ArrowRight } from '@lucide/svelte';
   import type { PageData } from './$types';
+  import { onMount } from 'svelte';
 
   let { data }: { data: PageData } = $props();
   const post = $derived(data.post);
 
-  $effect(() => {
+  onMount(() => {
     trackEvent('blog_post_viewed', { slug: post.slug, title: post.title });
   });
 </script>

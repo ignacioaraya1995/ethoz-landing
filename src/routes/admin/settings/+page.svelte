@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { adminStore } from '$lib/stores/admin.svelte';
   import { supabase } from '$lib/supabase';
   import { env } from '$env/dynamic/public';
@@ -140,7 +140,7 @@
     }
 
     // Check for OAuth callback success
-    const connected = $page.url.searchParams.get('connected');
+    const connected = page.url.searchParams.get('connected');
     if (connected) {
       successMessage = `${connected.charAt(0).toUpperCase() + connected.slice(1)} conectado correctamente.`;
       setTimeout(() => (successMessage = ''), 5000);
@@ -257,7 +257,7 @@
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {#each PLATFORMS as platform}
               {@const token = tokens[platform.id]}
-              {@const expired = isTokenExpired(token)}
+              {@const expired = isTokenExpired(token ?? undefined)}
               {@const displayName = token ? getDisplayName(token) : ''}
 
               <div class="rounded-xl border border-border bg-background p-4">

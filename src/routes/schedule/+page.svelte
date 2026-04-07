@@ -3,12 +3,13 @@
   import NavBar from '$lib/components/NavBar.svelte';
   import { t } from '$lib/i18n/index.svelte';
   import { Check, Building, MapPin, Loader2 } from '@lucide/svelte';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { browser } from '$app/environment';
   import { trackEvent } from '$lib/utils/analytics';
   import { updateLeadStatus } from '$lib/supabase';
+  import { onMount } from 'svelte';
 
-  const params = $derived(browser ? new URLSearchParams($page.url.search) : new URLSearchParams());
+  const params = $derived(browser ? new URLSearchParams(page.url.search) : new URLSearchParams());
   const schoolName = $derived(params.get('school') ?? '');
   const contactName = $derived(params.get('name') ?? '');
   const contactEmail = $derived(params.get('email') ?? '');
@@ -105,7 +106,7 @@
     }, 10000);
   });
 
-  $effect(() => {
+  onMount(() => {
     trackEvent('agendar_page_viewed', { school: schoolName });
   });
 </script>
@@ -123,7 +124,7 @@
   <link rel="canonical" href="https://ethoz.cl/schedule" />
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col bg-secondary">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <div class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 pt-24 sm:py-16 sm:pt-28">

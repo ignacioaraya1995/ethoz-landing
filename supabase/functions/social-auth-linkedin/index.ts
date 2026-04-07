@@ -23,8 +23,24 @@ Deno.serve(async (req) => {
     authUrl.searchParams.set("client_id", LINKEDIN_CLIENT_ID);
     authUrl.searchParams.set("redirect_uri", REDIRECT_URI);
     authUrl.searchParams.set("scope", "openid profile w_member_social w_organization_social r_organization_social");
-    authUrl.searchParams.set("state", crypto.randomUUID());
+    // State encodes a timestamp so we can verify it wasn't replayed or forged
+    const state = `${Date.now()}:${crypto.randomUUID()}`;
+    authUrl.searchParams.set("state", state);
     return Response.redirect(authUrl.toString(), 302);
+  }
+
+  // Validate state parameter to prevent CSRF attacks
+  const state = url.searchParams.get("state");
+  if (!state) {
+    return new Response("Missing state parameter", { status: 400 });
+  }
+  const [tsStr] = state.split(":");
+  const ts = Number(tsStr);
+  const TEN_MINUTES_MS = 10 * 60 * 1000;
+  if (isNaN(ts) || Date.now() - ts > TEN_MINUTES_MS) {
+    // SECURITY: state parameter timestamp is expired or invalid
+    console.error("[LinkedIn OAuth] State parameter invalid or expired:", state);
+    return new Response("Invalid or expired state parameter", { status: 400 });
   }
 
   // Step 2: Exchange code for token

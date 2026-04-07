@@ -16,17 +16,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ethoz — Control de Acceso Granular por Roles" />
   <meta property="og:description" content="Cada persona ve exactamente lo que necesita, ni más ni menos." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ethoz — Control de Acceso Granular por Roles" />
   <meta name="twitter:description" content="Cada persona ve exactamente lo que necesita, ni más ni menos." />
   <link rel="canonical" href="https://ethoz.cl/features/access-control" />
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Productos","item":"https://ethoz.cl/productos"},{"@type":"ListItem","position":3,"name":"Control de Acceso por Roles"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col pt-16">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->
-  <section class="bg-secondary py-16 sm:py-20">
+  <section class="bg-secondary pt-28 pb-16 sm:pt-32 sm:pb-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <a href="/#features" class="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
         <ArrowLeft class="size-3.5" />
@@ -86,13 +87,11 @@
   <!-- Detail cards -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6">
-      <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-warning/15">
-              <UserCog class="size-5 text-warning-foreground" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <UserCog class="size-5 shrink-0 text-warning-foreground" />
             <h2 class="text-base font-semibold text-foreground">Vistas personalizadas por cargo</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -101,10 +100,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-warning/15">
-              <GanttChartSquare class="size-5 text-warning-foreground" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <GanttChartSquare class="size-5 shrink-0 text-warning-foreground" />
             <h2 class="text-base font-semibold text-foreground">Interfaz de portería ultra-restringida</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -113,10 +110,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-warning/15">
-              <EyeOff class="size-5 text-warning-foreground" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <EyeOff class="size-5 shrink-0 text-warning-foreground" />
             <h2 class="text-base font-semibold text-foreground">Confidencialidad filtrada por rol</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">

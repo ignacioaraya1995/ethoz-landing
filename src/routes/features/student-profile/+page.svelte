@@ -16,17 +16,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ethoz — Ficha Integral 360° del Alumno" />
   <meta property="og:description" content="Un perfil longitudinal que sigue al alumno año a año, con acceso estrictamente controlado por rol." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ethoz — Ficha Integral 360° del Alumno" />
   <meta name="twitter:description" content="Un perfil longitudinal que sigue al alumno año a año, con acceso estrictamente controlado por rol." />
   <link rel="canonical" href="https://ethoz.cl/features/student-profile" />
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Productos","item":"https://ethoz.cl/productos"},{"@type":"ListItem","position":3,"name":"Perfil Integral del Alumno"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col pt-16">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->
-  <section class="bg-secondary py-16 sm:py-20">
+  <section class="bg-secondary pt-28 pb-16 sm:pt-32 sm:pb-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <a href="/#features" class="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
         <ArrowLeft class="size-3.5" />
@@ -116,13 +117,11 @@
   <!-- Detail cards -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6">
-      <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <History class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <History class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Historial longitudinal</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -131,10 +130,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Lock class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Lock class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Niveles de confidencialidad</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -143,10 +140,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <BadgeCheck class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <BadgeCheck class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Cumplimiento normativo</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">

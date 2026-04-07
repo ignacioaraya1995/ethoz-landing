@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { onDestroy } from 'svelte';
   import NavBar from '$lib/components/NavBar.svelte';
   import { t } from '$lib/i18n/index.svelte';
   import { schoolStore, type School } from '$lib/stores/schools.svelte';
@@ -91,12 +92,17 @@
         ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     });
   }
+
+  onDestroy(() => {
+    if (debounceTimer) clearTimeout(debounceTimer);
+  });
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
 
 <svelte:head>
   <title>Ethoz — {t('nav.cta')}</title>
+  <meta name="description" content="Solicita una demo personalizada de Ethoz para tu colegio. Busca tu establecimiento y agenda una presentación." />
   <meta property="og:url" content="https://ethoz.cl/demo" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Demo — Ethoz" />

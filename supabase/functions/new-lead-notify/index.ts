@@ -9,6 +9,10 @@
 
 import nodemailer from 'npm:nodemailer@6';
 
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') {
     return resp({ error: 'Method not allowed' }, 405);
@@ -26,14 +30,14 @@ Deno.serve(async (req: Request) => {
 
     const meta = r.metadata ?? {};
     const isContactForm = r.contact_role === 'contact_form';
-    const schoolName = r.school_name || 'Sin colegio';
-    const contactName = r.contact_name || 'Sin nombre';
-    const contactEmail = r.contact_email || '';
-    const contactPhone = r.contact_phone || '';
-    const contactRole = isContactForm ? 'Formulario de contacto' : (r.contact_role || '');
+    const schoolName = escapeHtml(r.school_name || 'Sin colegio');
+    const contactName = escapeHtml(r.contact_name || 'Sin nombre');
+    const contactEmail = escapeHtml(r.contact_email || '');
+    const contactPhone = escapeHtml(r.contact_phone || '');
+    const contactRole = isContactForm ? 'Formulario de contacto' : escapeHtml(r.contact_role || '');
     const source = r.contact_source || 'directo';
     const visitorId = r.visitor_id || '';
-    const notes = (r.notes || '').replace('[TEST]', '').trim();
+    const notes = escapeHtml((r.notes || '').replace('[TEST]', '').trim());
 
     const device = meta.device || '—';
     const os = meta.os || '—';

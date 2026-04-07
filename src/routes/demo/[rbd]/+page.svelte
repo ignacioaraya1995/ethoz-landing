@@ -102,7 +102,7 @@
   $effect(() => {
     const school = schoolStore.selectedSchool;
     const container = mapContainer;
-    if (!school || !container || school.lat === 0 && school.lng === 0) return;
+    if (!school || !container || school.lat === 0 || school.lng === 0) return;
     if (mapInstance || (container as any)._leaflet_id) return;
 
     import('leaflet/dist/leaflet.css');
@@ -153,6 +153,7 @@
     errorMessage = '';
 
     try {
+      // TODO: Send token to backend for server-side verification
       await executeRecaptcha('submit_demo');
       const school = isManual ? null : schoolStore.selectedSchool;
       const schoolName = isManual ? manualSchoolName.trim() : (school?.name ?? '');

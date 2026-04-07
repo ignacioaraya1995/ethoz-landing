@@ -16,17 +16,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ethoz — Búsqueda Instantánea y Dashboard Inteligente" />
   <meta property="og:description" content="Cualquier alumno, en segundos, con tolerancia a errores tipográficos." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ethoz — Búsqueda Instantánea y Dashboard Inteligente" />
   <meta name="twitter:description" content="Cualquier alumno, en segundos, con tolerancia a errores tipográficos." />
   <link rel="canonical" href="https://ethoz.cl/features/smart-search" />
   {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Productos","item":"https://ethoz.cl/productos"},{"@type":"ListItem","position":3,"name":"Búsqueda Inteligente"}]})}</script>`}
 </svelte:head>
 
-<main class="flex min-h-dvh flex-col pt-16">
+<main class="flex min-h-dvh flex-col bg-background">
   <NavBar />
 
   <!-- Hero -->
-  <section class="bg-secondary py-16 sm:py-20">
+  <section class="bg-secondary pt-28 pb-16 sm:pt-32 sm:pb-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <a href="/#features" class="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
         <ArrowLeft class="size-3.5" />
@@ -93,13 +94,11 @@
   <!-- Detail cards -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6">
-      <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Zap class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Zap class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Búsqueda tolerante a errores</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -108,10 +107,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <LayoutDashboard class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <LayoutDashboard class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Dashboard con badges de alerta</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -120,10 +117,8 @@
         </div>
 
         <div class="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <Filter class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Filter class="size-5 shrink-0 text-primary" />
             <h2 class="text-base font-semibold text-foreground">Filtros precisos de navegación</h2>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">

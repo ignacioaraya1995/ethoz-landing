@@ -2,8 +2,6 @@
   import { t, toggleLocale, getLocale } from '$lib/i18n/index.svelte';
   import { Globe } from '@lucide/svelte';
 
-  let { mode = 'page' }: { mode?: 'landing' | 'page' } = $props();
-
   const social = [
     {
       name: 'LinkedIn',

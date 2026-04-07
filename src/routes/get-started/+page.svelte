@@ -50,6 +50,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="¿Cómo contratar? — Ethoz" />
   <meta property="og:description" content="Conoce cómo implementar Ethoz en tu colegio. Proceso consultivo paso a paso." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="¿Cómo contratar? — Ethoz" />
+  <meta name="twitter:description" content="Contrata Ethoz en 4 pasos: agenda una demo, elige tus módulos, migramos tus datos y tu colegio queda protegido." />
   {@html `<script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",

@@ -3,6 +3,7 @@ import { env } from '$env/dynamic/public';
 import { isInternal, isTestEmail } from '$lib/utils/internal';
 import { getVisitorId } from '$lib/utils/visitor';
 import { getDeviceMetadata } from '$lib/utils/device';
+import { log } from '$lib/utils/logger';
 
 function captureError(err: unknown, context?: Record<string, unknown>): void {
   import('@sentry/browser').then(Sentry => {
@@ -18,9 +19,9 @@ export const supabase = supabaseUrl && supabaseKey
   : null;
 
 if (supabase) {
-  console.info('[Supabase] ✔ Client initialized —', supabaseUrl);
+  log.info('[Supabase] ✔ Client initialized —', supabaseUrl);
 } else {
-  console.warn('[Supabase] ✘ NOT configured — missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY');
+  log.warn('[Supabase] ✘ NOT configured — missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY');
 }
 
 export interface Lead {
@@ -71,14 +72,14 @@ export async function updateLeadStatus(
       .eq('id', leads[0].id);
 
     if (error) {
-      console.error('[Leads] Status update failed:', error.message);
+      log.error('[Leads] Status update failed:', error.message);
       return { ok: false, error: error.message };
     }
 
-    console.info(`[Leads] Lead ${leads[0].id} → ${status}`);
+    log.info(`[Leads] Lead ${leads[0].id} → ${status}`);
     return { ok: true };
   } catch (err) {
-    console.error('[Leads] updateLeadStatus error:', err);
+    log.error('[Leads] updateLeadStatus error:', err);
     captureError(err, { fn: 'updateLeadStatus', email });
     return { ok: false, error: String(err) };
   }
@@ -86,7 +87,7 @@ export async function updateLeadStatus(
 
 export async function saveLead(lead: Lead): Promise<{ ok: boolean; error?: string }> {
   if (!supabase) {
-    console.warn('[Leads] Supabase not configured, lead not saved:', lead);
+    log.warn('[Leads] Supabase not configured, lead not saved:', lead);
     return { ok: false, error: 'Supabase not configured' };
   }
 
@@ -107,11 +108,11 @@ export async function saveLead(lead: Lead): Promise<{ ok: boolean; error?: strin
   }]);
 
   if (error) {
-    console.error('[Leads] ✘ Failed to save:', error.message, { lead: { school: lead.school_name, email: lead.contact_email } });
+    log.error('[Leads] ✘ Failed to save:', error.message, { lead: { school: lead.school_name, email: lead.contact_email } });
     captureError(error, { fn: 'saveLead', school: lead.school_name, email: lead.contact_email });
     return { ok: false, error: error.message };
   }
 
-  console.info('[Leads] ✔ Lead saved:', { school: lead.school_name, email: lead.contact_email, source: lead.contact_source });
+  log.info('[Leads] ✔ Lead saved:', { school: lead.school_name, email: lead.contact_email, source: lead.contact_source });
   return { ok: true };
 }

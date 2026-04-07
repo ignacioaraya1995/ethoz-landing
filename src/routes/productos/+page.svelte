@@ -67,6 +67,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Productos — Ethoz" />
   <meta property="og:description" content="Conoce todos los módulos de Ethoz: perfil integral, retiros seguros, permisos por cargo, y más." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Productos — Ethoz" />
   <meta name="twitter:description" content="Conoce todos los módulos de Ethoz: perfil integral, retiros seguros, permisos por cargo, y más." />
   <link rel="canonical" href="https://ethoz.cl/productos" />
@@ -85,14 +86,14 @@
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
         Cada módulo resuelve un problema concreto de tu colegio. Activa solo los que necesitas hoy.
       </p>
-      <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
+      <span class="mt-3 inline-flex items-center gap-2 rounded-full bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
         Cumplimiento Ley 21.719 — Plazo: diciembre 2026
-      </p>
+      </span>
     </div>
   </section>
 
   <!-- Products -->
-  <section class="py-12 sm:py-20">
+  <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="space-y-16 sm:space-y-20">
         {#each products as product, i}
@@ -100,10 +101,8 @@
           <div class="grid items-start gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12 {i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}">
             <!-- Info -->
             <div>
-              <div class="flex items-center gap-3">
-                <div class="flex size-10 shrink-0 items-center justify-center rounded-lg {product.color}">
-                  <Icon class="size-5" />
-                </div>
+              <div class="flex items-center gap-2.5">
+                <Icon class="size-5 shrink-0 {product.color.split(' ')[1]}" />
                 <h2 class="text-xl font-bold tracking-tight text-foreground">{product.name}</h2>
               </div>
               <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{product.desc}</p>

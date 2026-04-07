@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { log } from '$lib/utils/logger';
 
 const STORAGE_KEY = 'ethoz_internal';
 const IP_CACHE_KEY = 'ethoz_ip_checked';
@@ -19,10 +20,10 @@ export function checkInternalFlag(): void {
     const value = params.get('_internal');
     if (value === '1') {
       localStorage.setItem(STORAGE_KEY, '1');
-      console.info('[Ethoz] Internal mode ON — analytics excluded');
+      log.info('[Ethoz] Internal mode ON — analytics excluded');
     } else {
       localStorage.removeItem(STORAGE_KEY);
-      console.info('[Ethoz] Internal mode OFF');
+      log.info('[Ethoz] Internal mode OFF');
     }
     // Clean URL without reload
     params.delete('_internal');
@@ -46,7 +47,7 @@ export async function checkInternalIP(): Promise<void> {
     const { ip } = await res.json();
     if (INTERNAL_IPS.includes(ip)) {
       localStorage.setItem(STORAGE_KEY, '1');
-      console.info(`[Ethoz] Internal IP detected (${ip}) — analytics excluded`);
+      log.info(`[Ethoz] Internal IP detected (${ip}) — analytics excluded`);
     }
   } catch {
     // Silent fail — not critical

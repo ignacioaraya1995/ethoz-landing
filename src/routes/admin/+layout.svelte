@@ -86,4 +86,10 @@
   </header>
 {/if}
 
-{@render children()}
+{#if adminStore.authenticated || isLoginPage}
+  {@render children()}
+{:else}
+  <div class="flex min-h-dvh items-center justify-center">
+    <div class="size-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+  </div>
+{/if}

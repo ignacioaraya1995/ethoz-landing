@@ -49,6 +49,7 @@ export interface Region {
 }
 
 import { normalize } from '$lib/utils/text';
+import { log } from '$lib/utils/logger';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -186,7 +187,7 @@ function createSchoolStore() {
 
 			loaded = true;
 		} catch (error) {
-			console.error('[schoolStore] Error loading schools data:', error);
+			log.error('[schoolStore] Error loading schools data:', error);
 			loadError = 'No pudimos cargar los colegios. Verifica tu conexión.';
 		} finally {
 			loading = false;

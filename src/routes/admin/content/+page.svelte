@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { adminStore } from '$lib/stores/admin.svelte';
   import { supabase } from '$lib/supabase';
   import { env } from '$env/dynamic/public';
@@ -124,7 +124,7 @@
     await Promise.all([loadPosts(), loadConnectedPlatforms()]);
 
     // Check for OAuth callback success
-    const connected = $page.url.searchParams.get('connected');
+    const connected = page.url.searchParams.get('connected');
     if (connected) {
       showToast(`${SOCIAL_PLATFORM_LABELS[connected as SocialPlatform] ?? connected} conectado exitosamente`);
       // Clean up URL param without navigation

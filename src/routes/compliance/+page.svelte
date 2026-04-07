@@ -129,9 +129,7 @@
         rel="noopener noreferrer"
         class="group flex items-start gap-4 rounded-xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-primary/30 hover:bg-primary/[0.02]"
       >
-        <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-          <Scale class="size-5 text-primary" />
-        </div>
+        <Scale class="size-5 shrink-0 text-primary" />
         <div class="min-w-0 flex-1">
           <div class="flex items-center gap-2">
             <p class="text-sm font-bold text-foreground">{t('compliance_page.law_ref.title')}</p>
@@ -280,10 +278,8 @@
         {#each pillars as pillar}
           {@const Icon = pillar.icon}
           <div class="flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm">
-            <div class="mb-3 flex items-center gap-3">
-              <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <Icon class="size-5 text-primary" />
-              </div>
+            <div class="mb-3 flex items-center gap-2.5">
+              <Icon class="size-5 shrink-0 text-primary" />
               <div class="flex min-w-0 flex-1 items-center justify-between gap-3">
                 <h3 class="text-base font-bold text-foreground leading-snug">{t(pillar.titleKey)}</h3>
                 <span class="shrink-0 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
@@ -375,10 +371,8 @@
       <div class="grid gap-5 sm:grid-cols-3">
         <!-- Ley 21.719 -->
         <div class="rounded-xl border border-border bg-card p-5 shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-              <ShieldCheck class="size-5 text-primary" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <ShieldCheck class="size-5 shrink-0 text-primary" />
             <div>
               <p class="text-sm font-bold text-foreground">{t('compliance_page.certs.cert1.name')}</p>
               <p class="text-xs text-muted-foreground">{t('compliance_page.certs.cert1.status')}</p>
@@ -387,10 +381,8 @@
         </div>
         <!-- ISO 27001 placeholder -->
         <div class="rounded-xl border border-dashed border-border bg-card p-5 shadow-sm opacity-60">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
-              <Lock class="size-5 text-muted-foreground" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <Lock class="size-5 shrink-0 text-muted-foreground" />
             <div>
               <p class="text-sm font-bold text-foreground">{t('compliance_page.certs.cert2.name')}</p>
               <p class="text-xs text-muted-foreground">{t('compliance_page.certs.cert2.status')}</p>
@@ -399,10 +391,8 @@
         </div>
         <!-- SOC 2 placeholder -->
         <div class="rounded-xl border border-dashed border-border bg-card p-5 shadow-sm opacity-60">
-          <div class="flex items-center gap-3">
-            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
-              <FileText class="size-5 text-muted-foreground" />
-            </div>
+          <div class="flex items-center gap-2.5">
+            <FileText class="size-5 shrink-0 text-muted-foreground" />
             <div>
               <p class="text-sm font-bold text-foreground">{t('compliance_page.certs.cert3.name')}</p>
               <p class="text-xs text-muted-foreground">{t('compliance_page.certs.cert3.status')}</p>
@@ -416,7 +406,7 @@
   <!-- ══════════════════════════════════════
        CTA
        ══════════════════════════════════════ -->
-  <section class="py-16 sm:py-20 bg-secondary">
+  <section class="py-16 sm:py-20 bg-background">
     <div class="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
         {t('compliance_page.cta.title')}
