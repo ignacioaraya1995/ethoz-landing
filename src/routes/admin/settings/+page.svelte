@@ -5,14 +5,17 @@
   import { supabase } from '$lib/supabase';
   import { env } from '$env/dynamic/public';
   import { onMount } from 'svelte';
+  import { toast } from 'svelte-sonner';
+  import { Button } from '$lib/components/ui/button';
+  import { Badge } from '$lib/components/ui/badge';
+  import { Skeleton } from '$lib/components/ui/skeleton';
+  import * as Dialog from '$lib/components/ui/dialog';
+  import * as Tooltip from '$lib/components/ui/tooltip';
   import {
     Loader2,
     RefreshCw,
-    CheckCircle2,
-    XCircle,
     ExternalLink,
     Trash2,
-    Settings,
     BarChart3,
     Key,
     Share2,
@@ -61,7 +64,7 @@
   });
   let disconnecting = $state<SocialPlatform | null>(null);
   let contentStats = $state<ContentStats>({ draft: 0, approved: 0, published: 0 });
-  let successMessage = $state('');
+  let confirmDisconnect = $state<SocialPlatform | null>(null);
 
   // ── Platform config ──
   const PLATFORMS: { id: SocialPlatform; name: string; color: string; profileUrl: string; svg: string }[] = [
@@ -142,8 +145,7 @@
     // Check for OAuth callback success
     const connected = page.url.searchParams.get('connected');
     if (connected) {
-      successMessage = `${connected.charAt(0).toUpperCase() + connected.slice(1)} conectado correctamente.`;
-      setTimeout(() => (successMessage = ''), 5000);
+      toast.success(`${connected.charAt(0).toUpperCase() + connected.slice(1)} conectado correctamente`);
     }
 
     await loadData();
@@ -153,14 +155,18 @@
   async function disconnect(platform: SocialPlatform) {
     if (!supabase || disconnecting) return;
     disconnecting = platform;
+    confirmDisconnect = null;
 
     const { error } = await supabase
       .from('social_tokens')
       .delete()
       .eq('platform', platform);
 
-    if (!error) {
+    if (error) {
+      toast.error('Error al desconectar', { description: error.message });
+    } else {
       tokens = { ...tokens, [platform]: null };
+      toast.success(`${platform.charAt(0).toUpperCase() + platform.slice(1)} desconectado`);
     }
     disconnecting = null;
   }
@@ -216,44 +222,44 @@
   <!-- Auth guard redirect -->
 {:else}
   <main class="min-h-dvh bg-secondary pt-14">
-    {#if loading}
-      <div class="flex items-center justify-center py-32">
-        <Loader2 class="size-8 animate-spin text-primary" />
+    <div class="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-foreground">Settings</h1>
+          <p class="mt-0.5 text-sm text-muted-foreground">Manage integrations and account configuration</p>
+        </div>
+        <Button variant="outline" onclick={loadData} disabled={loading}>
+          <RefreshCw class="size-4 {loading ? 'animate-spin' : ''}" />
+          Refresh
+        </Button>
       </div>
-    {:else}
-      <div class="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
 
-        <!-- Header -->
-        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 class="text-2xl font-bold tracking-tight text-foreground">Settings</h1>
-            <p class="mt-0.5 text-sm text-muted-foreground">Manage integrations and account configuration</p>
-          </div>
-          <button
-            type="button"
-            onclick={loadData}
-            class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/50"
-          >
-            <RefreshCw class="size-4" />
-            Refresh
-          </button>
+      <!-- ── Social Media Connections ── -->
+      <section class="mb-8">
+        <div class="mb-4 flex items-center gap-2">
+          <Share2 class="size-4 text-muted-foreground" />
+          <h2 class="text-base font-semibold text-foreground">Social Media Connections</h2>
         </div>
 
-        <!-- Success banner -->
-        {#if successMessage}
-          <div class="mb-6 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-            <CheckCircle2 class="size-4 shrink-0" />
-            {successMessage}
+        {#if loading}
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {#each Array(4) as _}
+              <div class="rounded-xl border border-border bg-background p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                  <Skeleton class="h-5 w-24" />
+                  <Skeleton class="h-5 w-20 rounded-full" />
+                </div>
+                <Skeleton class="h-3 w-32" />
+                <Skeleton class="h-3 w-40" />
+                <div class="flex gap-2 pt-1">
+                  <Skeleton class="h-8 w-20" />
+                  <Skeleton class="h-8 w-20" />
+                </div>
+              </div>
+            {/each}
           </div>
-        {/if}
-
-        <!-- ── Social Media Connections ── -->
-        <section class="mb-8">
-          <div class="mb-4 flex items-center gap-2">
-            <Share2 class="size-4 text-muted-foreground" />
-            <h2 class="text-base font-semibold text-foreground">Social Media Connections</h2>
-          </div>
-
+        {:else}
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {#each PLATFORMS as platform}
               {@const token = tokens[platform.id]}
@@ -268,15 +274,11 @@
                     <span class="font-medium text-foreground">{platform.name}</span>
                   </div>
                   {#if token}
-                    <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold {expired ? 'bg-yellow-50 text-yellow-700' : 'bg-green-50 text-green-700'}">
-                      <span class="size-1.5 rounded-full {expired ? 'bg-yellow-500' : 'bg-green-500'}"></span>
+                    <Badge variant={expired ? 'secondary' : 'default'}>
                       {expired ? 'Token expired' : 'Connected'}
-                    </span>
+                    </Badge>
                   {:else}
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-semibold text-muted-foreground">
-                      <span class="size-1.5 rounded-full bg-muted-foreground/40"></span>
-                      Not connected
-                    </span>
+                    <Badge variant="outline">Not connected</Badge>
                   {/if}
                 </div>
 
@@ -301,31 +303,45 @@
 
                 <!-- Actions -->
                 <div class="flex flex-wrap items-center gap-2">
-                  <a
-                    href={platform.profileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted/50"
-                    style="border-color: {platform.color}33; color: {platform.color}"
-                  >
-                    <ExternalLink class="size-3.5" />
-                    Ver perfil
-                  </a>
-                  <a
+                  <Tooltip.Provider>
+                    <Tooltip.Root>
+                      <Tooltip.Trigger>
+                        {#snippet child({ props })}
+                          <Button
+                            {...props}
+                            href={platform.profileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="outline"
+                            size="sm"
+                          >
+                            <ExternalLink class="size-3.5" />
+                            Ver perfil
+                          </Button>
+                        {/snippet}
+                      </Tooltip.Trigger>
+                      <Tooltip.Content>Abrir perfil público</Tooltip.Content>
+                    </Tooltip.Root>
+                  </Tooltip.Provider>
+
+                  <Button
                     href="{SUPABASE_URL}/functions/v1/social-auth-{platform.id === 'facebook' || platform.id === 'instagram' ? 'meta' : platform.id === 'youtube' ? 'google' : platform.id}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted/50"
+                    variant="outline"
+                    size="sm"
                   >
                     <ExternalLink class="size-3.5" />
                     {token ? 'Reconnect' : 'Connect'}
-                  </a>
+                  </Button>
+
                   {#if token}
-                    <button
-                      type="button"
-                      onclick={() => disconnect(platform.id)}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onclick={() => (confirmDisconnect = platform.id)}
                       disabled={disconnecting === platform.id}
-                      class="inline-flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-red-50 disabled:opacity-50"
+                      class="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
                     >
                       {#if disconnecting === platform.id}
                         <Loader2 class="size-3.5 animate-spin" />
@@ -333,63 +349,84 @@
                         <Trash2 class="size-3.5" />
                       {/if}
                       Disconnect
-                    </button>
+                    </Button>
                   {/if}
                 </div>
               </div>
             {/each}
           </div>
-        </section>
+        {/if}
+      </section>
 
-        <!-- ── Content Stats ── -->
-        <section class="mb-8">
-          <div class="mb-4 flex items-center gap-2">
-            <BarChart3 class="size-4 text-muted-foreground" />
-            <h2 class="text-base font-semibold text-foreground">Content Stats</h2>
-          </div>
+      <!-- ── Content Stats ── -->
+      <section class="mb-8">
+        <div class="mb-4 flex items-center gap-2">
+          <BarChart3 class="size-4 text-muted-foreground" />
+          <h2 class="text-base font-semibold text-foreground">Content Stats</h2>
+        </div>
 
-          <div class="grid grid-cols-3 gap-4">
-            {#each (['draft', 'approved', 'published'] as PostStatus[]) as status}
-              <div class="rounded-xl border border-border bg-background p-4">
-                <p class="text-xs font-medium text-muted-foreground">{STAT_LABELS[status]}</p>
+        <div class="grid grid-cols-3 gap-4">
+          {#each (['draft', 'approved', 'published'] as PostStatus[]) as status}
+            <div class="rounded-xl border border-border bg-background p-4">
+              <p class="text-xs font-medium text-muted-foreground">{STAT_LABELS[status]}</p>
+              {#if loading}
+                <Skeleton class="mt-1 h-9 w-12" />
+              {:else}
                 <p class="mt-1 text-3xl font-bold tabular-nums text-foreground">{contentStats[status]}</p>
-                <span class="mt-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold {STAT_CLASSES[status]}">{STAT_LABELS[status]}</span>
-              </div>
-            {/each}
-          </div>
-        </section>
-
-        <!-- ── API Keys Status ── -->
-        <section>
-          <div class="mb-4 flex items-center gap-2">
-            <Key class="size-4 text-muted-foreground" />
-            <h2 class="text-base font-semibold text-foreground">API Keys Status</h2>
-          </div>
-
-          <div class="rounded-xl border border-border bg-background divide-y divide-border">
-            <div class="flex items-center justify-between px-4 py-3">
-              <div class="flex items-center gap-2.5">
-                <span class="size-2 rounded-full {supabaseConfigured ? 'bg-green-500' : 'bg-red-400'}"></span>
-                <span class="text-sm text-foreground">Supabase</span>
-              </div>
-              <span class="text-xs {supabaseConfigured ? 'text-green-600' : 'text-red-500'}">
-                {supabaseConfigured ? 'Configured' : 'Not configured'}
-              </span>
+              {/if}
+              <Badge variant={status === 'published' ? 'default' : status === 'approved' ? 'secondary' : 'outline'} class="mt-2">
+                {STAT_LABELS[status]}
+              </Badge>
             </div>
-            <div class="flex items-center justify-between px-4 py-3">
-              <div class="flex items-center gap-2.5">
-                <span class="size-2 rounded-full bg-green-500"></span>
-                <span class="text-sm text-foreground">Admin Auth</span>
-              </div>
-              <span class="text-xs text-green-600">Active session</span>
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-xs text-muted-foreground">API keys are stored server-side and are not exposed to the client.</p>
-            </div>
-          </div>
-        </section>
+          {/each}
+        </div>
+      </section>
 
-      </div>
-    {/if}
+      <!-- ── API Keys Status ── -->
+      <section>
+        <div class="mb-4 flex items-center gap-2">
+          <Key class="size-4 text-muted-foreground" />
+          <h2 class="text-base font-semibold text-foreground">API Keys Status</h2>
+        </div>
+
+        <div class="rounded-xl border border-border bg-background divide-y divide-border">
+          <div class="flex items-center justify-between px-4 py-3">
+            <span class="text-sm text-foreground">Supabase</span>
+            <Badge variant={supabaseConfigured ? 'default' : 'destructive'}>
+              {supabaseConfigured ? 'Configured' : 'Not configured'}
+            </Badge>
+          </div>
+          <div class="flex items-center justify-between px-4 py-3">
+            <span class="text-sm text-foreground">Admin Auth</span>
+            <Badge variant="default">Active session</Badge>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-xs text-muted-foreground">API keys are stored server-side and are not exposed to the client.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
   </main>
+
+  <!-- Disconnect confirmation dialog -->
+  <Dialog.Root open={confirmDisconnect !== null} onOpenChange={(open) => { if (!open) confirmDisconnect = null; }}>
+    <Dialog.Content>
+      <Dialog.Header>
+        <Dialog.Title>Desconectar cuenta</Dialog.Title>
+        <Dialog.Description>
+          ¿Estás seguro de desconectar <strong>{confirmDisconnect}</strong>? Tendrás que volver a autorizar para publicar contenido.
+        </Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Footer>
+        <Button variant="outline" onclick={() => (confirmDisconnect = null)}>Cancelar</Button>
+        <Button
+          variant="destructive"
+          onclick={() => confirmDisconnect && disconnect(confirmDisconnect)}
+        >
+          Desconectar
+        </Button>
+      </Dialog.Footer>
+    </Dialog.Content>
+  </Dialog.Root>
 {/if}
