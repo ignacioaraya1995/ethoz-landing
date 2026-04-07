@@ -29,7 +29,7 @@
       <section>
         <h2 class="text-lg font-semibold text-foreground">1. Responsable del tratamiento</h2>
         <p class="mt-2">
-          Ethoz SpA, RUT XX.XXX.XXX-X, con domicilio en Santiago de Chile, es responsable del tratamiento de los datos personales recopilados a través de la plataforma ethoz.cl y sus servicios asociados.
+          Ethoz SpA, RUT 78.394.522-3, con domicilio en Santiago de Chile, constituida el 6 de abril de 2026, es responsable del tratamiento de los datos personales recopilados a través de la plataforma ethoz.cl y sus servicios asociados.
         </p>
       </section>
 

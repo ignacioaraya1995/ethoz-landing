@@ -14,7 +14,8 @@
 		"test:unit:watch": "vitest",
 		"test:e2e": "playwright test --grep-invert 'DB Integration'",
 		"test:integration": "playwright test tests/db-integration.spec.ts",
-		"test:ci": "npm run check && npm run test:unit && playwright test --grep-invert 'DB Integration'"
+		"test:ci": "npm run check && npm run test:unit && playwright test --grep-invert 'DB Integration'",
+		"video:render": "node scripts/generate-pitch-video.mjs"
 	},
 	"devDependencies": {
 		"@lucide/svelte": "^1.7.0",
@@ -34,6 +35,7 @@
 	},
 	"dependencies": {
 		"@fontsource-variable/inter": "^5.2.5",
+		"@remotion/bundler": "^4.0.446",
 		"@sentry/browser": "^10.47.0",
 		"@supabase/supabase-js": "^2.101.1",
 		"@sveltejs/adapter-static": "^3.0.8",

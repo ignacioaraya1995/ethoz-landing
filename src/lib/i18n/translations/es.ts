@@ -14,7 +14,7 @@ export const es = {
 
   // Hero
   'hero.badge': 'Cumple con Ley 21.719',
-  'hero.title': 'El escudo digital de tu comunidad escolar',
+  'hero.title': 'Protección de datos y seguimiento integral para colegios chilenos',
   'hero.subtitle':
     'Seguimiento de alumnos, alertas críticas y protección de datos — diseñado para la realidad normativa chilena.',
   'hero.cta.primary': 'Agendar Demo',

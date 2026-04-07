@@ -170,6 +170,7 @@ test.describe('Smoke — tracking coverage', () => {
 		await page.goto('/');
 		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
 		await page.goto('/get-started');
+		await page.waitForTimeout(1000);
 		const events = await page.evaluate(() => {
 			return (window as any).dataLayer
 				?.filter((e: any) => e.event === 'pricing_page_viewed') ?? [];

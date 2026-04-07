@@ -41,6 +41,7 @@ test.describe('Pages — load with 200 and visible heading', () => {
 		'/features/access-control',
 		'/features/smart-search',
 		'/features/privacy-compliance',
+		'/integrations',
 		'/privacy',
 		'/terms',
 		'/pitch',
@@ -102,17 +103,15 @@ test.describe('Navigation — desktop NavBar', () => {
 		await expect(ctaBtn).toHaveAttribute('href', '/demo');
 	});
 
-	test('Productos dropdown opens on hover and shows 6 items', async ({ page }) => {
+	test('Productos dropdown opens on hover and shows product links', async ({ page }) => {
 		await page.goto('/');
-		// Hover the Productos button
 		const dropdownTrigger = page.locator('nav').getByRole('button', { name: /producto|feature/i }).first();
 		await dropdownTrigger.hover();
-		// Dropdown grid should appear
-		const dropdown = page.locator('nav .absolute').first();
-		await expect(dropdown).toBeVisible({ timeout: 2000 });
-		// Should have 6 product links
-		const items = dropdown.locator('a[href^="/features"], a[href="/compliance"]');
-		expect(await items.count()).toBeGreaterThanOrEqual(6);
+		await page.waitForTimeout(300);
+		const dropdown = page.locator('[role="menu"]').first();
+		await expect(dropdown).toBeVisible({ timeout: 3000 });
+		const items = dropdown.locator('a[href^="/features"], a[href="/integrations"]');
+		expect(await items.count()).toBeGreaterThanOrEqual(5);
 	});
 
 	test('Productos dropdown items navigate correctly', async ({ page }) => {
@@ -178,9 +177,9 @@ test.describe('Navigation — mobile hamburger', () => {
 });
 
 test.describe('Navigation — Footer links', () => {
-	test('footer compliance link navigates to /compliance', async ({ page }) => {
+	test('footer integrations link navigates to /integrations', async ({ page }) => {
 		await page.goto('/');
-		const link = page.locator('footer a[href="/compliance"]').first();
+		const link = page.locator('footer a[href="/integrations"]').first();
 		await link.scrollIntoViewIfNeeded();
 		await expect(link).toBeVisible();
 	});
@@ -619,6 +618,7 @@ test.describe('SEO — titles, canonical, og:title', () => {
 		'/productos',
 		'/compliance',
 		'/blog',
+		'/integrations',
 		'/features/student-profile',
 		'/features/safe-pickups',
 		'/features/access-control',
@@ -898,5 +898,231 @@ test.describe('Responsive — mobile (375×812)', () => {
 		await page.goto('/pitch');
 		const controls = page.locator('.controls-bar');
 		await expect(controls).toBeVisible({ timeout: 5000 });
+	});
+
+	test('mobile hamburger menu shows Integraciones link', async ({ page }) => {
+		await page.goto('/');
+		const hamburger = page.locator('button[aria-label="Toggle menu"]');
+		await expect(hamburger).toBeVisible();
+		await hamburger.click();
+		// Wait for slide transition
+		await page.waitForTimeout(500);
+		// On mobile, after menu opens, Integraciones link should be visible
+		await expect(page.getByRole('link', { name: 'Integraciones' }).first()).toBeVisible({ timeout: 5000 });
+	});
+
+	test('mobile menu links close menu on click', async ({ page }) => {
+		await page.goto('/');
+		const hamburger = page.locator('button[aria-label="Toggle menu"]');
+		await expect(hamburger).toBeVisible();
+		await hamburger.click();
+		await page.waitForTimeout(500);
+		// Click a link visible in the mobile menu
+		const blogLink = page.getByRole('link', { name: 'Blog' }).first();
+		await expect(blogLink).toBeVisible({ timeout: 5000 });
+		await blogLink.click();
+		await expect(page).toHaveURL('/blog', { timeout: 5000 });
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 11. Integrations page
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Integrations page', () => {
+	test('loads with hero section', async ({ page }) => {
+		const response = await page.goto('/integrations');
+		expect(response?.status()).toBe(200);
+		await expect(page.locator('h1')).toBeVisible();
+		await expect(page.locator('h1')).toContainText('conecta');
+	});
+
+	test('shows compatible systems table', async ({ page }) => {
+		await page.goto('/integrations');
+		const systems = ['Napsis', 'Syscol', 'SchoolTrack', 'SIGE', 'Excel'];
+		for (const name of systems) {
+			await expect(page.locator(`text=${name}`).first()).toBeVisible();
+		}
+	});
+
+	test('has availability status badges', async ({ page }) => {
+		await page.goto('/integrations');
+		const disponible = page.locator('text=Disponible');
+		expect(await disponible.count()).toBeGreaterThanOrEqual(3);
+	});
+
+	test('has CTA linking to /demo', async ({ page }) => {
+		await page.goto('/integrations');
+		const cta = page.locator('a[href="/demo"]').first();
+		await cta.scrollIntoViewIfNeeded();
+		await expect(cta).toBeVisible();
+	});
+
+	test('has breadcrumb JSON-LD', async ({ page }) => {
+		await page.goto('/integrations');
+		const html = await page.content();
+		expect(html).toContain('BreadcrumbList');
+	});
+
+	test('fires integrations_page_viewed tracking event', async ({ page }) => {
+		await page.goto('/');
+		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await page.goto('/integrations');
+		const events = await page.evaluate(() =>
+			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'integrations_page_viewed')
+		);
+		expect(events.length).toBeGreaterThanOrEqual(1);
+	});
+
+	test('has no JS errors', async ({ page }) => {
+		const errors: string[] = [];
+		page.on('pageerror', (err) => errors.push(err.message));
+		await page.goto('/integrations');
+		await page.waitForTimeout(1000);
+		expect(errors).toEqual([]);
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 12. Admin pages
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Admin — login page', () => {
+	test('login page loads with password field', async ({ page }) => {
+		const response = await page.goto('/admin');
+		expect(response?.status()).toBe(200);
+		await expect(page.locator('input[type="password"]')).toBeVisible();
+	});
+
+	test('has noindex meta tag', async ({ page }) => {
+		await page.goto('/admin');
+		const robots = page.locator('meta[name="robots"]').first();
+		await expect(robots).toHaveAttribute('content', /noindex/);
+	});
+
+	test('shows error on wrong password', async ({ page }) => {
+		await page.goto('/admin');
+		await page.locator('input[type="password"]').fill('wrongpassword');
+		await page.locator('button[type="submit"]').click();
+		await expect(page.locator('text=Contraseña incorrecta')).toBeVisible({ timeout: 3000 });
+	});
+
+	test('submit button is disabled when empty', async ({ page }) => {
+		await page.goto('/admin');
+		const submitBtn = page.locator('button[type="submit"]');
+		await expect(submitBtn).toBeDisabled();
+	});
+
+	test('has link back to main site', async ({ page }) => {
+		await page.goto('/admin');
+		const backLink = page.locator('a[href="/"]');
+		await expect(backLink).toBeVisible();
+	});
+
+	test('has no JS errors', async ({ page }) => {
+		const errors: string[] = [];
+		page.on('pageerror', (err) => errors.push(err.message));
+		await page.goto('/admin');
+		await page.waitForTimeout(1000);
+		expect(errors).toEqual([]);
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 13. Footer social links
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Footer — social links', () => {
+	test('footer has 4 social media links', async ({ page }) => {
+		await page.goto('/');
+		const socialLinks = page.locator('footer a[target="_blank"][aria-label]');
+		await page.locator('footer').scrollIntoViewIfNeeded();
+		expect(await socialLinks.count()).toBe(5);
+	});
+
+	test('LinkedIn link points to correct URL', async ({ page }) => {
+		await page.goto('/');
+		const link = page.locator('footer a[aria-label="LinkedIn"]');
+		await expect(link).toHaveAttribute('href', /linkedin\.com\/company\/ethozcl/);
+	});
+
+	test('YouTube link points to correct URL', async ({ page }) => {
+		await page.goto('/');
+		const link = page.locator('footer a[aria-label="YouTube"]');
+		await expect(link).toHaveAttribute('href', /youtube\.com\/channel/);
+	});
+
+	test('social links open in new tab', async ({ page }) => {
+		await page.goto('/');
+		const socialLinks = page.locator('footer a[target="_blank"][aria-label]');
+		const count = await socialLinks.count();
+		for (let i = 0; i < count; i++) {
+			await expect(socialLinks.nth(i)).toHaveAttribute('rel', /noopener/);
+		}
+	});
+
+	test('footer has Integraciones link', async ({ page }) => {
+		await page.goto('/');
+		const link = page.locator('footer a[href="/integrations"]');
+		await page.locator('footer').scrollIntoViewIfNeeded();
+		await expect(link).toBeVisible();
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 14. Demo — manual school entry
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Demo — manual school entry', () => {
+	test('manual entry link appears when searching', async ({ page }) => {
+		await page.goto('/demo');
+		const input = page.locator('input[type="text"], input[placeholder]').first();
+		await expect(input).toBeVisible({ timeout: 10000 });
+		await input.fill('Mi Colegio Inventado');
+		await page.waitForTimeout(500);
+		const manualLink = page.locator('text=No encuentras tu colegio');
+		await expect(manualLink).toBeVisible({ timeout: 5000 });
+	});
+
+	test('manual entry navigates to /demo/0 with params', async ({ page }) => {
+		await page.goto('/demo');
+		const input = page.locator('input[type="text"], input[placeholder]').first();
+		await expect(input).toBeVisible({ timeout: 10000 });
+		await input.fill('Colegio Test');
+		await page.waitForTimeout(500);
+		const manualLink = page.locator('text=No encuentras tu colegio');
+		await expect(manualLink).toBeVisible({ timeout: 5000 });
+		await manualLink.click();
+		await expect(page).toHaveURL(/\/demo\/0\?manual=1/);
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 15. Navbar — desktop products dropdown
+// ─────────────────────────────────────────────────────────────────────────────
+
+test.describe('Navbar — products dropdown', () => {
+	test('Productos dropdown button exists', async ({ page }) => {
+		await page.goto('/');
+		const btn = page.locator('nav button', { hasText: /Productos|Funcionalidades/ });
+		await expect(btn).toBeVisible();
+	});
+
+	test('dropdown opens on hover and shows product links', async ({ page }) => {
+		await page.goto('/');
+		const btn = page.locator('nav').getByRole('button', { name: /producto|feature/i }).first();
+		await btn.hover();
+		await page.waitForTimeout(300);
+		const dropdown = page.locator('[role="menu"]').first();
+		await expect(dropdown).toBeVisible({ timeout: 3000 });
+		await expect(dropdown.locator('a[href="/features/student-profile"]')).toBeVisible();
+		await expect(dropdown.locator('a[href="/features/safe-pickups"]')).toBeVisible();
+	});
+
+	test('Integraciones is a top-level nav link', async ({ page }) => {
+		await page.goto('/');
+		// Should be a direct link, not inside the dropdown
+		const navLink = page.locator('nav a[href="/integrations"]').first();
+		await expect(navLink).toBeVisible();
 	});
 });

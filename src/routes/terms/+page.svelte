@@ -30,7 +30,7 @@
       <section>
         <h2 class="text-lg font-semibold text-foreground">1. Aceptación de los términos</h2>
         <p class="mt-2">
-          Al acceder y utilizar la plataforma Ethoz, usted acepta estos términos de uso en su totalidad. Si no está de acuerdo con alguna de estas condiciones, no debe utilizar el servicio.
+          Al acceder y utilizar la plataforma Ethoz, operada por Ethoz SpA (RUT 78.394.522-3, constituida el 6 de abril de 2026, con domicilio en Santiago de Chile), usted acepta estos términos de uso en su totalidad. Si no está de acuerdo con alguna de estas condiciones, no debe utilizar el servicio.
         </p>
       </section>
 

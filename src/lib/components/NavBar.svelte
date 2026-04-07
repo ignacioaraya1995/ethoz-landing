@@ -34,7 +34,8 @@
     { key: 'nav.about' as const, href: '/about' },
     { key: 'nav.pricing' as const, href: '/get-started' },
   ];
-  const navLinksAfter = [
+  const navLinksAfter: Array<{ key?: any; label?: string; href: string }> = [
+    { label: 'Integraciones', href: '/integrations' },
     { key: 'nav.blog' as const, href: '/blog' },
     { key: 'nav.contact' as const, href: '/contact' },
   ];
@@ -149,7 +150,7 @@
               ? 'text-primary bg-primary/5'
               : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'}"
         >
-          {t(link.key)}
+          {link.label ?? t(link.key)}
         </a>
       {/each}
     </div>
@@ -223,6 +224,18 @@
           onclick={() => (mobileOpen = false)}
         >
           {t('nav.features')}
+        </a>
+
+        <!-- Integraciones -->
+        <a
+          href="/integrations"
+          class="rounded-lg px-3 py-3 text-sm font-medium transition-colors
+            {isActive('/integrations')
+              ? 'text-primary bg-primary/5'
+              : 'text-foreground hover:bg-muted/50'}"
+          onclick={() => (mobileOpen = false)}
+        >
+          Integraciones
         </a>
 
         <!-- Blog -->
