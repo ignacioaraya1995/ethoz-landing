@@ -195,9 +195,9 @@
             <p class="col-span-5 text-sm text-muted-foreground">{r.why}</p>
             <div class="col-span-2 flex justify-center">
               {#if r.met}
-                <CheckCircle class="size-5 text-green-600" />
+                <CheckCircle class="size-5 text-success" />
               {:else}
-                <XCircle class="size-5 text-red-500" />
+                <XCircle class="size-5 text-destructive" />
               {/if}
             </div>
           </div>
@@ -209,7 +209,7 @@
         <div class="space-y-3">
           {#each nonCompliant as nc}
             <div class="flex gap-3 rounded-xl border border-border bg-card p-4">
-              <XCircle class="size-5 shrink-0 text-red-500 mt-0.5" />
+              <XCircle class="size-5 shrink-0 text-destructive mt-0.5" />
               <div>
                 <p class="text-sm font-semibold text-foreground">{nc.system}</p>
                 <p class="text-sm text-muted-foreground mt-0.5">{nc.reason}</p>
@@ -234,11 +234,11 @@
       <div class="rounded-xl border border-border bg-card overflow-hidden">
         {#each selfAssessment as item, i}
           <div class="flex items-start gap-3 px-5 py-3.5 {i !== selfAssessment.length - 1 ? 'border-b border-border' : ''}">
-            <div class="mt-0.5 size-5 shrink-0 rounded border-2 {item.critical ? 'border-red-400/60' : 'border-muted-foreground/30'}"></div>
+            <div class="mt-0.5 size-5 shrink-0 rounded border-2 {item.critical ? 'border-destructive/20/60' : 'border-muted-foreground/30'}"></div>
             <div class="flex-1 flex items-start justify-between gap-3">
               <p class="text-sm text-foreground">{item.question}</p>
               {#if item.critical}
-                <Badge variant="outline" class="shrink-0 text-xs border-red-300 text-red-600">Crítico</Badge>
+                <Badge variant="outline" class="shrink-0 text-xs border-destructive/20 text-destructive">Crítico</Badge>
               {/if}
             </div>
           </div>

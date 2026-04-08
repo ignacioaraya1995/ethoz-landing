@@ -132,10 +132,10 @@
   ];
 
   const colorMap: Record<string, string> = {
-    blue: 'bg-blue-500/10 text-blue-700 dark:text-blue-400',
-    green: 'bg-green-500/10 text-green-700 dark:text-green-400',
-    orange: 'bg-orange-500/10 text-orange-700 dark:text-orange-400',
-    purple: 'bg-purple-500/10 text-purple-700 dark:text-purple-400'
+    blue: 'bg-primary/10 text-primary',
+    green: 'bg-success/10 text-success',
+    orange: 'bg-warning/10 text-warning-foreground',
+    purple: 'bg-primary/10 text-primary'
   };
 </script>
 

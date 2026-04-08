@@ -166,7 +166,7 @@
           <ul class="space-y-2.5">
             {#each learnings as item}
               <li class="flex items-start gap-2.5 text-sm text-muted-foreground">
-                <CheckCircle class="size-4 text-green-500 shrink-0 mt-0.5" />
+                <CheckCircle class="size-4 text-success shrink-0 mt-0.5" />
                 {item}
               </li>
             {/each}
@@ -203,7 +203,7 @@
 
             <form onsubmit={handleSubmit} class="space-y-4">
               <div>
-                <label for="webinar-name" class="block text-xs font-medium text-foreground mb-1.5">Nombre completo <span class="text-red-500">*</span></label>
+                <label for="webinar-name" class="block text-xs font-medium text-foreground mb-1.5">Nombre completo <span class="text-destructive">*</span></label>
                 <input
                   id="webinar-name"
                   type="text"
@@ -215,7 +215,7 @@
               </div>
 
               <div>
-                <label for="webinar-email" class="block text-xs font-medium text-foreground mb-1.5">Correo electrónico <span class="text-red-500">*</span></label>
+                <label for="webinar-email" class="block text-xs font-medium text-foreground mb-1.5">Correo electrónico <span class="text-destructive">*</span></label>
                 <input
                   id="webinar-email"
                   type="email"
@@ -255,7 +255,7 @@
               </div>
 
               {#if errorMessage}
-                <p class="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+                <p class="text-sm text-destructive">{errorMessage}</p>
               {/if}
 
               <Button type="submit" class="w-full gap-2" disabled={submitting}>

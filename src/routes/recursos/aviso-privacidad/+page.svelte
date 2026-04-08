@@ -108,7 +108,7 @@
               <tr><td class="px-4 py-2.5">Identificación del alumno</td><td class="px-4 py-2.5">Nombre, RUT, fecha de nacimiento, fotografía</td><td class="px-4 py-2.5">No</td></tr>
               <tr><td class="px-4 py-2.5">Identificación del apoderado</td><td class="px-4 py-2.5">Nombre, RUT, correo, teléfono, parentesco</td><td class="px-4 py-2.5">No</td></tr>
               <tr><td class="px-4 py-2.5">Datos académicos</td><td class="px-4 py-2.5">Notas, asistencia, observaciones pedagógicas</td><td class="px-4 py-2.5">No</td></tr>
-              <tr><td class="px-4 py-2.5">Datos de salud</td><td class="px-4 py-2.5">Alergias, diagnósticos, medicamentos, PIE</td><td class="px-4 py-2.5"><span class="text-orange-600 font-medium">Sí</span></td></tr>
+              <tr><td class="px-4 py-2.5">Datos de salud</td><td class="px-4 py-2.5">Alergias, diagnósticos, medicamentos, PIE</td><td class="px-4 py-2.5"><span class="text-warning-foreground font-medium">Sí</span></td></tr>
               <tr><td class="px-4 py-2.5">Datos socioeconómicos</td><td class="px-4 py-2.5">Situación JUNAEB, beneficios, becas</td><td class="px-4 py-2.5">Parcial</td></tr>
               <tr><td class="px-4 py-2.5">Datos de seguridad</td><td class="px-4 py-2.5">Registros de acceso, retiros, alertas</td><td class="px-4 py-2.5">No</td></tr>
             </tbody>

@@ -68,9 +68,9 @@
   ];
 
   const sensitivityStyle: Record<string, string> = {
-    green: 'bg-green-500/10 text-green-700 dark:text-green-400',
-    red: 'bg-red-500/10 text-red-700 dark:text-red-400',
-    blue: 'bg-blue-500/10 text-blue-700 dark:text-blue-400',
+    green: 'bg-success/10 text-success',
+    red: 'bg-destructive/10 text-destructive',
+    blue: 'bg-primary/10 text-primary',
   };
 </script>
 
@@ -123,9 +123,9 @@
 
     <!-- Legend -->
     <div class="mb-8 flex flex-wrap gap-3 text-xs">
-      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-green-500/20"></span> Datos básicos</div>
-      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-red-500/20"></span> Datos sensibles (requieren consentimiento explícito)</div>
-      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-blue-500/20"></span> Datos técnicos / auditoría</div>
+      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-success/100/20"></span> Datos básicos</div>
+      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-destructive/100/20"></span> Datos sensibles (requieren consentimiento explícito)</div>
+      <div class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-primary/100/20"></span> Datos técnicos / auditoría</div>
     </div>
 
     <!-- Inventory sections -->
@@ -164,9 +164,9 @@
 
     <!-- Notes -->
     <div class="mt-10 space-y-4">
-      <div class="rounded-lg border border-orange-200 bg-orange-50 dark:border-orange-900/40 dark:bg-orange-950/20 p-4 text-sm">
-        <p class="font-medium text-orange-800 dark:text-orange-300 mb-1">Datos sensibles — requisitos especiales</p>
-        <p class="text-orange-700 dark:text-orange-400 text-xs">Los datos médicos, de salud mental y situación familiar requieren consentimiento explícito, por escrito, con finalidad específica. No pueden usarse para finalidades distintas a las declaradas sin nuevo consentimiento. Deben tener controles de acceso reforzados y logs de auditoría.</p>
+      <div class="rounded-lg border border-warning/20 bg-warning/10 p-4 text-sm">
+        <p class="font-medium text-warning-foreground mb-1">Datos sensibles — requisitos especiales</p>
+        <p class="text-warning-foreground text-xs">Los datos médicos, de salud mental y situación familiar requieren consentimiento explícito, por escrito, con finalidad específica. No pueden usarse para finalidades distintas a las declaradas sin nuevo consentimiento. Deben tener controles de acceso reforzados y logs de auditoría.</p>
       </div>
       <div class="rounded-lg border border-border bg-muted/30 p-4 text-sm text-muted-foreground">
         <p class="font-medium text-foreground mb-1">Nota legal</p>

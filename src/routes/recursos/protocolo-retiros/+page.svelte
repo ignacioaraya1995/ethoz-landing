@@ -156,17 +156,17 @@
           Casos Especiales
         </h2>
         <div class="space-y-4">
-          <div class="rounded-lg border border-orange-200 bg-orange-50 dark:border-orange-900/40 dark:bg-orange-950/20 p-4">
-            <p class="font-medium text-orange-800 dark:text-orange-300 mb-1">Orden judicial de restricción de visitas</p>
-            <p class="text-sm text-orange-700 dark:text-orange-400">El sistema debe tener alerta activa. El portero no entrega al alumno bajo ninguna circunstancia. Contacta inmediatamente al director y, si hay presión o amenaza, llama a Carabineros (133).</p>
+          <div class="rounded-lg border border-warning/20 bg-warning/10 p-4">
+            <p class="font-medium text-warning-foreground mb-1">Orden judicial de restricción de visitas</p>
+            <p class="text-sm text-warning-foreground">El sistema debe tener alerta activa. El portero no entrega al alumno bajo ninguna circunstancia. Contacta inmediatamente al director y, si hay presión o amenaza, llama a Carabineros (133).</p>
           </div>
-          <div class="rounded-lg border border-red-200 bg-red-50 dark:border-red-900/40 dark:bg-red-950/20 p-4">
-            <p class="font-medium text-red-800 dark:text-red-300 mb-1">Menor intenta salir sin autorización</p>
-            <p class="text-sm text-red-700 dark:text-red-400">El portero retiene al alumno con respeto y notifica al inspector. Se contacta al apoderado titular. Se deja registro del incidente. No se usa fuerza física.</p>
+          <div class="rounded-lg border border-destructive/20 bg-destructive/10   p-4">
+            <p class="font-medium text-destructive mb-1">Menor intenta salir sin autorización</p>
+            <p class="text-sm text-destructive">El portero retiene al alumno con respeto y notifica al inspector. Se contacta al apoderado titular. Se deja registro del incidente. No se usa fuerza física.</p>
           </div>
-          <div class="rounded-lg border border-blue-200 bg-blue-50 dark:border-blue-900/40 dark:bg-blue-950/20 p-4">
-            <p class="font-medium text-blue-800 dark:text-blue-300 mb-1">Emergencia médica</p>
-            <p class="text-sm text-blue-700 dark:text-blue-400">Si el alumno requiere atención médica urgente, el director o inspector autoriza la salida con SAMU o ambulancia. Se notifica inmediatamente al apoderado titular y se deja registro completo del traslado.</p>
+          <div class="rounded-lg border border-primary/20 bg-primary/10   p-4">
+            <p class="font-medium text-primary mb-1">Emergencia médica</p>
+            <p class="text-sm text-primary">Si el alumno requiere atención médica urgente, el director o inspector autoriza la salida con SAMU o ambulancia. Se notifica inmediatamente al apoderado titular y se deja registro completo del traslado.</p>
           </div>
           <div class="rounded-lg border border-muted bg-muted/30 p-4">
             <p class="font-medium text-foreground mb-1">Persona no reconocida que afirma ser familiar</p>

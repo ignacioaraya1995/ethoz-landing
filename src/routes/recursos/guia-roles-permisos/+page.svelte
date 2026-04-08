@@ -206,7 +206,7 @@
                 {#each permKeys as key}
                   <td class="px-2 py-3 text-center">
                     {#if r.perms[key as keyof typeof r.perms]}
-                      <span class="inline-flex size-5 items-center justify-center rounded-full bg-green-500/15 text-green-600 dark:text-green-400 font-bold text-[11px]">✓</span>
+                      <span class="inline-flex size-5 items-center justify-center rounded-full bg-success/15 text-success font-bold text-[11px]">✓</span>
                     {:else}
                       <span class="inline-flex size-5 items-center justify-center rounded-full bg-muted text-muted-foreground text-[11px]">—</span>
                     {/if}

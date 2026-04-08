@@ -183,10 +183,10 @@
     youtube: 'YouTube', blog: 'Blog', email: 'Email', whatsapp: 'WhatsApp',
   };
   const PLATFORM_CLASSES: Record<Platform, string> = {
-    linkedin: 'bg-blue-100 text-blue-800', facebook: 'bg-indigo-100 text-indigo-800',
-    instagram: 'bg-pink-100 text-pink-800', youtube: 'bg-red-100 text-red-800',
-    blog: 'bg-orange-100 text-orange-800', email: 'bg-teal-100 text-teal-800',
-    whatsapp: 'bg-green-100 text-green-800',
+    linkedin: 'bg-primary/10 text-primary', facebook: 'bg-primary/15 text-primary',
+    instagram: 'bg-accent/20 text-accent-foreground', youtube: 'bg-destructive/10 text-destructive',
+    blog: 'bg-warning/10 text-warning-foreground', email: 'bg-muted text-muted-foreground',
+    whatsapp: 'bg-success/10 text-success',
   };
   const ALL_PLATFORMS: Platform[] = ['linkedin', 'facebook', 'instagram', 'youtube', 'blog', 'email', 'whatsapp'];
 
@@ -195,9 +195,9 @@
     scheduled: 'Programado', published: 'Publicado', archived: 'Archivado',
   };
   const STATUS_CLASSES: Record<PostStatus, string> = {
-    draft: 'bg-muted text-muted-foreground', review: 'bg-yellow-50 text-yellow-700',
-    approved: 'bg-primary/10 text-primary', scheduled: 'bg-blue-50 text-blue-700',
-    published: 'bg-green-50 text-green-700', archived: 'bg-muted text-muted-foreground',
+    draft: 'bg-muted text-muted-foreground', review: 'bg-warning/10 text-warning-foreground',
+    approved: 'bg-primary/10 text-primary', scheduled: 'bg-primary/10 text-primary',
+    published: 'bg-success/10 text-success', archived: 'bg-muted text-muted-foreground',
   };
   const ALL_STATUSES: PostStatus[] = ['draft', 'review', 'approved', 'scheduled', 'published', 'archived'];
 
@@ -212,8 +212,8 @@
     linkedin: 'LinkedIn', facebook: 'Facebook', instagram: 'Instagram', youtube: 'YouTube',
   };
   const SOCIAL_PLATFORM_BG: Record<SocialPlatform, string> = {
-    linkedin: 'bg-blue-600 hover:bg-blue-700', facebook: 'bg-indigo-600 hover:bg-indigo-700',
-    instagram: 'bg-pink-600 hover:bg-pink-700', youtube: 'bg-red-600 hover:bg-red-700',
+    linkedin: 'bg-primary hover:bg-primary/90', facebook: 'bg-primary/80 hover:bg-primary/70',
+    instagram: 'bg-accent hover:bg-accent/90', youtube: 'bg-destructive hover:bg-destructive/90',
   };
   const SOCIAL_AUTH_URLS: Record<SocialPlatform, string> = {
     linkedin: `${SUPABASE_URL}/functions/v1/social-auth-linkedin`,
@@ -426,7 +426,7 @@
         </div>
         <div class="rounded-xl border border-border bg-background p-4">
           <p class="text-xs font-medium text-muted-foreground">Publicados</p>
-          <p class="mt-1 text-2xl font-bold tabular-nums text-green-600">{stats.published}</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums text-success">{stats.published}</p>
         </div>
       </div>
 
@@ -443,7 +443,7 @@
           {#each SOCIAL_PLATFORMS as platform}
             {@const isConnected = connectedPlatforms.has(platform)}
             <div class="flex items-center gap-2 rounded-lg border border-border px-3 py-2">
-              <span class="size-2 rounded-full {isConnected ? 'bg-green-500' : 'bg-muted-foreground/30'}"></span>
+              <span class="size-2 rounded-full {isConnected ? 'bg-success' : 'bg-muted-foreground/30'}"></span>
               <span class="text-xs font-medium {isConnected ? 'text-foreground' : 'text-muted-foreground'}">
                 {SOCIAL_PLATFORM_LABELS[platform]}
               </span>

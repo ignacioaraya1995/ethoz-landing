@@ -81,10 +81,10 @@
   const allLetters = Object.keys(glossary).sort();
 
   const tagColors: Record<string, string> = {
-    'Ley 21.719': 'bg-blue-100 text-blue-800',
-    'Normativa': 'bg-purple-100 text-purple-800',
-    'Seguridad': 'bg-green-100 text-green-800',
-    'Educación': 'bg-yellow-100 text-yellow-800',
+    'Ley 21.719': 'bg-primary/10 text-primary',
+    'Normativa': 'bg-primary/10 text-primary',
+    'Seguridad': 'bg-success/10 text-success',
+    'Educación': 'bg-warning/10 text-warning-foreground',
   };
 </script>
 

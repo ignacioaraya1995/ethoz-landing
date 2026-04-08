@@ -206,8 +206,8 @@
 
   const STAT_CLASSES: Record<PostStatus, string> = {
     draft: 'bg-muted text-muted-foreground',
-    approved: 'bg-blue-50 text-blue-700',
-    published: 'bg-green-50 text-green-700',
+    approved: 'bg-primary/10 text-primary',
+    published: 'bg-success/10 text-success',
   };
 
   const supabaseConfigured = !!SUPABASE_URL;
@@ -292,7 +292,7 @@
                       Connected {formatDate(token.created_at)}
                     </p>
                     {#if token.token_expiry}
-                      <p class="text-xs {expired ? 'text-yellow-600' : 'text-muted-foreground'}">
+                      <p class="text-xs {expired ? 'text-warning-foreground' : 'text-muted-foreground'}">
                         Expires {formatDate(token.token_expiry)}
                       </p>
                     {/if}
@@ -341,7 +341,7 @@
                       size="sm"
                       onclick={() => (confirmDisconnect = platform.id)}
                       disabled={disconnecting === platform.id}
-                      class="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                      class="border-destructive/20 text-destructive hover:bg-destructive/10 hover:text-destructive"
                     >
                       {#if disconnecting === platform.id}
                         <Loader2 class="size-3.5 animate-spin" />

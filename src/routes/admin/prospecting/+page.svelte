@@ -145,7 +145,7 @@
   function tierColor(tier: 1 | 2 | 3): string {
     switch (tier) {
       case 1: return 'bg-primary/10 text-primary';
-      case 2: return 'bg-yellow-100 text-yellow-800';
+      case 2: return 'bg-warning/10 text-warning-foreground';
       case 3: return 'bg-muted text-muted-foreground';
     }
   }
@@ -667,7 +667,7 @@
 
             <div class="mt-4 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground">
               <span><span class="inline-block size-2 rounded-full bg-primary/60"></span> Tier 1 (score 60+): Whale accounts — multi-school, high enrollment, private</span>
-              <span><span class="inline-block size-2 rounded-full bg-yellow-400/60"></span> Tier 2 (score 35-59): Mid-market — growth targets</span>
+              <span><span class="inline-block size-2 rounded-full bg-warning/60"></span> Tier 2 (score 35-59): Mid-market — growth targets</span>
               <span><span class="inline-block size-2 rounded-full bg-muted-foreground/40"></span> Tier 3 (&lt;35): Long-tail — smaller/public</span>
             </div>
           {/if}

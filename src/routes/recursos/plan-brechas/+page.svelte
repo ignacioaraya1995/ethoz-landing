@@ -88,23 +88,23 @@
           Clasificación de Brechas
         </h2>
         <div class="space-y-3">
-          <div class="rounded-lg border border-green-200 bg-green-50 dark:border-green-900/40 dark:bg-green-950/20 p-4">
+          <div class="rounded-lg border border-success/20 bg-success/10   p-4">
             <div class="flex items-center gap-2 mb-2">
-              <span class="rounded-full bg-green-600 px-2.5 py-0.5 text-[11px] font-bold text-white">LEVE</span>
+              <span class="rounded-full bg-success px-2.5 py-0.5 text-[11px] font-bold text-white">LEVE</span>
               <span class="text-xs text-muted-foreground">Notificación interna. Sin obligación de notificar a autoridad si no hay riesgo significativo.</span>
             </div>
             <p class="text-sm text-muted-foreground">Acceso no autorizado a datos básicos de identificación por un tiempo muy limitado, sin evidencia de exfiltración. Ej: un funcionario accede por error a datos de otro curso. Contención posible en horas.</p>
           </div>
-          <div class="rounded-lg border border-orange-200 bg-orange-50 dark:border-orange-900/40 dark:bg-orange-950/20 p-4">
+          <div class="rounded-lg border border-warning/20 bg-warning/10 p-4">
             <div class="flex items-center gap-2 mb-2">
-              <span class="rounded-full bg-orange-600 px-2.5 py-0.5 text-[11px] font-bold text-white">GRAVE</span>
+              <span class="rounded-full bg-warning px-2.5 py-0.5 text-[11px] font-bold text-white">GRAVE</span>
               <span class="text-xs text-muted-foreground">Notificación a autoridad en 72 horas. Posible comunicación a afectados.</span>
             </div>
             <p class="text-sm text-muted-foreground">Acceso no autorizado a datos académicos o de contacto de un grupo de alumnos o apoderados. Posible exfiltración de datos. Ej: ataque de phishing que compromete credenciales de un docente. Riesgo de discriminación o fraude.</p>
           </div>
-          <div class="rounded-lg border border-red-200 bg-red-50 dark:border-red-900/40 dark:bg-red-950/20 p-4">
+          <div class="rounded-lg border border-destructive/20 bg-destructive/10   p-4">
             <div class="flex items-center gap-2 mb-2">
-              <span class="rounded-full bg-red-600 px-2.5 py-0.5 text-[11px] font-bold text-white">GRAVÍSIMA</span>
+              <span class="rounded-full bg-destructive px-2.5 py-0.5 text-[11px] font-bold text-white">GRAVÍSIMA</span>
               <span class="text-xs text-muted-foreground">Notificación urgente en 72 horas. Comunicación inmediata a afectados y medios si es masiva.</span>
             </div>
             <p class="text-sm text-muted-foreground">Exposición masiva de datos sensibles (médicos, judiciales, emocionales) o datos de menores. Ransomware con cifrado de todos los datos. Publicación pública de datos personales. Riesgo de daño físico o psicológico a alumnos.</p>
