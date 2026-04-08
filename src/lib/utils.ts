@@ -8,3 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 export type WithElementRef<T, E extends HTMLElement = HTMLElement> = T & {
   ref?: E | null;
 };
+
+// Helper types used by shadcn-svelte components (bits-ui v2 prop helpers)
+export type WithoutChild<T> = T extends { child?: unknown } ? Omit<T, 'child'> : T;
+export type WithoutChildren<T> = T extends { children?: unknown } ? Omit<T, 'children'> : T;
+export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
