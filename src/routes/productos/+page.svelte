@@ -3,7 +3,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
-  import { Users, Shield, MapPin, Search, ClipboardList, Eye, ArrowRight } from '@lucide/svelte';
+  import { Users, Shield, MapPin, Search, ClipboardList, Eye, ArrowRight, ShieldAlert, BarChart3, Siren, CalendarCheck } from '@lucide/svelte';
   import { trackEvent } from '$lib/utils/analytics';
 
   $effect(() => { trackEvent('products_page_viewed'); });
@@ -56,6 +56,38 @@
       href: '/compliance',
       color: 'bg-primary/10 text-primary',
       highlights: ['Conforme a Circular N°30', 'Verificación de identidad digital', 'Registro de auditoría completo', 'Integración con Ley 21.719'],
+    },
+    {
+      icon: ShieldAlert,
+      name: 'Alertas Críticas',
+      desc: 'Órdenes de alejamiento, ideación suicida, riesgo familiar y suspensiones: todas las alertas críticas en un solo sistema con acceso controlado y trazabilidad total.',
+      href: '/features/alerts',
+      color: 'bg-destructive/10 text-destructive',
+      highlights: ['Órdenes judiciales con RIT y tribunal', 'Bloqueo automático en portería', 'Protocolo MINEDUC ideación suicida', 'Auditoría de accesos por rol'],
+    },
+    {
+      icon: BarChart3,
+      name: 'Analytics y KPIs',
+      desc: 'Dashboard para directivos y sostenedores: indicadores de convivencia, alertas, asistencia y cumplimiento normativo en tiempo real.',
+      href: '/features/analytics',
+      color: 'bg-primary/10 text-primary',
+      highlights: ['KPIs de convivencia y alertas', 'Gráficos por mes y categoría', 'Top alumnos con más observaciones', 'Multi-sede para sostenedores'],
+    },
+    {
+      icon: Siren,
+      name: 'Protocolos de Emergencia',
+      desc: 'Sismo, incendio, intruso y emergencia médica: activa el protocolo SENAPRED con un toque, guía la evacuación y notifica a los apoderados en segundos.',
+      href: '/features/emergency',
+      color: 'bg-destructive/10 text-destructive',
+      highlights: ['Activación en 1 toque', 'Conteo digital por curso', 'Notificación push a apoderados', 'Registro para Superintendencia'],
+    },
+    {
+      icon: CalendarCheck,
+      name: 'Control de Asistencia',
+      desc: 'Libro digital conforme a Circular N°30. Registra presencia, atrasos y justificaciones con firma electrónica y alertas automáticas de inasistencia reiterada.',
+      href: '/features/attendance',
+      color: 'bg-success/10 text-success',
+      highlights: ['Circular N°30 MINEDUC', 'Alerta al superar 15% de inasistencias', 'Justificación digital con adjuntos', 'Reportes para subvención'],
     },
   ];
 </script>
