@@ -212,9 +212,10 @@
             icon: ShieldCheck,
           },
         ] as item}
+          {@const Icon = item.icon}
           <div class="rounded-xl border border-border bg-card p-5">
             <div class="flex items-center gap-2.5 mb-2">
-              <svelte:component this={item.icon} class="size-5 shrink-0 text-primary" />
+              <Icon class="size-5 shrink-0 text-primary" />
               <h3 class="font-semibold text-foreground">{item.title}</h3>
             </div>
             <p class="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
