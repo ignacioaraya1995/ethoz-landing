@@ -243,11 +243,11 @@
 
         <!-- CTAs -->
         <div class="animate-fade-in-up animate-delay-300 mt-8 flex items-center justify-center gap-3 sm:justify-start sm:gap-4">
-          <Button size="xl" href="/demo" class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 h-12 px-8 text-base sm:h-14 sm:px-10 sm:text-lg">
+          <Button size="xl" href="/demo" class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30">
             {t('hero.cta.primary')}
             <ArrowRight class="size-5" />
           </Button>
-          <Button variant="outline" size="xl" onclick={() => showPitch = true} class="border-foreground/20 hover:border-foreground/40 hover:bg-muted h-12 px-6 text-base sm:h-14 sm:px-8 sm:text-lg">
+          <Button variant="outline" size="xl" onclick={() => showPitch = true} class="border-foreground/20 hover:border-foreground/40 hover:bg-muted">
             <Play class="size-5" />
             <span class="hidden sm:inline">Conoce Ethoz en 2 min</span>
             <span class="sm:hidden">Ver video</span>
@@ -549,7 +549,7 @@
         </div>
         <!-- CTA right under countdown -->
         <div class="mt-8 text-center">
-          <Button size="xl" href="/demo" class="h-14 px-10 text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30">
+          <Button size="xl" href="/demo" class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30">
             {t('hero.cta.primary')}
             <ArrowRight class="size-5" />
           </Button>
@@ -722,7 +722,7 @@
         <Button
           size="xl"
           href="/demo"
-          class="h-14 px-10 text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
+          class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
         >
           {t('cta.primary')}
           <ArrowRight class="size-5" />
@@ -731,7 +731,6 @@
           variant="outline"
           size="xl"
           onclick={() => showPitch = true}
-          class="h-14 px-8 text-lg"
         >
           <Play class="size-5" />
           Ver presentación
@@ -745,7 +744,7 @@
   <!-- Mobile sticky CTA -->
   {#if showStickyCta}
     <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background px-4 pb-[max(env(safe-area-inset-bottom,0px),1rem)] pt-3 md:hidden">
-      <Button size="xl" href="/demo" class="w-full h-14 text-base">
+      <Button size="xl" href="/demo" class="w-full">
         {t('hero.cta.primary')}
         <ArrowRight class="size-5" />
       </Button>

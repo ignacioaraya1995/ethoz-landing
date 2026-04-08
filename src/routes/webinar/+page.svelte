@@ -258,7 +258,7 @@
                 <p class="text-sm text-destructive">{errorMessage}</p>
               {/if}
 
-              <Button type="submit" size="lg" class="w-full gap-2 h-12 text-base" disabled={submitting}>
+              <Button type="submit" size="lg" class="w-full gap-2" disabled={submitting}>
                 {#if submitting}
                   <Loader2 class="size-4 animate-spin" />
                   Inscribiendo...
