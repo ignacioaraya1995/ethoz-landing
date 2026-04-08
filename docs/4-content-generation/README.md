@@ -278,6 +278,32 @@ META_APP_ID=            # OAuth Instagram + Facebook
 META_APP_SECRET=
 ```
 
+## Cuentas de RRSS Configuradas
+
+| Plataforma | ID | Estado | Enlace |
+|------------|----|---------|---------| 
+| Facebook | `1083964671464526` | Activa | [Página Ethoz](https://facebook.com/ethoz) |
+| Instagram | `17841436264795872` | Activa | [Cuenta Ethoz](https://instagram.com/ethoz) |
+| YouTube | `UCYeWEdqonYWKvja78_HM2TA` | Activa | [Canal Ethoz](https://youtube.com/@ethoz) |
+| LinkedIn | Pendiente | En revisión | (Pendiente verificación) |
+
+**Nota importante:** Los tokens OAuth se guardan en Supabase tabla `social_tokens`. Si un token expira, reconectar en `/admin/settings`.
+
+## Content Bank v2
+
+Las siguientes archivos contienen contenido generado más reciente:
+
+| Archivo | Tipo | Contenido |
+|---------|------|----------|
+| `docs/content-bank/linkedin-posts-v2.md` | Posts | Posts v2 para LinkedIn |
+| `docs/content-bank/instagram-posts-v2.md` | Posts | Posts v2 para Instagram |
+| `docs/content-bank/facebook-posts-v2.md` | Posts | Posts v2 para Facebook |
+| `docs/content-bank/reels-scripts-v2.md` | Scripts | Guiones para reels v2 |
+| `docs/content-bank/whatsapp-broadcast-v2.md` | Broadcasts | Mensajes WhatsApp v2 |
+| `docs/content-bank/content-calendar-v2.md` | Calendario | Calendario de publicaciones v2 |
+
+**Primer post publicado:** 2026-04-08 a Facebook
+
 ## Flujo de trabajo completo — ejemplo paso a paso
 
 ```bash
@@ -294,6 +320,7 @@ node scripts/generate-images.mjs --batch --platform linkedin --status approved
 
 # 5. Publicar desde el panel haciendo clic en "Publicar" en cada post
 # → La Edge Function social-publish se encarga del resto
+# → Post se publica en LinkedIn como org (usa org_id de social_tokens)
 
 # --- Para reels ---
 
@@ -303,6 +330,24 @@ echo "La Ley 21.719 obliga a los colegios a proteger los datos de sus alumnos...
 # 7. Generar reel narrado
 node scripts/generate-narrated-video.mjs --script /tmp/guion.txt --output output/reel-compliance.mp4
 
-# 8. Publicar el reel
-node scripts/publish-reels-batch.mjs --dir output --platforms instagram,facebook
+# 8. Publicar el reel (simultaneamente Instagram, Facebook, LinkedIn)
+node scripts/publish-reels-batch.mjs --dir output --platforms instagram,facebook,linkedin
+
+# --- Verificar tokens activos ---
+
+# 9. Si publica falla con "token expired", reconectar en admin
+# https://ethoz.cl/admin/settings > Click "Conectar [plataforma]"
+# → OAuth flow actualiza token en social_tokens table
 ```
+
+## Troubleshooting
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Invalid access token" | Token LinkedIn expirado | Reconectar en `/admin/settings` |
+| "Page ID not found" | Facebook page_id incorrecto | Verificar en `social_tokens` table |
+| "Instagram container error" | Meta requiere container + paso 2 | Esperar 24h después de crear container |
+| "Rate limit exceeded" | API quota agotada | Esperar 1 hora, reintentar |
+| "Webhook signature failed" | Cal.com secret incorrecto | Actualizar `CAL_WEBHOOK_SECRET` en Edge Function secrets |
+
+Ver `docs/RUNBOOK.md` sección "How to Reconnect OAuth for Social Platforms" y "How to Debug a Failed Edge Function" para detalles.

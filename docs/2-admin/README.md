@@ -29,6 +29,7 @@ src/routes/admin/
 3. `adminStore.init()` verifica la sesion activa de Supabase Auth (`supabase.auth.getSession()`).
 4. Si no hay sesion, el layout no renderiza la barra de navegacion de admin, y las paginas individuales redirigen a `/admin`.
 5. En `/admin` (`+page.svelte`): formulario de email + password. Al autenticarse exitosamente, redirige a `/admin/prospecting`.
+6. Token de sesion se guarda en `localStorage` bajo clave `sb-[project-ref]-auth-token` (Supabase Auth estándar).
 
 ### Archivos clave
 
@@ -38,6 +39,29 @@ src/routes/admin/
 | `src/routes/admin/+page.svelte` | 110 | Pantalla de login. Email pre-cargado con `idaraya@uc.cl`. Usa `adminStore.login()`. |
 | `src/lib/stores/admin.svelte.ts` | 39 | Store Svelte 5 (runes). Wrappea `src/lib/supabase.ts`. Expone: `authenticated` (boolean), `user` (objeto Supabase User), `login(email, password)`, `logout()`, `init()`. |
 | `src/lib/supabase.ts` | 117 | Cliente Supabase. Exporta `supabase` (cliente con anon key para el front) y helpers de consulta. Tambien inicializa `supabaseAdmin` con service role para operaciones administrativas. |
+
+### Agregar nuevo usuario admin
+
+Para agregar un nuevo usuario admin:
+
+```bash
+# 1. Via Supabase Dashboard
+# https://supabase.com/dashboard/project/[ref]/auth/users
+# Click "Add user", ingresa email y password
+
+# 2. O via CLI
+supabase db execute 'INSERT INTO auth.users (...) VALUES (...);'
+
+# 3. Usuario puede log in en https://ethoz.cl/admin
+# 4. Para acceso a datos (RLS), agregar UUID a policy:
+ALTER POLICY "admin_only" ON leads
+  USING (auth.uid() IN (
+    '169e6037-fcc2-4201-b2af-92547e1d6739',
+    '[new-user-uuid]'
+  ));
+```
+
+Ver `docs/RUNBOOK.md` sección "How to Add a New Admin User" para instrucciones detalladas.
 
 ## Seccion: Prospecting (`/admin/prospecting`)
 
