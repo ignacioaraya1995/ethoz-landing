@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { t } from '$lib/i18n/index.svelte';
-  import { Menu, X, ChevronDown, Shield, Search, ClipboardList, Plug, Bell, Fingerprint } from '@lucide/svelte';
+  import { Menu, X, ChevronDown, Shield, Search, ClipboardList, Bell, Fingerprint } from '@lucide/svelte';
   import { env } from '$env/dynamic/public';
   import { slide } from 'svelte/transition';
   import { page } from '$app/state';

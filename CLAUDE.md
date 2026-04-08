@@ -72,6 +72,8 @@ Content pipeline: Kimi CLI (text) → Gemini (images) → Supabase Edge Function
 - **Edge Functions error responses** must not leak internal errors — log with `console.error`, return generic messages
 - **Open Supabase registration is disabled** — do not re-enable. Admin users are created manually in the dashboard
 - Run `npm run audit:security` before committing UI changes to check for regressions
+- Run `npm run lint` to check ESLint rules (Svelte 5 syntax, design tokens, security patterns)
+- `npm run test:ci` runs everything: lint + svelte-check + audit + unit + e2e
 
 ### UI components (shadcn-svelte)
 - Admin panel uses shadcn-svelte components from `$lib/components/ui/`

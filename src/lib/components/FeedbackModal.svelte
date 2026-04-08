@@ -51,7 +51,6 @@
 <svelte:window onkeydown={handleKeydown} />
 
 {#if feedbackStore.modalOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
   <div
     role="presentation"
     class="fixed inset-0 z-[110] flex items-end justify-center sm:items-center"
