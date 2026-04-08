@@ -71,8 +71,10 @@
           <ul class="mt-3 flex flex-col gap-2">
             <li><a href="/productos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Funcionalidades</a></li>
             <li><a href="/integrations" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Integraciones</a></li>
+            <li><a href="/comparativa" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Comparativa</a></li>
+            <li><a href="/roi-calculator" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Calculadora ROI</a></li>
+            <li><a href="/proyecciones" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Proyecciones</a></li>
             <li><a href="/get-started" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.pricing')}</a></li>
-            <li><a href="/demo" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('nav.cta')}</a></li>
           </ul>
         </div>
 
@@ -83,8 +85,9 @@
             <li><a href="/ley-21719" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Ley 21.719</a></li>
             <li><a href="/circular-30" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Circular N°30</a></li>
             <li><a href="/glosario" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Glosario</a></li>
-            <li><a href="/recursos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Recursos gratuitos</a></li>
+            <li><a href="/recursos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Descargas gratuitas</a></li>
             <li><a href="/webinar" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Webinar</a></li>
+            <li><a href="/seguridad-datos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Seguridad de datos</a></li>
           </ul>
         </div>
 
@@ -95,18 +98,18 @@
             <li><a href="/about" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.about')}</a></li>
             <li><a href="/blog" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.blog')}</a></li>
             <li><a href="/contact" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.contact')}</a></li>
-            <li><a href="/seguridad-datos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Seguridad de datos</a></li>
+            <li><a href="/demo" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('nav.cta')}</a></li>
           </ul>
         </div>
 
-        <!-- Audiencia -->
+        <!-- Para ti -->
         <div>
           <h4 class="text-xs font-semibold uppercase tracking-wider text-foreground">Para ti</h4>
           <ul class="mt-3 flex flex-col gap-2">
             <li><a href="/para-sostenedores" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Sostenedores</a></li>
             <li><a href="/para-directores" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Directores</a></li>
             <li><a href="/para-porteros" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Porteros</a></li>
-            <li><a href="/privacy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.privacy')}</a></li>
+            <li class="mt-2 border-t border-border pt-2"><a href="/privacy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.privacy')}</a></li>
             <li><a href="/terms" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.terms')}</a></li>
           </ul>
         </div>
