@@ -35,10 +35,10 @@
   <!-- Upper footer -->
   <div class="border-t border-border bg-background">
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-5">
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
 
         <!-- Brand + social -->
-        <div class="col-span-2 sm:col-span-4 lg:col-span-2">
+        <div class="col-span-2 sm:col-span-3 lg:col-span-2">
           <a href="/" class="inline-flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-6" aria-hidden="true">
               <rect x="2" y="7" width="18" height="22" rx="4.5" fill="none" stroke="currentColor" stroke-width="2.2" class="text-foreground"/>
@@ -76,23 +76,38 @@
           </ul>
         </div>
 
-        <!-- Nosotros -->
+        <!-- Recursos -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-foreground">Recursos</h4>
+          <ul class="mt-3 flex flex-col gap-2">
+            <li><a href="/ley-21719" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Ley 21.719</a></li>
+            <li><a href="/circular-30" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Circular N°30</a></li>
+            <li><a href="/glosario" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Glosario</a></li>
+            <li><a href="/recursos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Recursos gratuitos</a></li>
+            <li><a href="/webinar" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Webinar</a></li>
+          </ul>
+        </div>
+
+        <!-- Empresa -->
         <div>
           <h4 class="text-xs font-semibold uppercase tracking-wider text-foreground">{t('footer.company')}</h4>
           <ul class="mt-3 flex flex-col gap-2">
             <li><a href="/about" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.about')}</a></li>
             <li><a href="/blog" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.blog')}</a></li>
             <li><a href="/contact" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.contact')}</a></li>
+            <li><a href="/seguridad-datos" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Seguridad de datos</a></li>
           </ul>
         </div>
 
-        <!-- Legal -->
+        <!-- Audiencia -->
         <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-foreground">{t('footer.legal')}</h4>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-foreground">Para ti</h4>
           <ul class="mt-3 flex flex-col gap-2">
+            <li><a href="/para-sostenedores" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Sostenedores</a></li>
+            <li><a href="/para-directores" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Directores</a></li>
+            <li><a href="/para-porteros" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Porteros</a></li>
             <li><a href="/privacy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.privacy')}</a></li>
             <li><a href="/terms" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.terms')}</a></li>
-            <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1209272" target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground transition-colors hover:text-foreground">{t('footer.law_21719')}</a></li>
           </ul>
         </div>
 
