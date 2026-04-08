@@ -146,9 +146,9 @@
                   </li>
                 {/each}
               </ul>
-              <Button variant="outline" size="sm" href={product.href} class="mt-5">
+              <Button variant="outline" size="lg" href={product.href} class="mt-5">
                 Ver en detalle
-                <ArrowRight class="size-3.5" />
+                <ArrowRight class="size-4" />
               </Button>
             </div>
 

@@ -722,17 +722,18 @@
         <Button
           size="xl"
           href="/demo"
-          class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
+          class="h-14 px-10 text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
         >
           {t('cta.primary')}
-          <ArrowRight class="size-4" />
+          <ArrowRight class="size-5" />
         </Button>
         <Button
           variant="outline"
           size="xl"
           onclick={() => showPitch = true}
+          class="h-14 px-8 text-lg"
         >
-          <Play class="size-4" />
+          <Play class="size-5" />
           Ver presentación
         </Button>
       </div>

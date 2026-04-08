@@ -258,7 +258,7 @@
                 <p class="text-sm text-destructive">{errorMessage}</p>
               {/if}
 
-              <Button type="submit" class="w-full gap-2" disabled={submitting}>
+              <Button type="submit" size="lg" class="w-full gap-2 h-12 text-base" disabled={submitting}>
                 {#if submitting}
                   <Loader2 class="size-4 animate-spin" />
                   Inscribiendo...
@@ -304,7 +304,7 @@
       <Play class="size-10 text-muted-foreground mx-auto mb-4" />
       <h2 class="text-xl font-semibold text-foreground mb-2">Grabaciones anteriores</h2>
       <p class="text-muted-foreground mb-6 max-w-md mx-auto text-sm">Estamos preparando la biblioteca de grabaciones. Las sesiones grabadas estarán disponibles próximamente para todos los inscritos.</p>
-      <Button href="/webinar#form" variant="outline">Inscríbete para acceso anticipado</Button>
+      <Button href="/webinar#form" variant="outline" size="lg">Inscríbete para acceso anticipado</Button>
     </div>
   </section>
 
@@ -313,7 +313,7 @@
     <div class="mx-auto max-w-4xl px-4 py-12 text-center">
       <h2 class="text-xl font-semibold text-foreground mb-2">¿Prefieres una demo personalizada?</h2>
       <p class="text-muted-foreground mb-6 text-sm">Agenda una llamada de 30 minutos con el equipo de Ethoz para revisar el estado de tu establecimiento.</p>
-      <Button href="/demo">Solicitar demo gratuita</Button>
+      <Button href="/demo" size="lg">Solicitar demo gratuita</Button>
     </div>
   </section>
 
