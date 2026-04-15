@@ -23,6 +23,11 @@ export async function initSentry(): Promise<void> {
       beforeSend(event) {
         // Don't send events for internal users
         if (localStorage.getItem('ethoz_internal') === '1') return null;
+        // Suppress test-runner + local-dev traffic (Playwright, local preview server)
+        const ua = (event.request?.headers?.['User-Agent'] as string | undefined) ?? '';
+        const url = event.request?.url ?? '';
+        if (ua.includes('HeadlessChrome') || ua.includes('Playwright')) return null;
+        if (url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) return null;
         return event;
       },
     });

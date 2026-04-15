@@ -98,7 +98,10 @@
 
     Cal('ui', {
       theme: 'light',
-      styles: { branding: { brandColor: '#E8702A' } },
+      styles: { branding: {
+        // Cal.com API expects a hex literal; keep in sync with --primary (oklch(0.68 0.21 40))
+        brandColor: '#E8702A'
+      } },
       hideEventTypeDetails: false,
       hideBranding: true,
       layout: 'month_view'

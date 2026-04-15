@@ -2,18 +2,36 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<!-- Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-WX6ZCXLZ');</script>
+		<!-- Google Tag Manager — dataLayer init (sync, tiny) -->
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+		</script>
+		<!-- GTM loader deferred until after initial paint to protect LCP -->
+		<script>
+		  (function() {
+		    function loadGTM() {
+		      var f = document.getElementsByTagName('script')[0];
+		      var j = document.createElement('script');
+		      j.async = true;
+		      j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-WX6ZCXLZ';
+		      f.parentNode.insertBefore(j, f);
+		    }
+		    if (document.readyState === 'complete') {
+		      setTimeout(loadGTM, 1500);
+		    } else {
+		      window.addEventListener('load', function() { setTimeout(loadGTM, 1500); });
+		    }
+		  })();
+		</script>
 		<!-- End Google Tag Manager -->
 		<link rel="icon" href="%sveltekit.assets%/favicon.svg?v=2" />
 		<link rel="icon" type="image/png" sizes="32x32" href="%sveltekit.assets%/favicon.png" />
 		<link rel="apple-touch-icon" sizes="192x192" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#2C2C2E" />
+		<meta name="description" content="Protección escolar inteligente. Cumplimiento Ley 21.719, seguridad escolar y convivencia para colegios en Chile." />
+		<meta name="google-site-verification" content="%sveltekit.env.PUBLIC_GSC_VERIFICATION%" />
 		<meta property="og:image" content="https://ethoz.cl/images/og-default.svg" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />

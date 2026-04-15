@@ -2,9 +2,9 @@ import type { BlogPost } from './types';
 
 export const post: BlogPost = {
 	slug: 'ninguna-plataforma-cumple-ley-21719',
-	title: 'Por qué ninguna plataforma escolar en Chile está preparada para la Ley 21.719',
+	title: 'Por qué las plataformas escolares existentes no están preparadas para la Ley 21.719',
 	description:
-		'Analizamos las plataformas de gestión escolar más usadas en Chile: ninguna menciona la Ley 21.719 como funcionalidad. Explicamos por qué la privacidad no se puede agregar como módulo y qué significa eso para los colegios.',
+		'Analizamos las plataformas de gestión escolar más usadas en Chile: las soluciones existentes no mencionan la Ley 21.719 como funcionalidad. Explicamos por qué la privacidad no se puede agregar como módulo y qué significa eso para los colegios.',
 	date: '2026-04-04',
 	author: 'Ignacio Araya',
 	readTime: '9 min',
@@ -21,7 +21,7 @@ export const post: BlogPost = {
 <p>El problema es que ese problema ya no es el único que importa. A partir de diciembre de 2026, la <a href="/blog/ley-21719-que-deben-saber-los-colegios">Ley 21.719</a> convierte el tratamiento de datos personales en una obligación legal con consecuencias financieras concretas. Y las plataformas que dominan el mercado escolar chileno —con miles de establecimientos cada una— no mencionan la ley en ningún lugar visible de sus sitios, sus demos ni sus materiales de ventas.</p>
 <p>Eso no es un accidente de marketing. Es una señal de arquitectura.</p>
 
-<h2>Lo que exige la Ley 21.719 — y lo que ninguna plataforma actual resuelve</h2>
+<h2>Lo que exige la Ley 21.719 — y lo que las plataformas existentes no resuelven</h2>
 <p>La ley establece obligaciones técnicas y organizativas que no son ambiguas. Cada una de ellas requiere que el sistema de gestión escolar tenga capacidades específicas. La siguiente tabla compara lo que la ley exige con lo que ofrecen las plataformas de gestión escolar actuales:</p>
 
 <table>

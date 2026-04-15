@@ -17,6 +17,57 @@ function captureError(err: unknown, context?: Record<string, unknown>): void {
   }).catch(() => {});
 }
 
+export async function fetchWithRetryAndTimeout(
+  url: string,
+  init: RequestInit,
+  opts: { timeoutMs?: number; retries?: number } = {}
+): Promise<Response> {
+  const { timeoutMs = 10_000, retries = 1 } = opts;
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const started = Date.now();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      import('@sentry/browser').then(Sentry => {
+        Sentry.addBreadcrumb({
+          category: 'fetch',
+          message: `verify-lead attempt ${attempt + 1}/${retries + 1}`,
+          level: 'info',
+          data: { url, attempt: attempt + 1 }
+        });
+      }).catch(() => {});
+
+      const res = await fetch(url, { ...init, signal: controller.signal });
+      clearTimeout(timer);
+      return res;
+    } catch (err) {
+      clearTimeout(timer);
+      lastError = err;
+      const elapsed = Date.now() - started;
+
+      import('@sentry/browser').then(Sentry => {
+        Sentry.addBreadcrumb({
+          category: 'fetch',
+          message: `verify-lead attempt ${attempt + 1} failed`,
+          level: 'warning',
+          data: { url, attempt: attempt + 1, elapsed_ms: elapsed, error: String(err) }
+        });
+      }).catch(() => {});
+
+      if (attempt < retries) {
+        const backoffMs = 500 * Math.pow(2, attempt);
+        await new Promise(r => setTimeout(r, backoffMs));
+        continue;
+      }
+    }
+  }
+
+  throw lastError;
+}
+
 const supabaseUrl = env.PUBLIC_SUPABASE_URL ?? '';
 const supabaseKey = env.PUBLIC_SUPABASE_ANON_KEY ?? '';
 
@@ -113,11 +164,11 @@ export async function saveLead(lead: Lead, recaptchaToken?: string | null): Prom
   // Use server-side verified endpoint if reCAPTCHA token is provided
   if (recaptchaToken && supabaseUrl) {
     try {
-      const res = await fetch(`${supabaseUrl}/functions/v1/verify-lead`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetchWithRetryAndTimeout(
+        `${supabaseUrl}/functions/v1/verify-lead`,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) },
+        { timeoutMs: 10_000, retries: 1 }
+      );
 
       const data = await res.json();
 

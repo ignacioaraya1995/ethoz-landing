@@ -200,7 +200,7 @@
                 </div>
               {:else if product.name === 'Permisos por Cargo'}
                 <div class="p-5">
-                  <p class="mb-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Matriz de acceso</p>
+                  <p class="mb-2 label-mono text-muted-foreground">Matriz de acceso</p>
                   <div class="space-y-2">
                     {#each [{name:'Directora',img:'/images/people/director-mujer.webp',dots:[true,true,true,true]},{name:'Docente',img:'/images/people/docente-mujer.webp',dots:[true,false,true,false]},{name:'Portero',img:'/images/people/portero-hombre.webp',dots:[false,true,false,false]}] as role}
                       <div class="flex items-center gap-2">

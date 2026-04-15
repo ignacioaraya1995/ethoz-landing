@@ -132,12 +132,17 @@
 </script>
 
 <svelte:head>
-  <title>Ethoz — Pitch Interactivo</title>
-  <meta name="description" content="Presentación interactiva de Ethoz, el escudo digital escolar." />
-  <meta name="robots" content="noindex, nofollow" />
+  <title>Pitch — Ethoz</title>
+  <meta name="description" content="Presentación ejecutiva Ethoz: protección escolar inteligente y cumplimiento Ley 21.719 para colegios chilenos." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pitch — Ethoz" />
+  <meta property="og:description" content="Presentación ejecutiva Ethoz: protección escolar inteligente y cumplimiento Ley 21.719 para colegios chilenos." />
+  <meta property="og:url" content="https://ethoz.cl/pitch" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pitch — Ethoz" />
+  <meta name="twitter:description" content="Presentación ejecutiva Ethoz: protección escolar inteligente y cumplimiento Ley 21.719 para colegios chilenos." />
   <link rel="canonical" href="https://ethoz.cl/pitch" />
-  <meta property="og:title" content="Ethoz — Pitch Interactivo" />
-  <meta property="og:description" content="Presentación interactiva de Ethoz, la plataforma de protección escolar para colegios chilenos." />
 </svelte:head>
 
 <svelte:window onkeydown={handleKeydown} />

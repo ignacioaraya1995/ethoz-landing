@@ -243,7 +243,8 @@
 
 <style>
   @media print {
-    :global(body) { font-size: 10px; color: #000; background: #fff; }
+    /* Print: force high-contrast B&W regardless of theme */
+    :global(body) { font-size: 10px; color: black; background: white; }
     main { padding: 0; }
   }
 </style>

@@ -131,13 +131,17 @@
 </script>
 
 <svelte:head>
-  <title>Sugerencias — Ethoz Dev</title>
-  <meta name="description" content="Panel de sugerencias y feedback interno de Ethoz." />
+  <title>Sugerencias — Ethoz</title>
+  <meta name="description" content="Sugerencias para mejorar Ethoz. Comparte ideas con el equipo de producto." />
   <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sugerencias — Ethoz" />
+  <meta property="og:description" content="Sugerencias para mejorar Ethoz. Comparte ideas con el equipo de producto." />
+  <meta property="og:url" content="https://ethoz.cl/suggestions" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sugerencias — Ethoz" />
+  <meta name="twitter:description" content="Sugerencias para mejorar Ethoz. Comparte ideas con el equipo de producto." />
   <link rel="canonical" href="https://ethoz.cl/suggestions" />
-  <meta property="og:title" content="Sugerencias — Ethoz Dev" />
-  <meta property="og:description" content="Panel de sugerencias y feedback interno de Ethoz." />
-  {@html `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ethoz.cl/"},{"@type":"ListItem","position":2,"name":"Sugerencias"}]})}</script>`}
 </svelte:head>
 
 <main class="flex min-h-dvh flex-col bg-background">

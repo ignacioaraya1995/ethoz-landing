@@ -38,7 +38,7 @@
 
     <!-- Posts grid -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {#each allPosts as post}
+      {#each allPosts as post, i}
         <a
           href="/blog/{post.slug}"
           class="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-0.5"
@@ -49,8 +49,11 @@
               <img
                 src={post.coverImage}
                 alt={post.title}
+                width="1600"
+                height="900"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : 'auto'}
               />
             </div>
           {/if}

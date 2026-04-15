@@ -4,6 +4,7 @@
   import NavBar from '$lib/components/NavBar.svelte';
   import { Badge } from '$lib/components/ui/badge';
   import { t, type TranslationKey } from '$lib/i18n/index.svelte';
+  import { goto } from '$app/navigation';
   import { trackEvent } from '$lib/utils/analytics';
   import { CONTACT } from '$lib/config';
   import { slide } from 'svelte/transition';
@@ -157,10 +158,19 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Ethoz",
+      "legalName": "ETHOZ SpA",
       "url": "https://ethoz.cl",
       "logo": "https://ethoz.cl/favicon.svg",
       "description": "Plataforma de gestión y protección de datos escolares para colegios de Chile",
+      "foundingDate": "2026-04-06",
       "areaServed": { "@type": "Country", "name": "Chile" },
+      "sameAs": [
+        "https://www.linkedin.com/company/ethozcl/",
+        "https://web.facebook.com/profile.php?id=1083964671464526",
+        "https://www.instagram.com/ethoz.cl/",
+        "https://www.youtube.com/channel/UCYeWEdqonYWKvja78_HM2TA",
+        "https://share.google/kmwkmo8To6711zCgB"
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santiago",
@@ -168,8 +178,8 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "contacto@ethoz.cl",
-        "contactType": "sales"
+        "contactType": "sales",
+        "url": "https://ethoz.cl/contact"
       }
     },
     {
@@ -241,11 +251,18 @@
 
         <!-- CTAs -->
         <div class="animate-fade-in-up animate-delay-300 mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start sm:gap-4">
-          <Button size="xl" href="/demo" class="w-full justify-center shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 sm:w-auto">
+          <Button
+            size="xl"
+            onclick={async () => {
+              trackEvent('hero_cta_clicked', { cta: 'book_demo', location: 'hero' });
+              await goto('/demo');
+            }}
+            class="w-full justify-center shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
+          >
             {t('hero.cta.primary')}
             <ArrowRight class="size-5" />
           </Button>
-          <Button variant="outline" size="xl" onclick={() => showPitch = true} class="w-full justify-center border-foreground/20 hover:border-foreground/40 hover:bg-muted sm:w-auto">
+          <Button variant="outline" size="xl" onclick={() => { trackEvent('hero_cta_clicked', { cta: 'watch_video', location: 'hero' }); showPitch = true; }} class="w-full justify-center border-foreground/20 hover:border-foreground/40 hover:bg-muted sm:w-auto">
             <Play class="size-5" />
             <span class="hidden sm:inline">{t('hero.video_long')}</span>
             <span class="sm:hidden">{t('hero.video_short')}</span>
@@ -719,7 +736,10 @@
       <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <Button
           size="xl"
-          href="/demo"
+          onclick={async () => {
+            trackEvent('hero_cta_clicked', { cta: 'book_demo', location: 'hero' });
+            await goto('/demo');
+          }}
           class="shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
         >
           {t('cta.primary')}
@@ -742,7 +762,14 @@
   <!-- Mobile sticky CTA -->
   {#if showStickyCta}
     <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background px-4 pb-[max(env(safe-area-inset-bottom,0px),1rem)] pt-3 md:hidden">
-      <Button size="xl" href="/demo" class="w-full">
+      <Button
+        size="xl"
+        onclick={async () => {
+          trackEvent('hero_cta_clicked', { cta: 'book_demo', location: 'sticky' });
+          await goto('/demo');
+        }}
+        class="w-full"
+      >
         {t('hero.cta.primary')}
         <ArrowRight class="size-5" />
       </Button>

@@ -47,6 +47,18 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* ---------- Brand exceptions ---------- */
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+
+  /* ---------- Platform brand exceptions (external brand identity — do not repurpose) ---------- */
+  --color-brand-linkedin: var(--brand-linkedin);
+  --color-brand-facebook: var(--brand-facebook);
+  --color-brand-instagram: var(--brand-instagram);
+  --color-brand-youtube: var(--brand-youtube);
 
   /* ---------- Sidebar ---------- */
   --color-sidebar: var(--sidebar);
@@ -115,6 +127,20 @@
   /* ── Semantic: Success ── */
   --success: oklch(0.62 0.18 148);
   --success-foreground: oklch(0.98 0.005 80);
+
+  /* ── Semantic: Info ── */
+  --info: oklch(0.60 0.18 250);
+  --info-foreground: oklch(0.98 0.005 80);
+
+  /* ── Brand exception: WhatsApp ── */
+  --whatsapp: oklch(0.68 0.17 150);
+  --whatsapp-foreground: oklch(0.98 0.005 80);
+
+  /* ── Platform brand exceptions (external brand identity — do not repurpose) ── */
+  --brand-linkedin: #0A66C2;
+  --brand-facebook: #1877F2;
+  --brand-instagram: #E1306C;
+  --brand-youtube: #FF0000;
 
   /* ── Sidebar ── */
   --sidebar: oklch(0.96 0.008 80);

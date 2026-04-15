@@ -6,7 +6,9 @@ const key = process.env.SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KE
 
 test.skip(!url || !key, 'Skipped: missing SUPABASE_URL / SUPABASE_ANON_KEY env vars');
 
-const supabase = createClient(url, key);
+// Defer client instantiation — createClient throws on empty url/key during module load,
+// which breaks Playwright's test-collection pass even though test.skip excludes runtime.
+const supabase = url && key ? createClient(url, key) : (null as unknown as ReturnType<typeof createClient>);
 
 test.describe('DB Integration — lead persistence', () => {
 	const testEmail = `e2e-test-${Date.now()}@ethoz-test.com`;

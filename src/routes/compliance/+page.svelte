@@ -100,7 +100,7 @@
   <!-- ══════════════════════════════════════
        HERO
        ══════════════════════════════════════ -->
-  <section class="pt-28 pb-16 sm:pt-32 sm:pb-20 bg-secondary">
+  <section class="pt-28 pb-16 sm:pt-32 sm:pb-20 bg-secondary bg-grid-pattern">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary shadow-sm">
         <ShieldCheck class="size-3.5" />
@@ -282,7 +282,7 @@
               <Icon class="size-5 shrink-0 text-primary" />
               <div class="flex min-w-0 flex-1 items-center justify-between gap-3">
                 <h3 class="text-base font-bold text-foreground leading-snug">{t(pillar.titleKey)}</h3>
-                <span class="shrink-0 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                <span class="shrink-0 rounded-md bg-muted px-2 py-0.5 label-mono text-muted-foreground">
                   {t(pillar.articleKey)}
                 </span>
               </div>

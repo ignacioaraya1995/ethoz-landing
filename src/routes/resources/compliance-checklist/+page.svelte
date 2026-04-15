@@ -240,10 +240,11 @@
 
 <style>
   @media print {
+    /* Print: force high-contrast B&W regardless of theme */
     :global(body) {
       font-size: 11px;
-      color: #000;
-      background: #fff;
+      color: black;
+      background: white;
     }
 
     main {
