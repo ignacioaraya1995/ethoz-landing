@@ -116,7 +116,6 @@ export const es = {
   'cta.subtitle':
     'El piloto 2026 tiene cupos limitados. Sé de los primeros colegios en cumplir con la Ley 21.719.',
   'cta.primary': 'Agendar Demo',
-  'cta.secondary': 'Hablar por WhatsApp',
 
   // Footer
   'footer.product': 'Producto',
@@ -350,8 +349,6 @@ export const es = {
   'contact.back': 'Volver al inicio',
   'contact.heading': 'Hablemos',
   'contact.subheading': 'Elige cómo quieres contactarnos. Te respondemos rápido.',
-  'contact.whatsapp.label': 'WhatsApp',
-  'contact.whatsapp.desc': 'Respuesta en minutos',
   'contact.email.label': 'Email',
   'contact.email.desc': 'Respuesta en menos de 24 horas',
   'contact.demo.label': 'Agendar Demo',
@@ -609,7 +606,6 @@ export const es = {
   'getstarted.step4.title': 'Tu colegio queda protegido',
   'getstarted.step4.desc': 'En menos de un mes, tu establecimiento opera con datos centralizados, acceso controlado por rol y cumplimiento normativo listo para fiscalización. Actualizaciones y nuevas funcionalidades incluidas siempre.',
   'getstarted.step4.alt': 'Colegio operando con Ethoz',
-  'getstarted.whatsapp_cta': 'Hablar por WhatsApp',
   'getstarted.module.student_profile': 'Perfil integral del alumno',
   'getstarted.module.access_control': 'Control de acceso por roles',
   'getstarted.module.safe_pickups': 'Retiros escolares seguros',

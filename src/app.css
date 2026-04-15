@@ -50,10 +50,6 @@
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
 
-  /* ---------- Brand exceptions ---------- */
-  --color-whatsapp: var(--whatsapp);
-  --color-whatsapp-foreground: var(--whatsapp-foreground);
-
   /* ---------- Platform brand exceptions (external brand identity — do not repurpose) ---------- */
   --color-brand-linkedin: var(--brand-linkedin);
   --color-brand-facebook: var(--brand-facebook);
@@ -131,10 +127,6 @@
   /* ── Semantic: Info ── */
   --info: oklch(0.60 0.18 250);
   --info-foreground: oklch(0.98 0.005 80);
-
-  /* ── Brand exception: WhatsApp ── */
-  --whatsapp: oklch(0.68 0.17 150);
-  --whatsapp-foreground: oklch(0.98 0.005 80);
 
   /* ── Platform brand exceptions (external brand identity — do not repurpose) ── */
   --brand-linkedin: #0A66C2;

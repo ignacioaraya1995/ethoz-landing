@@ -116,7 +116,6 @@ export const en = {
   'cta.subtitle':
     'The 2026 pilot has limited spots. Be among the first schools to comply with Law 21.719.',
   'cta.primary': 'Book a Demo',
-  'cta.secondary': 'Chat on WhatsApp',
 
   // Footer
   'footer.product': 'Product',
@@ -346,8 +345,6 @@ export const en = {
   'contact.back': 'Back to home',
   'contact.heading': "Let's talk",
   'contact.subheading': 'Choose how you want to reach us. We respond fast.',
-  'contact.whatsapp.label': 'WhatsApp',
-  'contact.whatsapp.desc': 'Response in minutes',
   'contact.email.label': 'Email',
   'contact.email.desc': 'Response in under 24 hours',
   'contact.demo.label': 'Book a Demo',
@@ -604,7 +601,6 @@ export const en = {
   'getstarted.step4.title': 'Your school is protected',
   'getstarted.step4.desc': 'In less than a month, your institution operates with centralized data, role-based access control, and regulatory compliance ready for inspection. Updates and new features always included.',
   'getstarted.step4.alt': 'School operating with Ethoz',
-  'getstarted.whatsapp_cta': 'Chat on WhatsApp',
   'getstarted.module.student_profile': 'Comprehensive student profile',
   'getstarted.module.access_control': 'Role-based access control',
   'getstarted.module.safe_pickups': 'Safe school pickups',

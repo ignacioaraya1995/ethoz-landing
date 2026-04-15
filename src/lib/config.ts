@@ -2,13 +2,6 @@
 // Change here and it updates everywhere (contact page, homepage CTA, footer, etc.)
 
 export const CONTACT = {
-  whatsapp: {
-    number: '56979923964',
-    display: '+56 9 7992 3964',
-    get link() {
-      return `https://wa.me/${this.number}?text=${encodeURIComponent('Hola, me interesa saber más sobre Ethoz para mi colegio.')}`;
-    },
-  },
   email: {
     address: 'contacto@ethoz.cl',
     get link() {
