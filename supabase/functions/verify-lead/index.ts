@@ -13,6 +13,7 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders } from '../_shared/cors.ts';
+import { sendGa4Event } from '../_shared/ga4.ts';
 
 const RECAPTCHA_SECRET = Deno.env.get('RECAPTCHA_SECRET_KEY') || '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
@@ -164,6 +165,20 @@ Deno.serve(async (req: Request) => {
       }
     } catch {
       // Notification failure should never block lead save
+    }
+
+    // GA4 MP backup — fires even when client consent denies GTM.
+    if (payload.visitor_id) {
+      sendGa4Event(payload.visitor_id, {
+        name: 'lead_submitted',
+        params: {
+          source: payload.contact_source || 'unknown',
+          school_name: payload.school_name || '',
+          utm_source: payload.utm_source || '',
+          utm_medium: payload.utm_medium || '',
+          utm_campaign: payload.utm_campaign || '',
+        },
+      }).catch(() => {});
     }
 
     console.info(`[verify-lead] Lead saved: ${payload.contact_email.slice(0, 3)}*** (score: ${score})`);

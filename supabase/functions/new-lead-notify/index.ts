@@ -201,7 +201,7 @@ Deno.serve(async (req: Request) => {
     return resp({ ok: true, lead: contactEmail, notified: notifyEmails });
   } catch (err) {
     console.error('[lead-notify] Error:', err);
-    return resp({ error: String(err) }, 500);
+    return resp({ error: 'Notification failed' }, 500);
   }
 });
 

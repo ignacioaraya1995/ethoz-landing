@@ -19,6 +19,7 @@
  */
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { sendGa4Event } from '../_shared/ga4.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': 'https://app.cal.com',
@@ -139,7 +140,7 @@ Deno.serve(async (req: Request) => {
     // ── Find matching lead ���─
     const { data: leads, error: selectError } = await supabase
       .from('leads')
-      .select('id, status')
+      .select('id, status, visitor_id, school_name, utm_source, utm_medium, utm_campaign')
       .eq('contact_email', attendeeEmail)
       .in('status', ['new', 'contacted'])
       .order('created_at', { ascending: false })
@@ -176,10 +177,32 @@ Deno.serve(async (req: Request) => {
       return json({ error: 'Internal error' }, 500);
     }
 
+    // GA4 MP backup — fires independently of client-side GTM.
+    const lead = leads[0] as {
+      id: string;
+      visitor_id?: string;
+      school_name?: string;
+      utm_source?: string;
+      utm_medium?: string;
+      utm_campaign?: string;
+    };
+    if (lead.visitor_id) {
+      sendGa4Event(lead.visitor_id, {
+        name: 'demo_booked',
+        params: {
+          school_name: lead.school_name || '',
+          utm_source: lead.utm_source || '',
+          utm_medium: lead.utm_medium || '',
+          utm_campaign: lead.utm_campaign || '',
+          rescheduled: triggerEvent === 'BOOKING_RESCHEDULED',
+        },
+      }).catch(() => {});
+    }
+
     console.info(
-      `[cal-webhook] Lead ${leads[0].id} → demo_scheduled (${attendeeEmail})`
+      `[cal-webhook] Lead ${lead.id} → demo_scheduled (${attendeeEmail})`
     );
-    return json({ ok: true, lead_id: leads[0].id });
+    return json({ ok: true, lead_id: lead.id });
   } catch (err) {
     console.error('[cal-webhook] Unexpected error:', err);
     return json({ error: 'Internal error' }, 500);
