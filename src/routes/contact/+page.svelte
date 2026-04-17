@@ -17,6 +17,16 @@
   let submitting = $state(false);
   let submitted = $state(false);
   let errorMessage = $state('');
+  let recaptchaFailed = $state(false);
+
+  function captureError(err: unknown, context?: Record<string, unknown>) {
+    if (!browser) return;
+    import('@sentry/browser')
+      .then((Sentry) => Sentry.captureException(err, { extra: context }))
+      .catch(() => {});
+  }
+
+  const mailtoFallback = `mailto:${CONTACT.email.address}?subject=${encodeURIComponent('Contacto desde ethoz.cl')}`;
 
   // ── Load reCAPTCHA script ──
   $effect(() => {
@@ -32,10 +42,21 @@
   // ── Handlers ──
   async function handleSubmit(e: Event) {
     e.preventDefault();
+    if (submitting) return; // double-submit guard
     submitting = true;
     errorMessage = '';
+    recaptchaFailed = false;
 
-    const recaptchaToken = await executeRecaptcha('submit_contact');
+    let recaptchaToken: string | null = null;
+    try {
+      recaptchaToken = await executeRecaptcha('submit_contact');
+    } catch (err) {
+      captureError(err, { fn: 'contact.executeRecaptcha' });
+      recaptchaFailed = true;
+      errorMessage = 'No pudimos verificar que seas humano. Escríbenos directamente al correo indicado arriba.';
+      submitting = false;
+      return;
+    }
 
     // Save to Supabase as a lead (with server-side reCAPTCHA verification)
     const result = await saveLead({
@@ -55,7 +76,7 @@
       return;
     }
 
-    trackEvent('contact_form_submitted', { email });
+    trackEvent('contact_form_submitted', { source: 'contact_page' });
 
     submitting = false;
     submitted = true;
@@ -201,7 +222,17 @@
           {/if}
         </Button>
         {#if errorMessage}
-          <p class="mt-2 rounded-lg bg-destructive/10 px-4 py-2.5 text-center text-sm text-destructive">{errorMessage}</p>
+          <div class="mt-2 rounded-lg bg-destructive/10 px-4 py-2.5 text-center text-sm text-destructive">
+            <p>{errorMessage}</p>
+            {#if recaptchaFailed}
+              <a
+                href={mailtoFallback}
+                class="mt-1 inline-block font-medium underline underline-offset-2 hover:text-destructive/80"
+              >
+                Escribir por correo →
+              </a>
+            {/if}
+          </div>
         {/if}
 
       </form>
