@@ -1,18 +1,24 @@
-import { PUBLIC_RECAPTCHA_SITE_KEY } from '$env/static/public';
+import { env } from '$env/dynamic/public';
+
+function getKey(): string | undefined {
+  return env.PUBLIC_RECAPTCHA_SITE_KEY;
+}
 
 export async function executeRecaptcha(action: string): Promise<string | null> {
-  if (!PUBLIC_RECAPTCHA_SITE_KEY) return null;
+  const key = getKey();
+  if (!key) return null;
 
   const grecaptcha = (window as any).grecaptcha;
   if (!grecaptcha) return null;
 
   try {
-    return await grecaptcha.execute(PUBLIC_RECAPTCHA_SITE_KEY, { action });
+    return await grecaptcha.execute(key, { action });
   } catch {
     return null;
   }
 }
 
 export function getRecaptchaScriptUrl(): string {
-  return `https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`;
+  const key = getKey() ?? '';
+  return `https://www.google.com/recaptcha/api.js?render=${key}`;
 }
