@@ -1,4 +1,14 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+/** Pre-seed accepted consent via addInitScript for tracking tests. */
+async function acceptConsentInit(page: Page) {
+	await page.addInitScript(() => {
+		localStorage.setItem(
+			'ethoz_consent_v1',
+			JSON.stringify({ essential: true, analytics: true, marketing: true, updatedAt: Date.now() })
+		);
+	});
+}
 
 // ── Smoke test: critical pages load ──
 
@@ -39,34 +49,34 @@ test.describe('Smoke — pages load', () => {
 // ── Smoke test: GTM and analytics ──
 
 test.describe('Smoke — GTM & analytics', () => {
-	test('GTM script is present in head', async ({ page }) => {
+	test('GTM loads dynamically after consent accept', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/');
-		const gtmScript = await page.evaluate(() => {
-			const scripts = Array.from(document.querySelectorAll('script'));
-			return scripts.some(s => s.textContent?.includes('GTM-WX6ZCXLZ'));
-		});
-		expect(gtmScript).toBe(true);
-	});
-
-	test('GTM noscript iframe is present', async ({ page }) => {
-		await page.goto('/');
-		const iframe = page.locator('noscript iframe[src*="GTM-WX6ZCXLZ"]');
-		// noscript content isn't rendered, but we can check the raw HTML
-		const html = await page.content();
-		expect(html).toContain('GTM-WX6ZCXLZ');
+		// With consent pre-seeded, layout effect triggers loadGtm which appends
+		// a <script src="https://www.googletagmanager.com/gtm.js?id=GTM-WX6ZCXLZ">.
+		await expect
+			.poll(
+				async () =>
+					await page.evaluate(() =>
+						Array.from(document.querySelectorAll('script')).some((s) =>
+							(s.getAttribute('src') ?? '').includes('googletagmanager.com/gtm.js?id=GTM-WX6ZCXLZ')
+						)
+					),
+				{ timeout: 5000 }
+			)
+			.toBe(true);
 	});
 
 	test('dataLayer exists and receives events', async ({ page }) => {
 		await page.goto('/');
-		const hasDataLayer = await page.evaluate(() => {
-			return Array.isArray((window as any).dataLayer);
-		});
+		const hasDataLayer = await page.evaluate(() => Array.isArray((window as any).dataLayer));
 		expect(hasDataLayer).toBe(true);
 	});
 
 	test('blog post view fires tracking event', async ({ page }) => {
-		// Intercept dataLayer pushes
+		await acceptConsentInit(page);
 		await page.goto('/blog/ley-21719-que-deben-saber-los-colegios');
+		await page.waitForTimeout(500);
 		const events = await page.evaluate(() => {
 			return (window as any).dataLayer
 				?.filter((e: any) => e.event === 'blog_post_viewed')
@@ -113,9 +123,11 @@ test.describe('Smoke — lead funnel', () => {
 
 	test('cookie consent banner appears', async ({ page, context }) => {
 		await context.clearCookies();
-		// Clear localStorage by navigating then clearing
 		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('cookie-consent'));
+		await page.evaluate(() => {
+			localStorage.removeItem('cookie-consent');
+			localStorage.removeItem('ethoz_consent_v1');
+		});
 		await page.reload();
 		const banner = page.locator('text=Usamos cookies');
 		await expect(banner).toBeVisible({ timeout: 5000 });
@@ -143,19 +155,20 @@ test.describe('Smoke — tracking coverage', () => {
 	});
 
 	test('visitor ID is pushed to dataLayer after consent', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/');
-		await page.evaluate(() => localStorage.setItem('cookie-consent', 'accepted'));
-		await page.reload();
 		await page.waitForTimeout(2000);
 		const hasDataLayer = await page.evaluate(() => Array.isArray((window as any).dataLayer));
 		expect(hasDataLayer).toBe(true);
 	});
 
 	test('internal flag excludes analytics', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/?_internal=1');
+		await page.waitForTimeout(300);
 		const flag = await page.evaluate(() => localStorage.getItem('ethoz_internal'));
 		expect(flag).toBe('1');
-		// Navigate to a tracked page — event should NOT fire
+		// Navigate to a tracked page — event should NOT fire even with consent true
 		await page.goto('/get-started');
 		const events = await page.evaluate(() => {
 			return (window as any).dataLayer
@@ -167,8 +180,7 @@ test.describe('Smoke — tracking coverage', () => {
 	});
 
 	test('pricing page fires tracking event', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/get-started');
 		await page.waitForTimeout(1000);
 		const events = await page.evaluate(() => {
@@ -179,13 +191,19 @@ test.describe('Smoke — tracking coverage', () => {
 	});
 
 	test('feature pages fire tracking events', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/features/student-profile');
-		const events = await page.evaluate(() => {
-			return (window as any).dataLayer
-				?.filter((e: any) => e.event === 'feature_page_viewed')
-				?.map((e: any) => e.feature) ?? [];
-		});
-		expect(events).toContain('student-profile');
+		await expect
+			.poll(
+				async () =>
+					await page.evaluate(() =>
+						((window as any).dataLayer ?? [])
+							.filter((e: any) => e.event === 'feature_page_viewed')
+							.some((e: any) => e.feature === 'student-profile')
+					),
+				{ timeout: 5000 }
+			)
+			.toBe(true);
 	});
 
 	test('contact form saves lead (mock check)', async ({ page }) => {
@@ -210,6 +228,7 @@ test.describe('Smoke — tracking coverage', () => {
 test.describe('Smoke — internal traffic', () => {
 	test('?_internal=1 sets localStorage flag', async ({ page }) => {
 		await page.goto('/?_internal=1');
+		await page.waitForTimeout(300);
 		const flag = await page.evaluate(() => localStorage.getItem('ethoz_internal'));
 		expect(flag).toBe('1');
 	});
@@ -218,6 +237,7 @@ test.describe('Smoke — internal traffic', () => {
 		await page.goto('/');
 		await page.evaluate(() => localStorage.setItem('ethoz_internal', '1'));
 		await page.goto('/?_internal=0');
+		await page.waitForTimeout(300);
 		const flag = await page.evaluate(() => localStorage.getItem('ethoz_internal'));
 		expect(flag).toBeNull();
 	});

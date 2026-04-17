@@ -8,6 +8,7 @@ import { test, expect, type Page } from '@playwright/test';
 async function clearConsent(page: Page) {
 	await page.evaluate(() => {
 		localStorage.removeItem('cookie-consent');
+		localStorage.removeItem('ethoz_consent_v1');
 		localStorage.removeItem('ethoz_internal');
 	});
 }
@@ -19,6 +20,37 @@ async function acceptCookies(page: Page) {
 		await btn.click();
 		await page.waitForTimeout(300);
 	}
+}
+
+/**
+ * Pre-seed accepted consent via addInitScript so tracking events reach
+ * dataLayer from page load. Must be called BEFORE page.goto().
+ */
+async function acceptConsentInit(page: Page) {
+	await page.addInitScript(() => {
+		localStorage.setItem(
+			'ethoz_consent_v1',
+			JSON.stringify({ essential: true, analytics: true, marketing: true, updatedAt: Date.now() })
+		);
+	});
+}
+
+/**
+ * Wait until a tracking event appears in dataLayer. Page-view events are
+ * fired from the page's onMount, which runs after hydration — tests that
+ * check dataLayer synchronously after goto() race against hydration.
+ */
+async function expectDataLayerEvent(page: Page, eventName: string, timeout = 5000) {
+	await expect
+		.poll(
+			async () =>
+				await page.evaluate(
+					(name) => ((window as any).dataLayer ?? []).some((e: any) => e.event === name),
+					eventName
+				),
+			{ timeout }
+		)
+		.toBe(true);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -499,43 +531,27 @@ test.describe('Tracking — GTM dataLayer', () => {
 	});
 
 	test('pricing_page_viewed fires on /get-started', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/get-started');
-		const events = await page.evaluate(() =>
-			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'pricing_page_viewed')
-		);
-		expect(events.length).toBeGreaterThanOrEqual(1);
+		await expectDataLayerEvent(page, 'pricing_page_viewed');
 	});
 
 	test('about_page_viewed fires on /about', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/about');
-		const events = await page.evaluate(() =>
-			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'about_page_viewed')
-		);
-		expect(events.length).toBeGreaterThanOrEqual(1);
+		await expectDataLayerEvent(page, 'about_page_viewed');
 	});
 
 	test('products_page_viewed fires on /productos', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/productos');
-		const events = await page.evaluate(() =>
-			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'products_page_viewed')
-		);
-		expect(events.length).toBeGreaterThanOrEqual(1);
+		await expectDataLayerEvent(page, 'products_page_viewed');
 	});
 
 	test('compliance_page_viewed fires on /compliance', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/compliance');
-		const events = await page.evaluate(() =>
-			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'compliance_page_viewed')
-		);
-		expect(events.length).toBeGreaterThanOrEqual(1);
+		await expectDataLayerEvent(page, 'compliance_page_viewed');
 	});
 
 	const featurePages = [
@@ -548,14 +564,21 @@ test.describe('Tracking — GTM dataLayer', () => {
 
 	for (const { route, feature } of featurePages) {
 		test(`feature_page_viewed fires on ${route}`, async ({ page }) => {
-			await page.goto('/');
-			await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+			await acceptConsentInit(page);
 			await page.goto(route);
-			const events = await page.evaluate(() =>
-				((window as any).dataLayer ?? []).filter((e: any) => e.event === 'feature_page_viewed')
-			);
-			const features = events.map((e: any) => e.feature);
-			expect(features).toContain(feature);
+			await expect
+				.poll(
+					async () =>
+						await page.evaluate(
+							(f) =>
+								((window as any).dataLayer ?? [])
+									.filter((e: any) => e.event === 'feature_page_viewed')
+									.some((e: any) => e.feature === f),
+							feature
+						),
+					{ timeout: 5000 }
+				)
+				.toBe(true);
 		});
 	}
 
@@ -581,7 +604,9 @@ test.describe('Tracking — GTM dataLayer', () => {
 
 test.describe('Tracking — internal flag suppresses events', () => {
 	test('?_internal=1 prevents pricing_page_viewed', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/?_internal=1');
+		await page.waitForTimeout(300);
 		const flag = await page.evaluate(() => localStorage.getItem('ethoz_internal'));
 		expect(flag).toBe('1');
 
@@ -599,6 +624,7 @@ test.describe('Tracking — internal flag suppresses events', () => {
 		await page.goto('/');
 		await page.evaluate(() => localStorage.setItem('ethoz_internal', '1'));
 		await page.goto('/?_internal=0');
+		await page.waitForTimeout(300);
 		const flag = await page.evaluate(() => localStorage.getItem('ethoz_internal'));
 		expect(flag).toBeNull();
 	});
@@ -776,7 +802,7 @@ test.describe('Pitch page', () => {
 test.describe('Cookie consent', () => {
 	test('banner appears on fresh visit (no prior consent)', async ({ page }) => {
 		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('cookie-consent'));
+		await clearConsent(page);
 		await page.reload();
 		const banner = page.locator('text=Usamos cookies');
 		await expect(banner).toBeVisible({ timeout: 5000 });
@@ -784,17 +810,17 @@ test.describe('Cookie consent', () => {
 
 	test('Accept button is present in banner', async ({ page }) => {
 		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('cookie-consent'));
+		await clearConsent(page);
 		await page.reload();
-		const acceptBtn = page.locator('button', { hasText: 'Aceptar' });
+		const acceptBtn = page.getByRole('button', { name: 'Aceptar todo' });
 		await expect(acceptBtn).toBeVisible({ timeout: 5000 });
 	});
 
 	test('banner disappears after accepting', async ({ page }) => {
 		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('cookie-consent'));
+		await clearConsent(page);
 		await page.reload();
-		const acceptBtn = page.locator('button', { hasText: 'Aceptar' });
+		const acceptBtn = page.getByRole('button', { name: 'Aceptar todo' });
 		await expect(acceptBtn).toBeVisible({ timeout: 5000 });
 		await acceptBtn.click();
 		await expect(page.locator('text=Usamos cookies')).not.toBeVisible({ timeout: 3000 });
@@ -802,19 +828,20 @@ test.describe('Cookie consent', () => {
 
 	test('consent is persisted to localStorage', async ({ page }) => {
 		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('cookie-consent'));
+		await clearConsent(page);
 		await page.reload();
-		const acceptBtn = page.locator('button', { hasText: 'Aceptar' });
+		const acceptBtn = page.getByRole('button', { name: 'Aceptar todo' });
 		await expect(acceptBtn).toBeVisible({ timeout: 5000 });
 		await acceptBtn.click();
-		const stored = await page.evaluate(() => localStorage.getItem('cookie-consent'));
-		expect(stored).toBe('accepted');
+		const stored = await page.evaluate(() => localStorage.getItem('ethoz_consent_v1'));
+		expect(stored).not.toBeNull();
+		const parsed = JSON.parse(stored!);
+		expect(parsed.analytics).toBe(true);
 	});
 
 	test('banner does NOT appear when consent already set', async ({ page }) => {
+		await acceptConsentInit(page);
 		await page.goto('/');
-		await page.evaluate(() => localStorage.setItem('cookie-consent', 'accepted'));
-		await page.reload();
 		const banner = page.locator('text=Usamos cookies');
 		await expect(banner).not.toBeVisible({ timeout: 3000 });
 	});
@@ -965,13 +992,9 @@ test.describe('Integrations page', () => {
 	});
 
 	test('fires integrations_page_viewed tracking event', async ({ page }) => {
-		await page.goto('/');
-		await page.evaluate(() => localStorage.removeItem('ethoz_internal'));
+		await acceptConsentInit(page);
 		await page.goto('/integrations');
-		const events = await page.evaluate(() =>
-			((window as any).dataLayer ?? []).filter((e: any) => e.event === 'integrations_page_viewed')
-		);
-		expect(events.length).toBeGreaterThanOrEqual(1);
+		await expectDataLayerEvent(page, 'integrations_page_viewed');
 	});
 
 	test('has no JS errors', async ({ page }) => {
