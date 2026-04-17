@@ -1,5 +1,6 @@
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig, type Plugin } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,7 +26,7 @@ function svelteKitMocksPlugin(): Plugin {
 
 export default defineConfig(({ mode }) => ({
 	plugins: mode === 'test'
-		? [svelteKitMocksPlugin()]
+		? [svelteKitMocksPlugin(), svelte({ preprocess: vitePreprocess(), compilerOptions: { hydratable: false } })]
 		: [tailwindcss(), sveltekit()],
 	test: {
 		include: ['src/**/*.test.ts'],
