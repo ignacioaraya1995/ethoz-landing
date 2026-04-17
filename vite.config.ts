@@ -26,7 +26,7 @@ function svelteKitMocksPlugin(): Plugin {
 
 export default defineConfig(({ mode }) => ({
 	plugins: mode === 'test'
-		? [svelteKitMocksPlugin(), svelte({ preprocess: vitePreprocess(), compilerOptions: { hydratable: false } })]
+		? [svelteKitMocksPlugin(), svelte({ preprocess: vitePreprocess() })]
 		: [tailwindcss(), sveltekit()],
 	test: {
 		include: ['src/**/*.test.ts'],
